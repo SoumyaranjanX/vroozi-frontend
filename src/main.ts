@@ -39,17 +39,17 @@ function validateEnvironment(): boolean {
   }
 
   // Validate rate limiting configuration
-  if (!environment.apiRateLimit || environment.apiRateLimit.requestsPerMinute <= 0) {
-    throw new Error('Invalid rate limiting configuration');
+  if (!environment.apiRateLimit?.requestsPerMinute || environment.apiRateLimit.requestsPerMinute <= 0) {
+    throw new Error('Invalid API rate limit configuration');
   }
 
   // Validate file upload configuration
-  if (!environment.fileConfig || !environment.fileConfig.supportedFileTypes) {
-    throw new Error('Invalid file upload configuration');
+  if (!environment.fileConfig?.supportedFileTypes) {
+    throw new Error('Invalid file configuration');
   }
 
   // Validate security configuration
-  if (!environment.security || typeof environment.security.enableCSP !== 'boolean') {
+  if (!environment.security?.enableCSP) {
     throw new Error('Invalid security configuration');
   }
 
@@ -72,7 +72,7 @@ async function bootstrapApplication(): Promise<void> {
     }
 
     // Configure performance monitoring
-    if (environment.features.enablePerformanceMonitoring) {
+    if (environment.features?.enablePerformanceMonitoring) {
       performance.mark('bootstrap-start');
     }
 
@@ -95,7 +95,7 @@ async function bootstrapApplication(): Promise<void> {
       .toPromise();
 
     // Record bootstrap completion metrics
-    if (environment.features.enablePerformanceMonitoring) {
+    if (environment.features?.enablePerformanceMonitoring) {
       performance.mark('bootstrap-end');
       performance.measure('bootstrap-duration', 'bootstrap-start', 'bootstrap-end');
       

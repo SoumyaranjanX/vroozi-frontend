@@ -1,44 +1,30 @@
-/**
- * Development Environment Configuration
- * Version: 1.0.0
- * 
- * This file contains environment-specific configuration for the Contract Processing System
- * frontend application in development mode. It includes API endpoints, security parameters,
- * rate limiting settings, and feature flags.
- */
+import { Environment } from './environment.interface';
 
-export const environment = {
-  // Environment type flag
+export const environment: Environment = {
   production: false,
-
-  // Application Version
   version: '2.0.0',
-
-  // API Endpoints
   apiUrl: 'https://vroozi-backend-pz5d.onrender.com/api/v1',
-  googleVisionApiUrl: 'https://vision.googleapis.com/v1', // Google Cloud Vision API v1
-  s3BucketUrl: 'http://localhost:9000', // Local MinIO S3-compatible storage
+  googleVisionApiUrl: 'https://vision.googleapis.com/v1',
+  s3BucketUrl: 'http://localhost:9000',
+  cdnUrl: 'https://cdn.vroozi.com',
 
-  // API Rate Limiting Configuration
   apiRateLimit: {
-    requestsPerMinute: 100, // Base rate limit per client
-    burstAllowance: 20, // Percentage of additional burst capacity
-    perUserLimit: 50, // Individual user request limit
-    perOrgLimit: 1000 // Organization-wide request limit
+    requestsPerMinute: 100,
+    burstAllowance: 20,
+    perUserLimit: 50,
+    perOrgLimit: 1000
   },
 
-  // Token Configuration
   tokenConfig: {
-    accessTokenExpiry: 3600, // 1 hour in seconds
-    refreshTokenExpiry: 604800, // 7 days in seconds
+    accessTokenExpiry: 3600,
+    refreshTokenExpiry: 604800,
     tokenType: 'Bearer',
     issuer: 'contract-processing-system'
   },
 
-  // File Upload Configuration
   fileConfig: {
-    maxSingleFileSize: 25_000_000, // 25MB in bytes
-    maxBulkUploadSize: 500_000_000, // 500MB in bytes
+    maxSingleFileSize: 25_000_000,
+    maxBulkUploadSize: 500_000_000,
     supportedFileTypes: [
       'application/pdf',
       'image/jpeg',
@@ -49,34 +35,31 @@ export const environment = {
     maxFilesPerBatch: 50
   },
 
-  // Logging Configuration
   logging: {
-    level: 'debug', // Enhanced logging for development
-    enableConsole: true, // Enable console logging
-    enableFileLogging: true, // Enable file logging
+    level: 'debug',
+    enableConsole: true,
+    enableFileLogging: true,
     logFilePath: './logs/app.log',
-    maxLogFileSize: 10_485_760 // 10MB in bytes
+    maxLogFileSize: 10_485_760
   },
 
-  // Feature Flags
   features: {
-    enableMocks: true, // Enable mock services for development
-    enableDebugTools: true, // Enable Angular debug tools
-    enablePerformanceMonitoring: true, // Enable performance tracking
-    enableErrorReporting: true // Enable detailed error reporting
+    enableMocks: true,
+    enableDebugTools: true,
+    enablePerformanceMonitoring: true,
+    enableErrorReporting: true
   },
 
-  // Security Configuration
   security: {
-    enableCORS: true, // Enable CORS for development
+    enableCORS: true,
     allowedOrigins: [
       'https://vroozi-backend-pz5d.onrender.com',
-      'http://localhost:4200' // Angular development server
+      'http://localhost:4200'
     ],
-    enableCSP: true, // Enable Content Security Policy
-    enableXSRF: true, // Enable XSRF protection
-    maxSessionDuration: 28_800, // 8 hours in seconds
-    tokenEncryptionKey: 'development-encryption-key' // Added encryption key for JWT tokens
+    enableCSP: true,
+    enableXSRF: true,
+    maxSessionDuration: 28_800,
+    tokenEncryptionKey: 'development-encryption-key'
   },
 
   // Company Information
@@ -84,5 +67,5 @@ export const environment = {
   companyLogo: 'assets/images/company-logo.png',
   companyAddress: '123 Business Street, Los Angeles, CA 90001',
   companyPhone: '(555) 123-4567',
-  companyEmail: 'support@vroozi.com',
+  companyEmail: 'support@vroozi.com'
 };

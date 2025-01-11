@@ -6,10 +6,11 @@
  */
 
 // Angular Core - v15.0.0
-import { NgModule } from '@angular/core';
+import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 // NgRx Store - v15.0.0
 import { StoreModule } from '@ngrx/store';
@@ -91,6 +92,11 @@ export function HttpLoaderFactory(http: HttpClient) {
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production
+    }),
+
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: !isDevMode(),
+      registrationStrategy: 'registerWhenStable:30000'
     })
   ],
   providers: [],

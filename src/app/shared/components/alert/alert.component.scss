@@ -46,8 +46,8 @@ $alert-colors: (
 
   // Responsive styles for mobile devices
   @include mobile {
-    padding: ($spacing-small / 2);
-    margin-bottom: ($spacing-small / 2);
+    padding: calc($spacing-small / 2);
+    margin-bottom: calc($spacing-small / 2);
     font-size: 14px;
     max-width: 100%;
   }
@@ -83,7 +83,7 @@ $alert-colors: (
 
   // Responsive styles
   @include mobile {
-    gap: ($spacing-small / 2);
+    gap: calc($spacing-small / 2);
   }
 }
 

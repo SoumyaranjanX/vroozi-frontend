@@ -117,7 +117,7 @@
   @include scrollbar;
 
   @include mobile {
-    padding: $spacing-base / 2;
+    padding: calc($spacing-base / 2);
   }
 
   @include tablet {

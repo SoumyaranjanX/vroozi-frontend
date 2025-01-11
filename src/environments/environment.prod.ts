@@ -1,45 +1,71 @@
-/**
- * Production environment configuration for the Contract Processing System
- * Contains secure, optimized settings for production deployment
- * 
- * @version 1.0.0
- * @environment Production
- * @region AWS us-east-1 (Primary)
- */
+import { Environment } from './environment.interface';
 
-export const environment = {
-  // Core environment flag
+export const environment: Environment = {
   production: true,
-
-  // Application Version
   version: '2.0.0',
-
-  // API Endpoints with HTTPS enforcement
   apiUrl: 'https://vroozi-backend-pz5d.onrender.com/api/v1',
   googleVisionApiUrl: 'https://vision.googleapis.com/v1',
-  s3BucketUrl: 'https://storage.contractprocessing.com',
-  cdnUrl: 'https://cdn.contractprocessing.com',
+  s3BucketUrl: 'https://s3.vroozi.com',
+  cdnUrl: 'https://cdn.vroozi.com',
 
-  // API Rate Limiting (requests per minute per organization)
-  apiRateLimit: 1000, // As per technical specification 3.3.2
+  apiRateLimit: {
+    requestsPerMinute: 200,
+    burstAllowance: 10,
+    perUserLimit: 100,
+    perOrgLimit: 2000
+  },
 
-  // Security Settings
-  tokenExpiryTime: 3600, // JWT token expiry in seconds (1 hour)
+  tokenConfig: {
+    accessTokenExpiry: 3600,
+    refreshTokenExpiry: 604800,
+    tokenType: 'Bearer',
+    issuer: 'contract-processing-system'
+  },
 
-  // File Upload Constraints
-  maxFileSize: 25000000, // 25MB as per appendix A.1.2
-  supportedFileTypes: [
-    'application/pdf',           // PDF files
-    'image/jpeg',               // JPEG images
-    'image/png',                // PNG images
-    'application/msword',       // DOC files
-    'application/vnd.openxmlformats-officedocument.wordprocessingml.document' // DOCX files
-  ],
+  fileConfig: {
+    maxSingleFileSize: 25_000_000,
+    maxBulkUploadSize: 500_000_000,
+    supportedFileTypes: [
+      'application/pdf',
+      'image/jpeg',
+      'image/png',
+      'application/msword',
+      'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+    ],
+    maxFilesPerBatch: 50
+  },
 
-  // AWS Configuration
-  region: 'us-east-1', // Primary production region
+  logging: {
+    level: 'error',
+    enableConsole: false,
+    enableFileLogging: true,
+    logFilePath: './logs/app.log',
+    maxLogFileSize: 10_485_760
+  },
 
-  // Logging and Debug Settings
-  logLevel: 'error', // Production logging level
-  enableMocks: false // Disable mock data in production
+  features: {
+    enableMocks: false,
+    enableDebugTools: false,
+    enablePerformanceMonitoring: true,
+    enableErrorReporting: true
+  },
+
+  security: {
+    enableCORS: true,
+    allowedOrigins: [
+      'https://vroozi-backend-pz5d.onrender.com',
+      'https://app.vroozi.com'
+    ],
+    enableCSP: true,
+    enableXSRF: true,
+    maxSessionDuration: 28_800,
+    tokenEncryptionKey: process.env['TOKEN_ENCRYPTION_KEY'] || 'production-key'
+  },
+
+  // Company Information
+  companyName: 'VROOZI',
+  companyLogo: 'assets/images/company-logo.png',
+  companyAddress: '123 Business Street, Los Angeles, CA 90001',
+  companyPhone: '(555) 123-4567',
+  companyEmail: 'support@vroozi.com'
 };
