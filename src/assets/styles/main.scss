@@ -1,0 +1,223 @@
+// =============================================================================
+// Main Stylesheet
+// Contract Processing System Frontend
+// Version: 1.0.0
+// =============================================================================
+
+// -----------------------------------------------------------------------------
+// External Dependencies
+// -----------------------------------------------------------------------------
+
+// Angular Material Theme - v15.0.0
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+
+// Normalize.css - v8.0.1
+@import 'normalize.css';
+
+// -----------------------------------------------------------------------------
+// Internal Dependencies
+// -----------------------------------------------------------------------------
+
+@import 'variables';
+@import 'mixins';
+@import 'themes';
+@import 'typography';
+
+// -----------------------------------------------------------------------------
+// Root Element Configuration
+// -----------------------------------------------------------------------------
+
+html {
+  box-sizing: border-box;
+  font-size: $font-size-base;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-display: swap;
+  scroll-behavior: smooth;
+
+  @media (prefers-reduced-motion: reduce) {
+    scroll-behavior: auto;
+  }
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+// -----------------------------------------------------------------------------
+// Body Configuration
+// -----------------------------------------------------------------------------
+
+body {
+  margin: 0;
+  font-family: $font-family-primary;
+  line-height: 1.5;
+  color: var(--text-color);
+  background-color: var(--background-color);
+  text-size-adjust: 100%;
+  overflow-x: hidden;
+  min-height: 100vh;
+
+  @include theme-transition;
+}
+
+// -----------------------------------------------------------------------------
+// Layout Containers
+// -----------------------------------------------------------------------------
+
+.container {
+  max-width: $container-max-width;
+  margin: 0 auto;
+  padding: $spacing-medium;
+  container-type: inline-size;
+  container-name: main-container;
+
+  @include mobile {
+    padding: $spacing-small;
+  }
+}
+
+.app-wrapper {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  contain: layout;
+}
+
+// -----------------------------------------------------------------------------
+// Media Query Implementations
+// -----------------------------------------------------------------------------
+
+// Dark Mode Support
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+  }
+}
+
+// Print Styles
+@media print {
+  @include print-styles;
+
+  body {
+    background: white;
+    color: black;
+    margin: 0;
+    padding: 0;
+  }
+
+  .container {
+    max-width: none;
+    padding: 0;
+  }
+}
+
+// Reduced Motion
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+// High Contrast Mode
+@media (prefers-contrast: high) {
+  @include high-contrast-mode;
+}
+
+// -----------------------------------------------------------------------------
+// Global Utility Classes
+// -----------------------------------------------------------------------------
+
+// Accessibility
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+// Layout
+.flex-center {
+  @include flex-center;
+}
+
+// Typography
+.text-truncate {
+  @include truncate-text;
+}
+
+// -----------------------------------------------------------------------------
+// RTL Support
+// -----------------------------------------------------------------------------
+
+[dir="rtl"] {
+  @include rtl-support;
+}
+
+// -----------------------------------------------------------------------------
+// Theme Application
+// -----------------------------------------------------------------------------
+
+// Apply default theme
+:root {
+  @include apply-theme('light');
+}
+
+// Theme toggle classes
+.theme-light {
+  @include apply-theme('light');
+}
+
+.theme-dark {
+  @include apply-theme('dark');
+}
+
+// -----------------------------------------------------------------------------
+// Focus Management
+// -----------------------------------------------------------------------------
+
+:focus-visible {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 2px;
+}
+
+// Remove focus outline for mouse users
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+// -----------------------------------------------------------------------------
+// Scrollbar Styling
+// -----------------------------------------------------------------------------
+
+* {
+  @include scrollbar;
+}
+
+// -----------------------------------------------------------------------------
+// Global Animation Configuration
+// -----------------------------------------------------------------------------
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.fade-in {
+  animation: fadeIn 0.3s ease-in-out;
+  
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+}

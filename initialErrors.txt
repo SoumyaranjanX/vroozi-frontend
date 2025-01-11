@@ -1,0 +1,3384 @@
+D:\Projects\Blitzy\vroozi-purchase-order-processing-eprkk2\src\web>npm start
+
+> contract-processing-system@1.0.0 start
+> ng serve --configuration=development
+
+√ Browser application bundle generation complete.
+
+Initial Chunk Files   | Names         |  Raw Size
+styles.css, styles.js | styles        | 332.99 kB |
+polyfills.js          | polyfills     | 208.27 kB |
+vendor.js             | vendor        | 207.88 kB |
+runtime.js            | runtime       |   6.55 kB |
+main.js               | main          | 580 bytes |
+
+                      | Initial Total | 756.26 kB
+
+Build at: 2025-01-01T05:46:44.077Z - Hash: a2982de8e4d9d748 - Time: 5492ms
+
+./src/assets/styles/main.scss - Error: Module build failed (from ./node_modules/sass-loader/dist/cjs.js):
+SassError: Declarations may only be used within style rules.
+    ╷
+160 │     --border-color: #{$dark-gray};
+    │     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ╵
+  src\assets\styles\_themes.scss 160:5  high-contrast-mode()
+  src\assets\styles\_themes.scss 171:1  @import
+  src\assets\styles\main.scss 23:9      root stylesheet
+
+./src/app/app.component.scss?ngResource - Error: Module build failed (from ./node_modules/sass-loader/dist/cjs.js):
+SassError: Declarations may only be used within style rules.
+    ╷
+160 │     --border-color: #{$dark-gray};
+    │     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ╵
+  src\assets\styles\_themes.scss 160:5  high-contrast-mode()
+  src\assets\styles\_themes.scss 171:1  @import
+  src\app\app.component.scss 9:9        root stylesheet
+
+./src/app/features/auth/login/login.component.scss?ngResource - Error: Module build failed (from ./node_modules/sass-loader/dist/cjs.js):
+SassError: Can't find stylesheet to import.
+  ╷
+7 │ @import 'src/web/src/assets/styles/_variables';
+  │         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  ╵
+  src\app\features\auth\login\login.component.scss 7:9  root stylesheet
+
+./src/app/features/contracts/components/contract-list/contract-list.component.scss?ngResource - Error: Module build failed (from ./node_modules/sass-loader/dist/cjs.js):
+SassError: Can't find stylesheet to import.
+  ╷
+2 │ @import 'src/web/src/assets/styles/variables';
+  │         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  ╵
+  src\app\features\contracts\components\contract-list\contract-list.component.scss 2:9  root stylesheet
+
+./src/app/features/contracts/components/contract-upload/contract-upload.component.scss?ngResource - Error: Module build failed (from ./node_modules/sass-loader/dist/cjs.js):
+SassError: Can't find stylesheet to import.
+  ╷
+6 │ @import 'src/web/src/assets/styles/_variables';
+  │         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  ╵
+  src\app\features\contracts\components\contract-upload\contract-upload.component.scss 6:9  root stylesheet
+
+./src/app/features/contracts/components/contract-validation/contract-validation.component.scss?ngResource - Error: Module build failed (from ./node_modules/sass-loader/dist/cjs.js):
+SassError: Can't find stylesheet to import.
+  ╷
+1 │ @import 'src/web/src/assets/styles/variables';
+  │         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  ╵
+  src\app\features\contracts\components\contract-validation\contract-validation.component.scss 1:9  root stylesheet
+
+./src/app/features/dashboard/components/dashboard/dashboard.component.scss?ngResource - Error: Module build failed (from ./node_modules/sass-loader/dist/cjs.js):
+SassError: Can't find stylesheet to import.
+  ╷
+7 │ @import 'src/web/src/assets/styles/_variables';
+  │         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  ╵
+  src\app\features\dashboard\components\dashboard\dashboard.component.scss 7:9  root stylesheet
+
+./src/app/features/dashboard/components/recent-activity/recent-activity.component.scss?ngResource - Error: Module build failed (from ./node_modules/sass-loader/dist/cjs.js):
+SassError: Can't find stylesheet to import.
+  ╷
+6 │ @import 'src/web/src/assets/styles/_variables';
+  │         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  ╵
+  src\app\features\dashboard\components\recent-activity\recent-activity.component.scss 6:9  root stylesheet
+
+./src/app/features/dashboard/components/stats-card/stats-card.component.scss?ngResource - Error: Module build failed (from ./node_modules/sass-loader/dist/cjs.js):
+SassError: Undefined variable.
+   ╷
+17 │   border-radius: $border-radius-large;
+   │                  ^^^^^^^^^^^^^^^^^^^^
+   ╵
+  src\app\features\dashboard\components\stats-card\stats-card.component.scss 17:18  root stylesheet
+
+./src/app/features/purchase-orders/components/po-generation/po-generation.component.scss?ngResource - Error: Module build failed (from ./node_modules/sass-loader/dist/cjs.js):
+SassError: Can't find stylesheet to import.
+  ╷
+6 │ @import 'src/web/src/assets/styles/variables';
+  │         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  ╵
+  src\app\features\purchase-orders\components\po-generation\po-generation.component.scss 6:9  root stylesheet
+
+./src/app/features/purchase-orders/components/po-list/po-list.component.scss?ngResource - Error: Module build failed (from ./node_modules/sass-loader/dist/cjs.js):
+SassError: Can't find stylesheet to import.
+  ╷
+7 │ @import 'src/web/src/assets/styles/_variables';
+  │         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  ╵
+  src\app\features\purchase-orders\components\po-list\po-list.component.scss 7:9  root stylesheet
+
+./src/app/shared/components/alert/alert.component.scss?ngResource - Error: Module build failed (from ./node_modules/sass-loader/dist/cjs.js):
+SassError: Can't find stylesheet to import.
+  ╷
+2 │ @import '../../../assets/styles/variables';
+  │         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  ╵
+  src\app\shared\components\alert\alert.component.scss 2:9  root stylesheet
+
+./src/app/shared/components/file-upload/file-upload.component.scss?ngResource - Error: Module build failed (from ./node_modules/sass-loader/dist/cjs.js):
+SassError: Can't find stylesheet to import.
+  ╷
+6 │ @import '../../../assets/styles/variables';
+  │         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  ╵
+  src\app\shared\components\file-upload\file-upload.component.scss 6:9  root stylesheet
+
+./src/app/shared/components/navbar/navbar.component.scss?ngResource - Error: Module build failed (from ./node_modules/sass-loader/dist/cjs.js):
+SassError: Can't find stylesheet to import.
+  ╷
+2 │ @import 'src/web/src/assets/styles/variables';
+  │         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  ╵
+  src\app\shared\components\navbar\navbar.component.scss 2:9  root stylesheet
+
+./src/app/shared/components/sidebar/sidebar.component.scss?ngResource - Error: Module build failed (from ./node_modules/sass-loader/dist/cjs.js):
+SassError: Can't find stylesheet to import.
+  ╷
+7 │ @import 'src/web/src/assets/styles/variables';
+  │         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  ╵
+  src\app\shared\components\sidebar\sidebar.component.scss 7:9  root stylesheet
+
+./src/assets/styles/main.scss?ngGlobalStyle - Error: Module build failed (from ./node_modules/mini-css-extract-plugin/dist/loader.js):
+HookWebpackError: Module build failed (from ./node_modules/sass-loader/dist/cjs.js):
+SassError: Declarations may only be used within style rules.
+    ╷
+160 │     --border-color: #{$dark-gray};
+    │     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ╵
+  src\assets\styles\_themes.scss 160:5  high-contrast-mode()
+  src\assets\styles\_themes.scss 171:1  @import
+  src\assets\styles\main.scss 23:9      root stylesheet
+
+Error: Module not found: Error: Can't resolve 'D:/Projects/Blitzy/vroozi-purchase-order-processing-eprkk2/src/web/src/app/shared/components/navbar/navbar.component.mobile.scss?ngResource' in 'D:\Projects\Blitzy\vroozi-purchase-order-processing-eprkk2\src\web'
+
+Error: error TS6304: Composite projects may not disable declaration emit.
+
+
+Error: src/app/features/auth/auth.module.ts:12:29 - error TS2307: Cannot find module './store/auth.reducer' or its corresponding type declarations.
+
+12 import { authReducer } from './store/auth.reducer';
+                               ~~~~~~~~~~~~~~~~~~~~~~
+
+
+Error: src/app/features/auth/auth.module.ts:13:29 - error TS2307: Cannot find module './store/auth.effects' or its corresponding type declarations.
+
+13 import { AuthEffects } from './store/auth.effects';
+                               ~~~~~~~~~~~~~~~~~~~~~~
+
+
+Error: src/app/features/auth/auth.module.ts:14:27 - error TS2307: Cannot find module './guards/auth.guard' or its corresponding type declarations.
+
+14 import { AuthGuard } from './guards/auth.guard';
+                             ~~~~~~~~~~~~~~~~~~~~~
+
+
+Error: src/app/features/dashboard/components/recent-activity/recent-activity.component.ts:13:33 - error TS2307: Cannot find module '@shared/services/contract.service' or its corresponding type declarations.
+
+13 import { ContractService } from '@shared/services/contract.service';
+                                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+Error: src/app/features/dashboard/components/recent-activity/recent-activity.component.ts:14:38 - error TS2307: Cannot find module '@shared/services/purchase-order.service' or its corresponding type declarations.
+
+14 import { PurchaseOrderService } from '@shared/services/purchase-order.service';
+                                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+Error: src/app/features/dashboard/components/recent-activity/recent-activity.component.ts:58:24 - error TS2493: Tuple type '[any]' of length '1' has no element
+
+Error: src/app/store/effects/auth.effects.ts:40:1 - error TS6133: 'Action' is declared but its value is never read.
+
+40 import { Action } from '@ngrx/store';
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+Error: src/app/store/effects/auth.effects.ts:83:5 - error TS2322: Type 'Observable<unknown>' is not assignable to type 'EffectResult<Action>'.
+  Type 'Observable<unknown>' is not assignable to type 'Observable<Action>'.
+    Type 'unknown' is not assignable to type 'Action'.
+
+ 83     this.actions$.pipe(
+        ~~~~~~~~~~~~~~~~~~~
+ 84       ofType(logout),
+    ~~~~~~~~~~~~~~~~~~~~~
+...
+102       )
+    ~~~~~~~
+103     )
+    ~~~~~
+
+  node_modules/@ngrx/effects/src/effect_creator.d.ts:12:103
+    12 }, DT extends DispatchType<C>, OT extends ObservableType<DT, OT>, R extends EffectResult<OT>>(source: () => R & ConditionallyDisallowActionCreator<DT, R>, config?: C): R & CreateEffectMetadata;
+                                                                                                             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    The expected type comes from the return type of this signature.
+
+
+Error: src/app/store/effects/auth.effects.ts:86:35 - error TS2339: Property 'pipe' does not exist on type 'void'.
+
+86         this.authService.logout().pipe(
+                                     ~~~~
+
+
+Error: src/app/store/reducers/index.ts:22:18 - error TS2339: Property 'reducer' does not exist on type 'typeof import("D:/Projects/Blitzy/vroozi-purchase-order-processing-eprkk2/src/web/src/app/store/reducers/auth.reducer")'.
+
+22   auth: fromAuth.reducer,
+                    ~~~~~~~
+
+
+Error: src/app/store/reducers/index.ts:23:3 - error TS2322: Type '(state: ContractState | undefined, action: Action) => ContractState' is not assignable to type 'ActionReducer<IContractState, Action>'.
+  Types of parameters 'state' and 'state' are incompatible.
+    Type 'IContractState | undefined' is not assignable to type 'ContractState | undefined'.
+      Type 'IContractState' is not assignable to type 'ContractState'.
+        Types of property 'metadata' are incompatible.
+          Type 'Record<string, unknown>' is missing the following properties from type '{ lastUpdate: Date | null; totalCount: number; }': lastUpdate, totalCount
+
+23   contracts: fromContract.reducer,
+     ~~~~~~~~~
+
+  src/app/store/state/app.state.ts:91:3
+    91   contracts: IContractState;
+         ~~~~~~~~~
+    The expected type comes from property 'contracts' which is declared here on type 'ActionReducerMap<IAppState, Action>'
+
+
+Error: The loader "D:/Projects/Blitzy/vroozi-purchase-order-processing-eprkk2/src/web/src/app/shared/components/navbar/navbar.component.mobile.scss" didn't return a string.
+
+./src/app/shared/components/loading/loading.component.scss?ngResource - Error: Module build failed (from ./node_modules/sass-loader/dist/cjs.js):
+SassError: Can't find stylesheet to import.
+  ╷
+7 │ @import 'src/web/src/assets/styles/variables';
+  │         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  ╵
+  src\app\shared\components\loading\loading.component.scss 7:9  root stylesheet
+
+Error: src/app/shared/components/alert/alert.component.html:2:17 - error NG5002: Parser Error: Missing expected :
+
+Error: src/app/shared/components/alert/alert.component.html:2:17 - error NG5002: Parser Error: Unexpected token }
+
+Error: src/app/shared/components/alert/alert.component.html:3:6 - error NG5002: Parser Error: Missing expected :
+
+Error: src/app/shared/components/alert/alert.component.html:3:6 - error NG5002: Parser Error: Unexpected token }
+
+Error: src/app/shared/components/alert/alert.component.html:4:31 - error NG5002: Parser Error: Missing expected :
+
+Error: src/app/shared/components/alert/alert.component.html:4:31 - error NG5002: Parser Error: Unexpected token }
+
+Error: src/app/shared/components/alert/alert.component.html:5:19 - error NG5002: Parser Error: Missing expected :
+
+Error: src/app/shared/components/alert/alert.component.html:5:19 - error NG5002: Parser Error: Unexpected token }
+
+Error: src/app/shared/components/alert/alert.component.html:6:24 - error NG5002: Parser Error: Missing expected :
+
+Error: src/app/shared/components/alert/alert.component.html:6:24 - error NG5002: Parser Error: Unexpected token }
+
+Error: src/app/shared/components/alert/alert.component.html:12:33 - error NG5002: Parser Error: Missing expected :
+
+Error: src/app/shared/components/alert/alert.component.html:12:33 - error NG5002: Parser Error: Unexpected token }
+
+Error: src/app/shared/components/alert/alert.component.html:14:14 - error NG5002: Parser Error: Missing expected :
+
+Error: src/app/shared/components/alert/alert.component.html:14:14 - error NG5002: Parser Error: Unexpected token }
+
+Error: src/app/shared/components/alert/alert.component.html:18:14 - error NG5002: Parser Error: Missing expected :
+
+Error: src/app/shared/components/alert/alert.component.html:18:14 - error NG5002: Parser Error: Unexpected token }
+
+Error: src/app/shared/components/alert/alert.component.html:24:14 - error NG5002: Parser Error: Missing expected :
+
+Error: src/app/shared/components/alert/alert.component.html:24:14 - error NG5002: Parser Error: Unexpected token }
+
+Error: src/app/shared/components/alert/alert.component.html:30:14 - error NG5002: Parser Error: Missing expected :
+
+Error: src/app/shared/components/alert/alert.component.html:30:14 - error NG5002: Parser Error: Unexpected token }
+
+Error: src/app/shared/components/alert/alert.component.html:40:7 - error NG5002: Parser Error: Missing expected :
+
+Error: src/app/shared/components/alert/alert.component.html:40:7 - error NG5002: Parser Error: Unexpected token }
+
+Error: src/app/shared/components/alert/alert.component.html:45:11 - error NG5002: Parser Error: Missing expected :
+
+Error: src/app/shared/components/alert/alert.component.html:45:11 - error NG5002: Parser Error: Unexpected token }
+
+Error: src/app/shared/components/alert/alert.component.html:48:20 - error NG5002: Parser Error: Missing expected :
+
+Error: src/app/shared/components/alert/alert.component.html:48:20 - error NG5002: Parser Error: Unexpected token }
+
+Error: src/app/features/auth/login/login.component.html:15:25 - error TS2551: Property 'error$' does not exist on type 'LoginComponent'. Did you mean 'error'?
+
+15       <app-alert *ngIf="error$ | async"
+                           ~~~~~~
+
+  src/app/features/auth/login/login.component.ts:23:16
+    23   templateUrl: './login.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component LoginComponent.
+
+
+Error: src/app/features/auth/login/login.component.html:17:19 - error TS2322: Type 'string | null' is not assignable to type 'string'.
+  Type 'null' is not assignable to type 'string'.
+
+17                  [message]="error$ | async"
+                     ~~~~~~~
+
+  src/app/features/auth/login/login.component.ts:23:16
+    23   templateUrl: './login.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component LoginComponent.
+
+
+Error: src/app/features/auth/login/login.component.html:17:29 - error TS2551: Property 'error$' does not exist on type 'LoginComponent'. Did you mean 'error'?
+
+17                  [message]="error$ | async"
+                               ~~~~~~
+
+  src/app/features/auth/login/login.component.ts:23:16
+    23   templateUrl: './login.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component LoginComponent.
+
+
+Error: src/app/features/auth/login/login.component.html:32:60 - error TS2531: Object is possibly 'null'.
+
+32                [attr.aria-invalid]="loginForm.get('email').invalid && loginForm.get('email').touched">
+                                                              ~~~~~~~
+
+  src/app/features/auth/login/login.component.ts:23:16
+    23   templateUrl: './login.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component LoginComponent.
+
+
+Error: src/app/features/auth/login/login.component.html:32:94 - error TS2531: Object is possibly 'null'.
+
+32                [attr.aria-invalid]="loginForm.get('email').invalid && loginForm.get('email').touched">
+                                                                                                ~~~~~~~
+
+  src/app/features/auth/login/login.component.ts:23:16
+    23   templateUrl: './login.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component LoginComponent.
+
+
+Error: src/app/features/auth/login/login.component.html:37:44 - error TS2531: Object is possibly 'null'.
+
+37              *ngIf="loginForm.get('email').errors && loginForm.get('email').touched"
+                                              ~~~~~~
+
+  src/app/features/auth/login/login.component.ts:23:16
+    23   templateUrl: './login.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component LoginComponent.
+
+
+Error: src/app/features/auth/login/login.component.html:37:77 - error TS2531: Object is possibly 'null'.
+
+37              *ngIf="loginForm.get('email').errors && loginForm.get('email').touched"
+                                                                               ~~~~~~~
+
+  src/app/features/auth/login/login.component.ts:23:16
+    23   templateUrl: './login.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component LoginComponent.
+
+
+Error: src/app/features/auth/login/login.component.html:39:47 - error TS2531: Object is possibly 'null'.
+
+39           <span *ngIf="loginForm.get('email').errors?.['required']">
+                                                 ~~~~~~
+
+  src/app/features/auth/login/login.component.ts:23:16
+    23   templateUrl: './login.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component LoginComponent.
+
+
+Error: src/app/features/auth/login/login.component.html:42:47 - error TS2531: Object is possibly 'null'.
+
+42           <span *ngIf="loginForm.get('email').errors?.['email']">
+                                                 ~~~~~~
+
+  src/app/features/auth/login/login.component.ts:23:16
+    23   templateUrl: './login.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component LoginComponent.
+
+
+Error: src/app/features/auth/login/login.component.html:54:26 - error TS2339: Property 'showPassword' does not exist on type 'LoginComponent'.
+
+54           <input [type]="showPassword ? 'text' : 'password'"
+                            ~~~~~~~~~~~~
+
+  src/app/features/auth/login/login.component.ts:23:16
+    23   templateUrl: './login.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component LoginComponent.
+
+
+Error: src/app/features/auth/login/login.component.html:60:65 - error TS2531: Object is possibly 'null'.
+
+60                  [attr.aria-invalid]="loginForm.get('password').invalid && loginForm.get('password').touched">
+                                                                   ~~~~~~~
+
+  src/app/features/auth/login/login.component.ts:23:16
+    23   templateUrl: './login.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component LoginComponent.
+
+
+Error: src/app/features/auth/login/login.component.html:60:102 - error TS2531: Object is possibly 'null'.
+
+60                  [attr.aria-invalid]="loginForm.get('password').invalid && loginForm.get('password').touched">
+                                                                                                        ~~~~~~~
+
+  src/app/features/auth/login/login.component.ts:23:16
+    23   templateUrl: './login.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component LoginComponent.
+
+
+Error: src/app/features/auth/login/login.component.html:66:38 - error TS2339: Property 'showPassword' does not exist on type 'LoginComponent'.
+
+66                   [attr.aria-label]="showPassword ? 'Hide password' : 'Show password'"
+                                        ~~~~~~~~~~~~
+
+  src/app/features/auth/login/login.component.ts:23:16
+    23   templateUrl: './login.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component LoginComponent.
+
+
+Error: src/app/features/auth/login/login.component.html:67:40 - error TS2339: Property 'showPassword' does not exist on type 'LoginComponent'.
+
+67                   [attr.aria-pressed]="showPassword">
+                                          ~~~~~~~~~~~~
+
+  src/app/features/auth/login/login.component.ts:23:16
+    23   templateUrl: './login.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component LoginComponent.
+
+
+Error: src/app/features/auth/login/login.component.html:65:28 - error TS2339: Property 'togglePasswordVisibility' does not exist on type 'LoginComponent'.
+
+65                   (click)="togglePasswordVisibility()"
+                              ~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/features/auth/login/login.component.ts:23:16
+    23   templateUrl: './login.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component LoginComponent.
+
+
+Error: src/app/features/auth/login/login.component.html:77:47 - error TS2531: Object is possibly 'null'.
+
+77              *ngIf="loginForm.get('password').errors && loginForm.get('password').touched"
+                                                 ~~~~~~
+
+  src/app/features/auth/login/login.component.ts:23:16
+    23   templateUrl: './login.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component LoginComponent.
+
+
+Error: src/app/features/auth/login/login.component.html:77:83 - error TS2531: Object is possibly 'null'.
+
+77              *ngIf="loginForm.get('password').errors && loginForm.get('password').touched"
+                                                                                     ~~~~~~~
+
+  src/app/features/auth/login/login.component.ts:23:16
+    23   templateUrl: './login.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component LoginComponent.
+
+
+Error: src/app/features/auth/login/login.component.html:79:50 - error TS2531: Object is possibly 'null'.
+
+79           <span *ngIf="loginForm.get('password').errors?.['required']">
+                                                    ~~~~~~
+
+  src/app/features/auth/login/login.component.ts:23:16
+    23   templateUrl: './login.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component LoginComponent.
+
+
+Error: src/app/features/auth/login/login.component.html:82:50 - error TS2531: Object is possibly 'null'.
+
+82           <span *ngIf="loginForm.get('password').errors?.['minlength']">
+                                                    ~~~~~~
+
+  src/app/features/auth/login/login.component.ts:23:16
+    23   templateUrl: './login.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component LoginComponent.
+
+
+Error: src/app/features/auth/login/login.component.html:91:28 - error TS2551: Property 'loading$' does not exist on type 'LoginComponent'. Did you mean 'isLoading'?
+
+91               [disabled]="(loading$ | async) || !loginForm.valid"
+                              ~~~~~~~~
+
+  src/app/features/auth/login/login.component.ts:23:16
+    23   templateUrl: './login.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component LoginComponent.
+
+
+Error: src/app/features/auth/login/login.component.html:93:54 - error TS2551: Property 'loading$' does not exist on type 'LoginComponent'. Did you mean 'isLoading'?
+
+93         <span class="button-content" [class.hidden]="loading$ | async">
+                                                        ~~~~~~~~
+
+  src/app/features/auth/login/login.component.ts:23:16
+    23   templateUrl: './login.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component LoginComponent.
+
+
+Error: src/app/features/auth/login/login.component.html:97:22 - error TS2551: Property 'loading$' does not exist on type 'LoginComponent'. Did you mean 'isLoading'?
+
+97               *ngIf="loading$ | async"
+                        ~~~~~~~~
+
+  src/app/features/auth/login/login.component.ts:23:16
+    23   templateUrl: './login.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component LoginComponent.
+
+
+Error: src/app/features/dashboard/dashboard.module.ts:38:5 - error NG6008: Component DashboardComponent is standalone, and cannot be declared in an NgModule. Did you mean to import it instead?
+
+38     DashboardComponent,
+       ~~~~~~~~~~~~~~~~~~
+
+
+Error: src/app/features/dashboard/dashboard.module.ts:39:5 - error NG6008: Component StatsCardComponent is standalone, and cannot be declared in an NgModule. Did you mean to import it instead?
+
+39     StatsCardComponent,
+       ~~~~~~~~~~~~~~~~~~
+
+
+Error: src/app/features/dashboard/dashboard.module.ts:40:5 - error NG6001: The class 'RecentActivityComponent' is listed in the declarations of the NgModule 'DashboardModule', but is not a directive, a component, or a pipe. Either remove it from the NgModule's declarations, or add an appropriate Angular decorator.
+
+40     RecentActivityComponent
+       ~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/features/dashboard/components/recent-activity/recent-activity.component.ts:37:14
+    37 export class RecentActivityComponent implements OnInit, OnDestroy {
+                    ~~~~~~~~~~~~~~~~~~~~~~~
+    'RecentActivityComponent' is declared here.
+
+
+Error: src/app/features/dashboard/dashboard.module.ts:55:5 - error NG6004: Can't be exported from this NgModule, as it must be imported first
+
+55     DashboardComponent
+       ~~~~~~~~~~~~~~~~~~
+
+
+Error: src/app/features/dashboard/components/dashboard/dashboard.component.ts:30:33 - error NG2012: Component imports must be standalone components, directives, pipes, or must be NgModules.
+
+30   imports: [StatsCardComponent, RecentActivityComponent]
+                                   ~~~~~~~~~~~~~~~~~~~~~~~
+
+
+Error: src/app/features/dashboard/components/recent-activity/recent-activity.component.ts:48:13 - error NG2003: No suitable injection token for parameter 'contractService' of class 'RecentActivityComponent'.
+  Consider using the @Inject decorator to specify an injection token.
+
+48     private contractService: ContractService,
+               ~~~~~~~~~~~~~~~
+
+  src/app/features/dashboard/components/recent-activity/recent-activity.component.ts:48:30
+    48     private contractService: ContractService,
+                                    ~~~~~~~~~~~~~~~
+    This type does not have a value, so it cannot be used as injection token.
+
+
+Error: src/app/features/contracts/components/contract-list/contract-list.component.html:28:25 - error TS2339: Property 'applyFilter' does not exist on type 'ContractListComponent'.
+
+28                (keyup)="applyFilter($event)"
+                           ~~~~~~~~~~~
+
+  src/app/features/contracts/components/contract-list/contract-list.component.ts:50:16
+    50   templateUrl: './contract-list.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component ContractListComponent.
+
+
+Error: src/app/features/contracts/components/contract-list/contract-list.component.html:35:40 - error TS2551: Property 'selectedContracts' does not exist on type 'ContractListComponent'. Did you mean 'onSelectContract'?
+
+35       <div class="bulk-actions" *ngIf="selectedContracts.size > 0">
+                                          ~~~~~~~~~~~~~~~~~
+
+  src/app/features/contracts/components/contract-list/contract-list.component.ts:50:16
+    50   templateUrl: './contract-list.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component ContractListComponent.
+
+
+Error: src/app/features/contracts/components/contract-list/contract-list.component.html:38:49 - error TS2551: Property 'selectedContracts' does not exist on type 'ContractListComponent'. Did you mean 'onSelectContract'?
+
+38                 [attr.aria-label]="'Process ' + selectedContracts.size + ' selected contracts'">
+                                                   ~~~~~~~~~~~~~~~~~
+
+  src/app/features/contracts/components/contract-list/contract-list.component.ts:50:16
+    50   templateUrl: './contract-list.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component ContractListComponent.
+
+
+Error: src/app/features/contracts/components/contract-list/contract-list.component.html:39:31 - error TS2551: Property 'selectedContracts' does not exist on type 'ContractListComponent'. Did you mean 'onSelectContract'?
+
+39           Process Selected ({{selectedContracts.size}})
+                                 ~~~~~~~~~~~~~~~~~
+
+  src/app/features/contracts/components/contract-list/contract-list.component.ts:50:16
+    50   templateUrl: './contract-list.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component ContractListComponent.
+
+
+Error: src/app/features/contracts/components/contract-list/contract-list.component.html:50:31 - error TS2339: Property 'sortData' does not exist on type 'ContractListComponent'.
+
+50              (matSortChange)="sortData($event)"
+                                 ~~~~~~~~
+
+  src/app/features/contracts/components/contract-list/contract-list.component.ts:50:16
+    50   templateUrl: './contract-list.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component ContractListComponent.
+
+
+Error: src/app/features/contracts/components/contract-list/contract-list.component.html:59:37 - error TS2339: Property 'selection' does not exist on type 'ContractListComponent'.
+
+59                          [checked]="selection.hasValue() && isAllSelected()"
+                                       ~~~~~~~~~
+
+  src/app/features/contracts/components/contract-list/contract-list.component.ts:50:16
+    50   templateUrl: './contract-list.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component ContractListComponent.
+
+
+Error: src/app/features/contracts/components/contract-list/contract-list.component.html:59:61 - error TS2339: Property 'isAllSelected' does not exist on type 'ContractListComponent'.
+
+59                          [checked]="selection.hasValue() && isAllSelected()"
+                                                               ~~~~~~~~~~~~~
+
+  src/app/features/contracts/components/contract-list/contract-list.component.ts:50:16
+    50   templateUrl: './contract-list.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component ContractListComponent.
+
+
+Error: src/app/features/contracts/components/contract-list/contract-list.component.html:60:43 - error TS2339: Property 'selection' does not exist on type 'ContractListComponent'.
+
+60                          [indeterminate]="selection.hasValue() && !isAllSelected()"
+                                             ~~~~~~~~~
+
+  src/app/features/contracts/components/contract-list/contract-list.component.ts:50:16
+    50   templateUrl: './contract-list.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component ContractListComponent.
+
+
+Error: src/app/features/contracts/components/contract-list/contract-list.component.html:60:68 - error TS2339: Property 'isAllSelected' does not exist on type 'ContractListComponent'.
+
+60                          [indeterminate]="selection.hasValue() && !isAllSelected()"
+                                                                      ~~~~~~~~~~~~~
+
+  src/app/features/contracts/components/contract-list/contract-list.component.ts:50:16
+    50   templateUrl: './contract-list.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component ContractListComponent.
+
+
+Error: src/app/features/contracts/components/contract-list/contract-list.component.html:58:46 - error TS2339: Property 'masterToggle' does not exist on type 'ContractListComponent'.
+
+58             <mat-checkbox (change)="$event ? masterToggle() : null"
+                                                ~~~~~~~~~~~~
+
+  src/app/features/contracts/components/contract-list/contract-list.component.ts:50:16
+    50   templateUrl: './contract-list.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component ContractListComponent.
+
+
+Error: src/app/features/contracts/components/contract-list/contract-list.component.html:67:37 - error TS2339: Property 'selection' does not exist on type 'ContractListComponent'.
+
+67                          [checked]="selection.isSelected(contract)"
+                                       ~~~~~~~~~
+
+  src/app/features/contracts/components/contract-list/contract-list.component.ts:50:16
+    50   templateUrl: './contract-list.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component ContractListComponent.
+
+
+Error: src/app/features/contracts/components/contract-list/contract-list.component.html:66:45 - error TS2339: Property 'selection' does not exist on type 'ContractListComponent'.
+
+66                          (change)="$event ? selection.toggle(contract) : null"
+                                               ~~~~~~~~~
+
+  src/app/features/contracts/components/contract-list/contract-list.component.ts:50:16
+    50   templateUrl: './contract-list.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component ContractListComponent.
+
+
+Error: src/app/features/contracts/components/contract-list/contract-list.component.html:109:47 - error TS2339: Property 'getStatusIcon' does not exist on type 'ContractListComponent'.
+
+109               <mat-icon class="status-icon">{{getStatusIcon(contract.status)}}</mat-icon>
+                                                  ~~~~~~~~~~~~~
+
+  src/app/features/contracts/components/contract-list/contract-list.component.ts:50:16
+    50   templateUrl: './contract-list.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component ContractListComponent.
+
+
+Error: src/app/features/contracts/components/contract-list/contract-list.component.html:126:32 - error TS2339: Property 'viewContract' does not exist on type 'ContractListComponent'.
+
+126                       (click)="viewContract(contract)"
+                                   ~~~~~~~~~~~~
+
+  src/app/features/contracts/components/contract-list/contract-list.component.ts:50:16
+    50   templateUrl: './contract-list.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component ContractListComponent.
+
+
+Error: src/app/features/contracts/components/contract-list/contract-list.component.html:132:32 - error TS2339: Property 'processContract' does not exist on type 'ContractListComponent'.
+
+132                       (click)="processContract(contract)"
+                                   ~~~~~~~~~~~~~~~
+
+  src/app/features/contracts/components/contract-list/contract-list.component.ts:50:16
+    50   templateUrl: './contract-list.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component ContractListComponent.
+
+
+Error: src/app/features/contracts/components/contract-list/contract-list.component.html:138:32 - error TS2339: Property 'downloadContract' does not exist on type 'ContractListComponent'.
+
+138                       (click)="downloadContract(contract)"
+                                   ~~~~~~~~~~~~~~~~
+
+  src/app/features/contracts/components/contract-list/contract-list.component.ts:50:16
+    50   templateUrl: './contract-list.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component ContractListComponent.
+
+
+Error: src/app/features/contracts/components/contract-list/contract-list.component.html:153:31 - error TS2339: Property 'selection' does not exist on type 'ContractListComponent'.
+
+153             [class.selected]="selection.isSelected(contract)"
+                                  ~~~~~~~~~
+
+  src/app/features/contracts/components/contract-list/contract-list.component.ts:50:16
+    50   templateUrl: './contract-list.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component ContractListComponent.
+
+
+Error: src/app/features/contracts/components/contract-list/contract-list.component.html:158:35 - error TS2339: Property 'selection' does not exist on type 'ContractListComponent'.
+
+158             [attr.aria-selected]="selection.isSelected(contract)">
+                                      ~~~~~~~~~
+
+  src/app/features/contracts/components/contract-list/contract-list.component.ts:50:16
+    50   templateUrl: './contract-list.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component ContractListComponent.
+
+
+Error: src/app/features/contracts/components/contract-list/contract-list.component.html:154:22 - error TS2339: Property 'onContractSelect' does not exist on type 'ContractListComponent'.
+
+154             (click)="onContractSelect(contract)"
+                         ~~~~~~~~~~~~~~~~
+
+  src/app/features/contracts/components/contract-list/contract-list.component.ts:50:16
+    50   templateUrl: './contract-list.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component ContractListComponent.
+
+
+Error: src/app/features/contracts/components/contract-list/contract-list.component.html:155:30 - error TS2339: Property 'onContractSelect' does not exist on type 'ContractListComponent'.
+
+155             (keydown.enter)="onContractSelect(contract)"
+                                 ~~~~~~~~~~~~~~~~
+
+  src/app/features/contracts/components/contract-list/contract-list.component.ts:50:16
+    50   templateUrl: './contract-list.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component ContractListComponent.
+
+
+Error: src/app/features/contracts/components/contract-list/contract-list.component.html:182:45 - error TS2339: Property 'today' does not exist on type 'ContractListComponent'.
+
+182     <p class="print-timestamp">Generated: {{today | date:'medium'}}</p>
+                                                ~~~~~
+
+  src/app/features/contracts/components/contract-list/contract-list.component.ts:50:16
+    50   templateUrl: './contract-list.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component ContractListComponent.
+
+
+Error: src/app/features/contracts/components/contract-list/contract-list.component.html:6:5 - error NG8001: 'mat-progress-spinner' is not a known element:
+1. If 'mat-progress-spinner' is an Angular component, then verify that it is part of this module.
+2. If 'mat-progress-spinner' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+
+6     <mat-progress-spinner
+      ~~~~~~~~~~~~~~~~~~~~~
+7       mode="indeterminate"
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~
+8       diameter="48"
+  ~~~~~~~~~~~~~~~~~~~
+9       aria-label="Loading contracts">
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/features/contracts/components/contract-list/contract-list.component.ts:50:16
+    50   templateUrl: './contract-list.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component ContractListComponent.
+
+
+Error: src/app/features/contracts/components/contract-list/contract-list.component.html:45:5 - error NG8001: 'cdk-virtual-scroll-viewport' is not a known element:
+1. If 'cdk-virtual-scroll-viewport' is an Angular component, then verify that it is part of this module.
+2. If 'cdk-virtual-scroll-viewport' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+
+45     <cdk-virtual-scroll-viewport itemSize="48" class="virtual-scroll-viewport">
+       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/features/contracts/components/contract-list/contract-list.component.ts:50:16
+    50   templateUrl: './contract-list.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component ContractListComponent.
+
+
+Error: src/app/features/contracts/components/contract-list/contract-list.component.html:58:13 - error NG8001: 'mat-checkbox' is not a known element:
+1. If 'mat-checkbox' is an Angular component, then verify that it is part of this module.
+2. If 'mat-checkbox' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+
+58             <mat-checkbox (change)="$event ? masterToggle() : null"
+               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+59                          [checked]="selection.hasValue() && isAllSelected()"
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+60                          [indeterminate]="selection.hasValue() && !isAllSelected()"
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+61                          aria-label="Select all contracts">
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/features/contracts/components/contract-list/contract-list.component.ts:50:16
+    50   templateUrl: './contract-list.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component ContractListComponent.
+
+
+Error: src/app/features/contracts/components/contract-list/contract-list.component.html:59:26 - error NG8002: Can't bind to 'checked' since it isn't a known property of 'mat-checkbox'.
+1. If 'mat-checkbox' is an Angular component and it has 'checked' input, then verify that it is part of this module.
+2. If 'mat-checkbox' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+3. To allow any property add 'NO_ERRORS_SCHEMA' to the '@NgModule.schemas' of this component.
+
+59                          [checked]="selection.hasValue() && isAllSelected()"
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/features/contracts/components/contract-list/contract-list.component.ts:50:16
+    50   templateUrl: './contract-list.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component ContractListComponent.
+
+
+Error: src/app/features/contracts/components/contract-list/contract-list.component.html:60:26 - error NG8002: Can't bind to 'indeterminate' since it isn't a known property of 'mat-checkbox'.
+1. If 'mat-checkbox' is an Angular component and it has 'indeterminate' input, then verify that it is part of this module.
+2. If 'mat-checkbox' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+3. To allow any property add 'NO_ERRORS_SCHEMA' to the '@NgModule.schemas' of this component.
+
+60                          [indeterminate]="selection.hasValue() && !isAllSelected()"
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/features/contracts/components/contract-list/contract-list.component.ts:50:16
+    50   templateUrl: './contract-list.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component ContractListComponent.
+
+
+Error: src/app/features/contracts/components/contract-list/contract-list.component.html:65:13 - error NG8001: 'mat-checkbox' is not a known element:
+1. If 'mat-checkbox' is an Angular component, then verify that it is part of this module.
+2. If 'mat-checkbox' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+
+65             <mat-checkbox (click)="$event.stopPropagation()"
+               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+66                          (change)="$event ? selection.toggle(contract) : null"
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+67                          [checked]="selection.isSelected(contract)"
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+68                          [attr.aria-label]="'Select contract ' + contract.id">
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/features/contracts/components/contract-list/contract-list.component.ts:50:16
+    50   templateUrl: './contract-list.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component ContractListComponent.
+
+
+Error: src/app/features/contracts/components/contract-list/contract-list.component.html:67:26 - error NG8002: Can't bind to 'checked' since it isn't a known property of 'mat-checkbox'.
+1. If 'mat-checkbox' is an Angular component and it has 'checked' input, then verify that it is part of this module.
+2. If 'mat-checkbox' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+3. To allow any property add 'NO_ERRORS_SCHEMA' to the '@NgModule.schemas' of this component.
+
+67                          [checked]="selection.isSelected(contract)"
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/features/contracts/components/contract-list/contract-list.component.ts:50:16
+    50   templateUrl: './contract-list.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component ContractListComponent.
+
+
+Error: src/app/features/contracts/components/contract-list/contract-list.component.html:109:15 - error NG8001: 'mat-icon' is not a known element:
+1. If 'mat-icon' is an Angular component, then verify that it is part of this module.
+2. If 'mat-icon' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+
+109               <mat-icon class="status-icon">{{getStatusIcon(contract.status)}}</mat-icon>
+                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/features/contracts/components/contract-list/contract-list.component.ts:50:16
+    50   templateUrl: './contract-list.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component ContractListComponent.
+
+
+Error: src/app/features/contracts/components/contract-list/contract-list.component.html:120:21 - error NG8002: Can't bind to 'matMenuTriggerFor' since it isn't a known property of 'button'.
+
+120                     [matMenuTriggerFor]="menu"
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/features/contracts/components/contract-list/contract-list.component.ts:50:16
+    50   templateUrl: './contract-list.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component ContractListComponent.
+
+
+Error: src/app/features/contracts/components/contract-list/contract-list.component.html:122:15 - error NG8001: 'mat-icon' is not a known element:
+1. If 'mat-icon' is an Angular component, then verify that it is part of this module.
+2. If 'mat-icon' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+
+122               <mat-icon>more_vert</mat-icon>
+                  ~~~~~~~~~~
+
+  src/app/features/contracts/components/contract-list/contract-list.component.ts:50:16
+    50   templateUrl: './contract-list.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component ContractListComponent.
+
+
+Error: src/app/features/contracts/components/contract-list/contract-list.component.html:124:13 - error NG8001: 'mat-menu' is not a known element:
+1. If 'mat-menu' is an Angular component, then verify that it is part of this module.
+2. If 'mat-menu' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+
+124             <mat-menu #menu="matMenu">
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/features/contracts/components/contract-list/contract-list.component.ts:50:16
+    50   templateUrl: './contract-list.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component ContractListComponent.
+
+
+Error: src/app/features/contracts/components/contract-list/contract-list.component.html:128:17 - error NG8001: 'mat-icon' is not a known element:
+1. If 'mat-icon' is an Angular component, then verify that it is part of this module.
+2. If 'mat-icon' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+
+128                 <mat-icon>visibility</mat-icon>
+                    ~~~~~~~~~~
+
+  src/app/features/contracts/components/contract-list/contract-list.component.ts:50:16
+    50   templateUrl: './contract-list.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component ContractListComponent.
+
+
+Error: src/app/features/contracts/components/contract-list/contract-list.component.html:134:17 - error NG8001: 'mat-icon' is not a known element:
+1. If 'mat-icon' is an Angular component, then verify that it is part of this module.
+2. If 'mat-icon' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+
+134                 <mat-icon>play_arrow</mat-icon>
+                    ~~~~~~~~~~
+
+  src/app/features/contracts/components/contract-list/contract-list.component.ts:50:16
+    50   templateUrl: './contract-list.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component ContractListComponent.
+
+
+Error: src/app/features/contracts/components/contract-list/contract-list.component.html:140:17 - error NG8001: 'mat-icon' is not a known element:
+1. If 'mat-icon' is an Angular component, then verify that it is part of this module.
+2. If 'mat-icon' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+
+140                 <mat-icon>download</mat-icon>
+                    ~~~~~~~~~~
+
+  src/app/features/contracts/components/contract-list/contract-list.component.ts:50:16
+    50   templateUrl: './contract-list.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component ContractListComponent.
+
+
+Error: src/app/features/contracts/components/contract-list/contract-list.component.html:124:30 - error NG8003: No directive found with exportAs 'matMenu'.
+
+124             <mat-menu #menu="matMenu">
+                                 ~~~~~~~
+
+  src/app/features/contracts/components/contract-list/contract-list.component.ts:50:16
+    50   templateUrl: './contract-list.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component ContractListComponent.
+
+
+Error: src/app/features/contracts/components/contract-upload/contract-upload.component.html:22:24 - error TS2339: Property 'onFilesSelected' does not exist on type 'ContractUploadComponent'.
+
+22       (filesSelected)="onFilesSelected($event)"
+                          ~~~~~~~~~~~~~~~
+
+  src/app/features/contracts/components/contract-upload/contract-upload.component.ts:47:16
+    47   templateUrl: './contract-upload.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component ContractUploadComponent.
+
+
+Error: src/app/features/contracts/components/contract-upload/contract-upload.component.html:23:24 - error TS2339: Property 'onUploadStarted' does not exist on type 'ContractUploadComponent'.
+
+23       (uploadStarted)="onUploadStarted()"
+                          ~~~~~~~~~~~~~~~
+
+  src/app/features/contracts/components/contract-upload/contract-upload.component.ts:47:16
+    47   templateUrl: './contract-upload.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component ContractUploadComponent.
+
+
+Error: src/app/features/contracts/components/contract-upload/contract-upload.component.html:24:25 - error TS2551: Property 'onUploadComplete' does not exist on type 'ContractUploadComponent'. Did you mean 'uploadComplete'?
+
+24       (uploadComplete)="onUploadComplete()"
+                           ~~~~~~~~~~~~~~~~
+
+  src/app/features/contracts/components/contract-upload/contract-upload.component.ts:47:16
+    47   templateUrl: './contract-upload.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component ContractUploadComponent.
+
+
+Error: src/app/features/contracts/components/contract-upload/contract-upload.component.html:25:22 - error TS2339: Property 'onUploadError' does not exist on type 'ContractUploadComponent'.
+
+25       (uploadError)="onUploadError($event)"
+                        ~~~~~~~~~~~~~
+
+  src/app/features/contracts/components/contract-upload/contract-upload.component.ts:47:16
+    47   templateUrl: './contract-upload.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component ContractUploadComponent.
+
+
+Error: src/app/features/contracts/components/contract-upload/contract-upload.component.html:44:12 - error TS2551: Property 'isUploading' does not exist on type 'ContractUploadComponent'. Did you mean 'uploading'?
+
+44     *ngIf="isUploading">
+              ~~~~~~~~~~~
+
+  src/app/features/contracts/components/contract-upload/contract-upload.component.ts:47:16
+    47   templateUrl: './contract-upload.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component ContractUploadComponent.
+
+
+Error: src/app/features/contracts/components/contract-upload/contract-upload.component.html:51:18 - error TS2339: Property 'uploadProgress' does not exist on type 'ContractUploadComponent'.
+
+51         [value]="uploadProgress"
+                    ~~~~~~~~~~~~~~
+
+  src/app/features/contracts/components/contract-upload/contract-upload.component.ts:47:16
+    47   templateUrl: './contract-upload.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component ContractUploadComponent.
+
+
+Error: src/app/features/contracts/components/contract-upload/contract-upload.component.html:54:26 - error TS2339: Property 'uploadProgress' does not exist on type 'ContractUploadComponent'.
+
+54         [aria-valuenow]="uploadProgress"
+                            ~~~~~~~~~~~~~~
+
+  src/app/features/contracts/components/contract-upload/contract-upload.component.ts:47:16
+    47   templateUrl: './contract-upload.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component ContractUploadComponent.
+
+
+Error: src/app/features/contracts/components/contract-upload/contract-upload.component.html:60:11 - error TS2339: Property 'uploadProgress' does not exist on type 'ContractUploadComponent'.
+
+60         {{uploadProgress}}% Complete
+             ~~~~~~~~~~~~~~
+
+  src/app/features/contracts/components/contract-upload/contract-upload.component.ts:47:16
+    47   templateUrl: './contract-upload.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component ContractUploadComponent.
+
+
+Error: src/app/features/contracts/components/contract-upload/contract-upload.component.html:67:47 - error TS2339: Property 'name' does not exist on type '[string, UploadQueueItem]'.
+
+67         <span class="file-name" [title]="file.name">{{file.name}}</span>
+                                                 ~~~~
+
+  src/app/features/contracts/components/contract-upload/contract-upload.component.ts:47:16
+    47   templateUrl: './contract-upload.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component ContractUploadComponent.
+
+
+Error: src/app/features/contracts/components/contract-upload/contract-upload.component.html:67:60 - error TS2339: Property 'name' does not exist on type '[string, UploadQueueItem]'.
+
+67         <span class="file-name" [title]="file.name">{{file.name}}</span>
+                                                              ~~~~
+
+  src/app/features/contracts/components/contract-upload/contract-upload.component.ts:47:16
+    47   templateUrl: './contract-upload.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component ContractUploadComponent.
+
+
+Error: src/app/features/contracts/components/contract-upload/contract-upload.component.html:68:36 - error TS2339: Property 'formatFileSize' does not exist on type 'ContractUploadComponent'.
+
+68         <span class="file-size">({{formatFileSize(file.size)}})</span>
+                                      ~~~~~~~~~~~~~~
+
+  src/app/features/contracts/components/contract-upload/contract-upload.component.ts:47:16
+    47   templateUrl: './contract-upload.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component ContractUploadComponent.
+
+
+Error: src/app/features/contracts/components/contract-upload/contract-upload.component.html:68:56 - error TS2339: Property 'size' does not exist on type '[string, UploadQueueItem]'.
+
+68         <span class="file-size">({{formatFileSize(file.size)}})</span>
+                                                          ~~~~
+
+  src/app/features/contracts/components/contract-upload/contract-upload.component.ts:47:16
+    47   templateUrl: './contract-upload.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component ContractUploadComponent.
+
+
+Error: src/app/features/contracts/components/contract-upload/contract-upload.component.html:70:23 - error TS2339: Property 'status' does not exist on type '[string, UploadQueueItem]'.
+
+70           *ngIf="file.status === 'complete'"
+                         ~~~~~~
+
+  src/app/features/contracts/components/contract-upload/contract-upload.component.ts:47:16
+    47   templateUrl: './contract-upload.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component ContractUploadComponent.
+
+
+Error: src/app/features/contracts/components/contract-upload/contract-upload.component.html:84:12 - error TS2339: Property 'validationErrors' does not exist on type 'ContractUploadComponent'.
+
+84     *ngIf="validationErrors.length">
+              ~~~~~~~~~~~~~~~~
+
+  src/app/features/contracts/components/contract-upload/contract-upload.component.ts:47:16
+    47   templateUrl: './contract-upload.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component ContractUploadComponent.
+
+
+Error: src/app/features/contracts/components/contract-upload/contract-upload.component.html:92:32 - error TS2339: Property 'validationErrors' does not exist on type 'ContractUploadComponent'.
+
+92       <li *ngFor="let error of validationErrors" class="error-item">
+                                  ~~~~~~~~~~~~~~~~
+
+  src/app/features/contracts/components/contract-upload/contract-upload.component.ts:47:16
+    47   templateUrl: './contract-upload.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component ContractUploadComponent.
+
+
+Error: src/app/features/contracts/components/contract-upload/contract-upload.component.html:103:19 - error TS2551: Property 'isUploading' does not exist on type 'ContractUploadComponent'. Did you mean 'uploading'?
+
+103       [disabled]="isUploading || !hasFiles"
+                      ~~~~~~~~~~~
+
+  src/app/features/contracts/components/contract-upload/contract-upload.component.ts:47:16
+    47   templateUrl: './contract-upload.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component ContractUploadComponent.
+
+
+Error: src/app/features/contracts/components/contract-upload/contract-upload.component.html:103:35 - error TS2339: Property 'hasFiles' does not exist on type 'ContractUploadComponent'.
+
+103       [disabled]="isUploading || !hasFiles"
+                                      ~~~~~~~~
+
+  src/app/features/contracts/components/contract-upload/contract-upload.component.ts:47:16
+    47   templateUrl: './contract-upload.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component ContractUploadComponent.
+
+
+Error: src/app/features/contracts/components/contract-upload/contract-upload.component.html:104:16 - error TS2339: Property 'startProcessing' does not exist on type 'ContractUploadComponent'.
+
+104       (click)="startProcessing()"
+                   ~~~~~~~~~~~~~~~
+
+  src/app/features/contracts/components/contract-upload/contract-upload.component.ts:47:16
+    47   templateUrl: './contract-upload.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component ContractUploadComponent.
+
+
+Error: src/app/features/contracts/components/contract-upload/contract-upload.component.html:112:20 - error TS2339: Property 'hasFiles' does not exist on type 'ContractUploadComponent'.
+
+112       [disabled]="!hasFiles"
+                       ~~~~~~~~
+
+  src/app/features/contracts/components/contract-upload/contract-upload.component.ts:47:16
+    47   templateUrl: './contract-upload.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component ContractUploadComponent.
+
+
+Error: src/app/features/contracts/components/contract-upload/contract-upload.component.html:125:7 - error TS2339: Property 'accessibilityAnnouncement' does not exist on type 'ContractUploadComponent'.
+
+125     {{accessibilityAnnouncement}}
+          ~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/features/contracts/components/contract-upload/contract-upload.component.ts:47:16
+    47   templateUrl: './contract-upload.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component ContractUploadComponent.
+
+
+Error: src/app/features/contracts/components/contract-upload/contract-upload.component.html:6:7 - error NG8001: 'mat-icon' is not a known element:
+1. If 'mat-icon' is an Angular component, then verify that it is part of this module.
+2. If 'mat-icon' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+
+6       <mat-icon aria-hidden="true">cloud_upload</mat-icon>
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/features/contracts/components/contract-upload/contract-upload.component.ts:47:16
+    47   templateUrl: './contract-upload.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component ContractUploadComponent.
+
+
+Error: src/app/features/contracts/components/contract-upload/contract-upload.component.html:16:5 - error NG8001: 'app-file-upload' is not a known element:
+1. If 'app-file-upload' is an Angular component, then verify that it is part of this module.
+2. If 'app-file-upload' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+
+ 16     <app-file-upload
+        ~~~~~~~~~~~~~~~~
+ 17       [allowedTypes]="['.pdf', '.docx']"
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+...
+ 25       (uploadError)="onUploadError($event)"
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 26       aria-label="Contract file upload area">
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/features/contracts/components/contract-upload/contract-upload.component.ts:47:16
+    47   templateUrl: './contract-upload.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component ContractUploadComponent.
+
+
+Error: src/app/features/contracts/components/contract-upload/contract-upload.component.html:17:7 - error NG8002: Can't bind to 'allowedTypes' since it isn't a known property of 'app-file-upload'.
+1. If 'app-file-upload' is an Angular component and it has 'allowedTypes' input, then verify that it is part of this module.
+2. If 'app-file-upload' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+3. To allow any property add 'NO_ERRORS_SCHEMA' to the '@NgModule.schemas' of this component.
+
+17       [allowedTypes]="['.pdf', '.docx']"
+         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/features/contracts/components/contract-upload/contract-upload.component.ts:47:16
+    47   templateUrl: './contract-upload.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component ContractUploadComponent.
+
+
+Error: src/app/features/contracts/components/contract-upload/contract-upload.component.html:18:7 - error NG8002: Can't bind to 'maxFileSize' since it isn't a known property of 'app-file-upload'.
+1. If 'app-file-upload' is an Angular component and it has 'maxFileSize' input, then verify that it is part of this module.
+2. If 'app-file-upload' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+3. To allow any property add 'NO_ERRORS_SCHEMA' to the '@NgModule.schemas' of this component.
+
+18       [maxFileSize]="25 * 1024 * 1024"
+         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/features/contracts/components/contract-upload/contract-upload.component.ts:47:16
+    47   templateUrl: './contract-upload.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component ContractUploadComponent.
+
+
+Error: src/app/features/contracts/components/contract-upload/contract-upload.component.html:19:7 - error NG8002: Can't bind to 'maxBatchSize' since it isn't a known property of 'app-file-upload'.
+1. If 'app-file-upload' is an Angular component and it has 'maxBatchSize' input, then verify that it is part of this module.
+2. If 'app-file-upload' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+3. To allow any property add 'NO_ERRORS_SCHEMA' to the '@NgModule.schemas' of this component.
+
+19       [maxBatchSize]="500 * 1024 * 1024"
+         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/features/contracts/components/contract-upload/contract-upload.component.ts:47:16
+    47   templateUrl: './contract-upload.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component ContractUploadComponent.
+
+
+Error: src/app/features/contracts/components/contract-upload/contract-upload.component.html:20:7 - error NG8002: Can't bind to 'multiple' since it isn't a known property of 'app-file-upload'.
+1. If 'app-file-upload' is an Angular component and it has 'multiple' input, then verify that it is part of this module.
+2. If 'app-file-upload' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+3. To allow any property add 'NO_ERRORS_SCHEMA' to the '@NgModule.schemas' of this component.
+
+20       [multiple]="true"
+         ~~~~~~~~~~~~~~~~~
+
+  src/app/features/contracts/components/contract-upload/contract-upload.component.ts:47:16
+    47   templateUrl: './contract-upload.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component ContractUploadComponent.
+
+
+Error: src/app/features/contracts/components/contract-upload/contract-upload.component.html:21:7 - error NG8002: Can't bind to 'autoUpload' since it isn't a known property of 'app-file-upload'.
+1. If 'app-file-upload' is an Angular component and it has 'autoUpload' input, then verify that it is part of this module.
+2. If 'app-file-upload' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+3. To allow any property add 'NO_ERRORS_SCHEMA' to the '@NgModule.schemas' of this component.
+
+21       [autoUpload]="true"
+         ~~~~~~~~~~~~~~~~~~~
+
+  src/app/features/contracts/components/contract-upload/contract-upload.component.ts:47:16
+    47   templateUrl: './contract-upload.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component ContractUploadComponent.
+
+
+Error: src/app/features/contracts/components/contract-upload/contract-upload.component.html:31:7 - error NG8001: 'mat-icon' is not a known element:
+1. If 'mat-icon' is an Angular component, then verify that it is part of this module.
+2. If 'mat-icon' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+
+31       <mat-icon aria-hidden="true">info</mat-icon>
+         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/features/contracts/components/contract-upload/contract-upload.component.ts:47:16
+    47   templateUrl: './contract-upload.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component ContractUploadComponent.
+
+
+Error: src/app/features/contracts/components/contract-upload/contract-upload.component.html:54:9 - error NG8002: Can't bind to 'aria-valuenow' since it isn't a known property of 'mat-progress-bar'.
+1. If 'mat-progress-bar' is an Angular component and it has 'aria-valuenow' input, then verify that it is part of this module.
+2. If 'mat-progress-bar' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+3. To allow any property add 'NO_ERRORS_SCHEMA' to the '@NgModule.schemas' of this component.
+
+54         [aria-valuenow]="uploadProgress"
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/features/contracts/components/contract-upload/contract-upload.component.ts:47:16
+    47   templateUrl: './contract-upload.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component ContractUploadComponent.
+
+
+Error: src/app/features/contracts/components/contract-upload/contract-upload.component.html:69:9 - error NG8001: 'mat-icon' is not a known element:
+1. If 'mat-icon' is an Angular component, then verify that it is part of this module.
+2. If 'mat-icon' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+
+69         <mat-icon
+           ~~~~~~~~~
+70           *ngIf="file.status === 'complete'"
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+71           class="status-icon success"
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+72           aria-label="Upload complete">
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/features/contracts/components/contract-upload/contract-upload.component.ts:47:16
+    47   templateUrl: './contract-upload.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component ContractUploadComponent.
+
+
+Error: src/app/features/contracts/components/contract-upload/contract-upload.component.html:87:7 - error NG8001: 'mat-icon' is not a known element:
+1. If 'mat-icon' is an Angular component, then verify that it is part of this module.
+2. If 'mat-icon' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+
+87       <mat-icon color="warn" aria-hidden="true">error</mat-icon>
+         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/features/contracts/components/contract-upload/contract-upload.component.ts:47:16
+    47   templateUrl: './contract-upload.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component ContractUploadComponent.
+
+
+Error: src/app/features/contracts/components/contract-upload/contract-upload.component.html:106:7 - error NG8001: 'mat-icon' is not a known element:
+1. If 'mat-icon' is an Angular component, then verify that it is part of this module.
+2. If 'mat-icon' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+
+106       <mat-icon aria-hidden="true">play_arrow</mat-icon>
+          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/features/contracts/components/contract-upload/contract-upload.component.ts:47:16
+    47   templateUrl: './contract-upload.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component ContractUploadComponent.
+
+
+Error: src/app/features/contracts/components/contract-upload/contract-upload.component.html:115:7 - error NG8001: 'mat-icon' is not a known element:
+1. If 'mat-icon' is an Angular component, then verify that it is part of this module.
+2. If 'mat-icon' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+
+115       <mat-icon aria-hidden="true">clear_all</mat-icon>
+          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/features/contracts/components/contract-upload/contract-upload.component.ts:47:16
+    47   templateUrl: './contract-upload.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component ContractUploadComponent.
+
+
+Error: src/app/features/contracts/components/contract-validation/contract-validation.component.html:8:12 - error TS2339: Property 'validationMessage' does not exist on type 'ContractValidationComponent'.
+
+8     *ngIf="validationMessage"
+             ~~~~~~~~~~~~~~~~~
+
+  src/app/features/contracts/components/contract-validation/contract-validation.component.ts:15:18
+    15     templateUrl: './contract-validation.component.html',
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component ContractValidationComponent.
+
+
+Error: src/app/features/contracts/components/contract-validation/contract-validation.component.html:9:13 - error TS2339: Property 'validationMessageType' does not exist on type 'ContractValidationComponent'.
+
+9     [type]="validationMessageType"
+              ~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/features/contracts/components/contract-validation/contract-validation.component.ts:15:18
+    15     templateUrl: './contract-validation.component.html',
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component ContractValidationComponent.
+
+
+Error: src/app/features/contracts/components/contract-validation/contract-validation.component.html:10:16 - error TS2339: Property 'validationMessage' does not exist on type 'ContractValidationComponent'.
+
+10     [message]="validationMessage"
+                  ~~~~~~~~~~~~~~~~~
+
+  src/app/features/contracts/components/contract-validation/contract-validation.component.ts:15:18
+    15     templateUrl: './contract-validation.component.html',
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component ContractValidationComponent.
+
+
+Error: src/app/features/contracts/components/contract-validation/contract-validation.component.html:12:15 - error TS2339: Property 'clearValidationMessage' does not exist on type 'ContractValidationComponent'.
+
+12     (closed)="clearValidationMessage()"
+                 ~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/features/contracts/components/contract-validation/contract-validation.component.ts:15:18
+    15     templateUrl: './contract-validation.component.html',
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component ContractValidationComponent.
+
+
+Error: src/app/features/contracts/components/contract-validation/contract-validation.component.html:28:21 - error TS2339: Property 'zoomLevel' does not exist on type 'ContractValidationComponent'.
+
+28         [disabled]="zoomLevel >= maxZoom">
+                       ~~~~~~~~~
+
+  src/app/features/contracts/components/contract-validation/contract-validation.component.ts:15:18
+    15     templateUrl: './contract-validation.component.html',
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component ContractValidationComponent.
+
+
+Error: src/app/features/contracts/components/contract-validation/contract-validation.component.html:28:34 - error TS2339: Property 'maxZoom' does not exist on type 'ContractValidationComponent'.
+
+28         [disabled]="zoomLevel >= maxZoom">
+                                    ~~~~~~~
+
+  src/app/features/contracts/components/contract-validation/contract-validation.component.ts:15:18
+    15     templateUrl: './contract-validation.component.html',
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component ContractValidationComponent.
+
+
+Error: src/app/features/contracts/components/contract-validation/contract-validation.component.html:26:18 - error TS2339: Property 'zoomIn' does not exist on type 'ContractValidationComponent'.
+
+26         (click)="zoomIn()"
+                    ~~~~~~
+
+  src/app/features/contracts/components/contract-validation/contract-validation.component.ts:15:18
+    15     templateUrl: './contract-validation.component.html',
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component ContractValidationComponent.
+
+
+Error: src/app/features/contracts/components/contract-validation/contract-validation.component.html:35:21 - error TS2339: Property 'zoomLevel' does not exist on type 'ContractValidationComponent'.
+
+35         [disabled]="zoomLevel <= minZoom">
+                       ~~~~~~~~~
+
+  src/app/features/contracts/components/contract-validation/contract-validation.component.ts:15:18
+    15     templateUrl: './contract-validation.component.html',
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component ContractValidationComponent.
+
+
+Error: src/app/features/contracts/components/contract-validation/contract-validation.component.html:35:34 - error TS2339: Property 'minZoom' does not exist on type 'ContractValidationComponent'.
+
+35         [disabled]="zoomLevel <= minZoom">
+                                    ~~~~~~~
+
+  src/app/features/contracts/components/contract-validation/contract-validation.component.ts:15:18
+    15     templateUrl: './contract-validation.component.html',
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component ContractValidationComponent.
+
+
+Error: src/app/features/contracts/components/contract-validation/contract-validation.component.html:33:18 - error TS2339: Property 'zoomOut' does not exist on type 'ContractValidationComponent'.
+
+33         (click)="zoomOut()"
+                    ~~~~~~~
+
+  src/app/features/contracts/components/contract-validation/contract-validation.component.ts:15:18
+    15     templateUrl: './contract-validation.component.html',
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component ContractValidationComponent.
+
+
+Error: src/app/features/contracts/components/contract-validation/contract-validation.component.html:40:18 - error TS2339: Property 'resetZoom' does not exist on type 'ContractValidationComponent'.
+
+40         (click)="resetZoom()"
+                    ~~~~~~~~~
+
+  src/app/features/contracts/components/contract-validation/contract-validation.component.ts:15:18
+    15     templateUrl: './contract-validation.component.html',
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component ContractValidationComponent.
+
+
+Error: src/app/features/contracts/components/contract-validation/contract-validation.component.html:49:37 - error TS2339: Property 'zoomLevel' does not exist on type 'ContractValidationComponent'.
+
+49       [style.transform]="'scale(' + zoomLevel + ')'">
+                                       ~~~~~~~~~
+
+  src/app/features/contracts/components/contract-validation/contract-validation.component.ts:15:18
+    15     templateUrl: './contract-validation.component.html',
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component ContractValidationComponent.
+
+
+Error: src/app/features/contracts/components/contract-validation/contract-validation.component.html:51:16 - error TS2339: Property 'documentUrl' does not exist on type 'ContractValidationComponent'.
+
+51         *ngIf="documentUrl"
+                  ~~~~~~~~~~~
+
+  src/app/features/contracts/components/contract-validation/contract-validation.component.ts:15:18
+    15     templateUrl: './contract-validation.component.html',
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component ContractValidationComponent.
+
+
+Error: src/app/features/contracts/components/contract-validation/contract-validation.component.html:52:16 - error TS2339: Property 'documentUrl' does not exist on type 'ContractValidationComponent'.
+
+52         [src]="documentUrl"
+                  ~~~~~~~~~~~
+
+  src/app/features/contracts/components/contract-validation/contract-validation.component.ts:15:18
+    15     templateUrl: './contract-validation.component.html',
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component ContractValidationComponent.
+
+
+Error: src/app/features/contracts/components/contract-validation/contract-validation.component.html:53:50 - error TS2551: Property 'contractId' does not exist on type 'ContractValidationComponent'. Did you mean 'contract'?
+
+53         [alt]="'Preview of contract document ' + contractId"
+                                                    ~~~~~~~~~~
+
+  src/app/features/contracts/components/contract-validation/contract-validation.component.ts:15:18
+    15     templateUrl: './contract-validation.component.html',
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component ContractValidationComponent.
+
+
+Error: src/app/features/contracts/components/contract-validation/contract-validation.component.html:64:19 - error TS2339: Property 'onSubmit' does not exist on type 'ContractValidationComponent'.
+
+64       (ngSubmit)="onSubmit()"
+                     ~~~~~~~~
+
+  src/app/features/contracts/components/contract-validation/contract-validation.component.ts:15:18
+    15     templateUrl: './contract-validation.component.html',
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component ContractValidationComponent.
+
+
+Error: src/app/features/contracts/components/contract-validation/contract-validation.component.html:76:37 - error TS2339: Property 'isFieldInvalid' does not exist on type 'ContractValidationComponent'.
+
+76           [ngClass]="{'is-invalid': isFieldInvalid('partyNames')}"
+                                       ~~~~~~~~~~~~~~
+
+  src/app/features/contracts/components/contract-validation/contract-validation.component.ts:15:18
+    15     templateUrl: './contract-validation.component.html',
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component ContractValidationComponent.
+
+
+Error: src/app/features/contracts/components/contract-validation/contract-validation.component.html:79:18 - error TS2339: Property 'isFieldInvalid' does not exist on type 'ContractValidationComponent'.
+
+79           *ngIf="isFieldInvalid('partyNames')"
+                    ~~~~~~~~~~~~~~
+
+  src/app/features/contracts/components/contract-validation/contract-validation.component.ts:15:18
+    15     templateUrl: './contract-validation.component.html',
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component ContractValidationComponent.
+
+
+Error: src/app/features/contracts/components/contract-validation/contract-validation.component.html:100:37 - error TS2339: Property 'isFieldInvalid' does not exist on type 'ContractValidationComponent'.
+
+100           [ngClass]="{'is-invalid': isFieldInvalid('paymentTerms')}"
+                                        ~~~~~~~~~~~~~~
+
+  src/app/features/contracts/components/contract-validation/contract-validation.component.ts:15:18
+    15     templateUrl: './contract-validation.component.html',
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component ContractValidationComponent.
+
+
+Error: src/app/features/contracts/components/contract-validation/contract-validation.component.html:103:18 - error TS2339: Property 'isFieldInvalid' does not exist on type 'ContractValidationComponent'.
+
+103           *ngIf="isFieldInvalid('paymentTerms')"
+                     ~~~~~~~~~~~~~~
+
+  src/app/features/contracts/components/contract-validation/contract-validation.component.ts:15:18
+    15     templateUrl: './contract-validation.component.html',
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component ContractValidationComponent.
+
+
+Error: src/app/features/contracts/components/contract-validation/contract-validation.component.html:119:37 - error TS2339: Property 'isFieldInvalid' does not exist on type 'ContractValidationComponent'.
+
+119           [ngClass]="{'is-invalid': isFieldInvalid('totalCost')}"
+                                        ~~~~~~~~~~~~~~
+
+  src/app/features/contracts/components/contract-validation/contract-validation.component.ts:15:18
+    15     templateUrl: './contract-validation.component.html',
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component ContractValidationComponent.
+
+
+Error: src/app/features/contracts/components/contract-validation/contract-validation.component.html:124:18 - error TS2339: Property 'isFieldInvalid' does not exist on type 'ContractValidationComponent'.
+
+124           *ngIf="isFieldInvalid('totalCost')"
+                     ~~~~~~~~~~~~~~
+
+  src/app/features/contracts/components/contract-validation/contract-validation.component.ts:15:18
+    15     templateUrl: './contract-validation.component.html',
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component ContractValidationComponent.
+
+
+Error: src/app/features/contracts/components/contract-validation/contract-validation.component.html:145:37 - error TS2339: Property 'isFieldInvalid' does not exist on type 'ContractValidationComponent'.
+
+145           [ngClass]="{'is-invalid': isFieldInvalid('startDate')}"
+                                        ~~~~~~~~~~~~~~
+
+  src/app/features/contracts/components/contract-validation/contract-validation.component.ts:15:18
+    15     templateUrl: './contract-validation.component.html',
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component ContractValidationComponent.
+
+
+Error: src/app/features/contracts/components/contract-validation/contract-validation.component.html:148:18 - error TS2339: Property 'isFieldInvalid' does not exist on type 'ContractValidationComponent'.
+
+148           *ngIf="isFieldInvalid('startDate')"
+                     ~~~~~~~~~~~~~~
+
+  src/app/features/contracts/components/contract-validation/contract-validation.component.ts:15:18
+    15     templateUrl: './contract-validation.component.html',
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component ContractValidationComponent.
+
+
+Error: src/app/features/contracts/components/contract-validation/contract-validation.component.html:169:37 - error TS2339: Property 'isFieldInvalid' does not exist on type 'ContractValidationComponent'.
+
+169           [ngClass]="{'is-invalid': isFieldInvalid('endDate')}"
+                                        ~~~~~~~~~~~~~~
+
+  src/app/features/contracts/components/contract-validation/contract-validation.component.ts:15:18
+    15     templateUrl: './contract-validation.component.html',
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component ContractValidationComponent.
+
+
+Error: src/app/features/contracts/components/contract-validation/contract-validation.component.html:172:18 - error TS2339: Property 'isFieldInvalid' does not exist on type 'ContractValidationComponent'.
+
+172           *ngIf="isFieldInvalid('endDate')"
+                     ~~~~~~~~~~~~~~
+
+  src/app/features/contracts/components/contract-validation/contract-validation.component.ts:15:18
+    15     templateUrl: './contract-validation.component.html',
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component ContractValidationComponent.
+
+
+Error: src/app/features/contracts/components/contract-validation/contract-validation.component.html:196:20 - error TS2339: Property 'resetForm' does not exist on type 'ContractValidationComponent'.
+
+196           (click)="resetForm()"
+                       ~~~~~~~~~
+
+  src/app/features/contracts/components/contract-validation/contract-validation.component.ts:15:18
+    15     templateUrl: './contract-validation.component.html',
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component ContractValidationComponent.
+
+
+Error: src/app/features/contracts/components/contract-validation/contract-validation.component.html:203:20 - error TS2339: Property 'cancelValidation' does not exist on type 'ContractValidationComponent'.
+
+203           (click)="cancelValidation()"
+                       ~~~~~~~~~~~~~~~~
+
+  src/app/features/contracts/components/contract-validation/contract-validation.component.ts:15:18
+    15     templateUrl: './contract-validation.component.html',
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component ContractValidationComponent.
+
+
+Error: src/app/features/contracts/components/contract-validation/contract-validation.component.html:217:10 - error TS2339: Property 'showKeyboardShortcuts' does not exist on type 'ContractValidationComponent'.
+
+217   *ngIf="showKeyboardShortcuts">
+             ~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/features/contracts/components/contract-validation/contract-validation.component.ts:15:18
+    15     templateUrl: './contract-validation.component.html',
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component ContractValidationComponent.
+
+
+Error: src/app/features/contracts/components/contract-validation/contract-validation.component.html:229:14 - error TS2339: Property 'toggleKeyboardShortcuts' does not exist on type 'ContractValidationComponent'.
+
+229     (click)="toggleKeyboardShortcuts()">
+                 ~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/features/contracts/components/contract-validation/contract-validation.component.ts:15:18
+    15     templateUrl: './contract-validation.component.html',
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component ContractValidationComponent.
+
+
+Error: src/app/features/contracts/components/contract-validation/contract-validation.component.html:4:3 - error NG8001: 'app-loading' is not a known element:
+1. If 'app-loading' is an Angular component, then verify that it is part of this module.
+2. If 'app-loading' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+
+4   <app-loading *ngIf="isLoading"></app-loading>
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/features/contracts/components/contract-validation/contract-validation.component.ts:15:18
+    15     templateUrl: './contract-validation.component.html',
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component ContractValidationComponent.
+
+
+Error: src/app/features/purchase-orders/components/po-list/po-list.component.html:20:28 - error TS2551: Property 'loading$' does not exist on type 'POListComponent'. Did you mean 'isLoading'?
+
+20               [disabled]="(loading$ | async) === true"
+                              ~~~~~~~~
+
+  src/app/features/purchase-orders/components/po-list/po-list.component.ts:42:16
+    42   templateUrl: './po-list.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component POListComponent.
+
+
+Error: src/app/features/purchase-orders/components/po-list/po-list.component.html:21:24 - error TS2339: Property 'onBatchAction' does not exist on type 'POListComponent'.
+
+21               (click)="onBatchAction('download')"
+                          ~~~~~~~~~~~~~
+
+  src/app/features/purchase-orders/components/po-list/po-list.component.ts:42:16
+    42   templateUrl: './po-list.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component POListComponent.
+
+
+Error: src/app/features/purchase-orders/components/po-list/po-list.component.html:30:15 - error TS2339: Property 'error$' does not exist on type 'POListComponent'.
+
+30   <div *ngIf="error$ | async as error"
+                 ~~~~~~
+
+  src/app/features/purchase-orders/components/po-list/po-list.component.ts:42:16
+    42   templateUrl: './po-list.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component POListComponent.
+
+
+Error: src/app/features/purchase-orders/components/po-list/po-list.component.html:38:24 - error TS2339: Property 'retryLoad' does not exist on type 'POListComponent'.
+
+38               (click)="retryLoad()"
+                          ~~~~~~~~~
+
+  src/app/features/purchase-orders/components/po-list/po-list.component.ts:42:16
+    42   templateUrl: './po-list.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component POListComponent.
+
+
+Error: src/app/features/purchase-orders/components/po-list/po-list.component.html:46:15 - error TS2551: Property 'loading$' does not exist on type 'POListComponent'. Did you mean 'isLoading'?
+
+46   <div *ngIf="loading$ | async"
+                 ~~~~~~~~
+
+  src/app/features/purchase-orders/components/po-list/po-list.component.ts:42:16
+    42   templateUrl: './po-list.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component POListComponent.
+
+
+Error: src/app/features/purchase-orders/components/po-list/po-list.component.html:56:40 - error TS2339: Property 'purchaseOrders$' does not exist on type 'POListComponent'.
+
+56   <div class="table-container" *ngIf="(purchaseOrders$ | async) as purchaseOrders">
+                                          ~~~~~~~~~~~~~~~
+
+  src/app/features/purchase-orders/components/po-list/po-list.component.ts:42:16
+    42   templateUrl: './po-list.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component POListComponent.
+
+
+Error: src/app/features/purchase-orders/components/po-list/po-list.component.html:58:13 - error TS2322: Type 'unknown' is not assignable to type 'CdkTableDataSourceInput<any>'.
+
+58            [dataSource]="purchaseOrders"
+               ~~~~~~~~~~
+
+  src/app/features/purchase-orders/components/po-list/po-list.component.ts:42:16
+    42   templateUrl: './po-list.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component POListComponent.
+
+
+Error: src/app/features/purchase-orders/components/po-list/po-list.component.html:60:29 - error TS2551: Property 'onSort' does not exist on type 'POListComponent'. Did you mean 'sort'?
+
+60            (matSortChange)="onSort($event)"
+                               ~~~~~~
+
+  src/app/features/purchase-orders/components/po-list/po-list.component.ts:42:16
+    42   templateUrl: './po-list.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component POListComponent.
+
+
+Error: src/app/features/purchase-orders/components/po-list/po-list.component.html:69:34 - error TS2339: Property 'selection' does not exist on type 'POListComponent'.
+
+69                       [checked]="selection.hasValue() && isAllSelected()"
+                                    ~~~~~~~~~
+
+  src/app/features/purchase-orders/components/po-list/po-list.component.ts:42:16
+    42   templateUrl: './po-list.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component POListComponent.
+
+
+Error: src/app/features/purchase-orders/components/po-list/po-list.component.html:69:58 - error TS2339: Property 'isAllSelected' does not exist on type 'POListComponent'.
+
+69                       [checked]="selection.hasValue() && isAllSelected()"
+                                                            ~~~~~~~~~~~~~
+
+  src/app/features/purchase-orders/components/po-list/po-list.component.ts:42:16
+    42   templateUrl: './po-list.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component POListComponent.
+
+
+Error: src/app/features/purchase-orders/components/po-list/po-list.component.html:70:40 - error TS2339: Property 'selection' does not exist on type 'POListComponent'.
+
+70                       [indeterminate]="selection.hasValue() && !isAllSelected()"
+                                          ~~~~~~~~~
+
+  src/app/features/purchase-orders/components/po-list/po-list.component.ts:42:16
+    42   templateUrl: './po-list.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component POListComponent.
+
+
+Error: src/app/features/purchase-orders/components/po-list/po-list.component.html:70:65 - error TS2339: Property 'isAllSelected' does not exist on type 'POListComponent'.
+
+70                       [indeterminate]="selection.hasValue() && !isAllSelected()"
+                                                                   ~~~~~~~~~~~~~
+
+  src/app/features/purchase-orders/components/po-list/po-list.component.ts:42:16
+    42   templateUrl: './po-list.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component POListComponent.
+
+
+Error: src/app/features/purchase-orders/components/po-list/po-list.component.html:68:44 - error TS2339: Property 'masterToggle' does not exist on type 'POListComponent'.
+
+68           <mat-checkbox (change)="$event ? masterToggle() : null"
+                                              ~~~~~~~~~~~~
+
+  src/app/features/purchase-orders/components/po-list/po-list.component.ts:42:16
+    42   templateUrl: './po-list.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component POListComponent.
+
+
+Error: src/app/features/purchase-orders/components/po-list/po-list.component.html:77:34 - error TS2339: Property 'selection' does not exist on type 'POListComponent'.
+
+77                       [checked]="selection.isSelected(po)"
+                                    ~~~~~~~~~
+
+  src/app/features/purchase-orders/components/po-list/po-list.component.ts:42:16
+    42   templateUrl: './po-list.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component POListComponent.
+
+
+Error: src/app/features/purchase-orders/components/po-list/po-list.component.html:76:42 - error TS2339: Property 'selection' does not exist on type 'POListComponent'.
+
+76                       (change)="$event ? selection.toggle(po) : null"
+                                            ~~~~~~~~~
+
+  src/app/features/purchase-orders/components/po-list/po-list.component.ts:42:16
+    42   templateUrl: './po-list.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component POListComponent.
+
+
+Error: src/app/features/purchase-orders/components/po-list/po-list.component.html:106:32 - error TS2339: Property 'getStatusColor' does not exist on type 'POListComponent'.
+
+106             <mat-chip [color]="getStatusColor(po.status)"
+                                   ~~~~~~~~~~~~~~
+
+  src/app/features/purchase-orders/components/po-list/po-list.component.ts:42:16
+    42   templateUrl: './po-list.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component POListComponent.
+
+
+Error: src/app/features/purchase-orders/components/po-list/po-list.component.html:161:34 - error TS2339: Property 'isModifiablePOStatus' does not exist on type 'POListComponent'.
+
+161                     [disabled]="!isModifiablePOStatus(po.status)"
+                                     ~~~~~~~~~~~~~~~~~~~~
+
+  src/app/features/purchase-orders/components/po-list/po-list.component.ts:42:16
+    42   templateUrl: './po-list.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component POListComponent.
+
+
+Error: src/app/features/purchase-orders/components/po-list/po-list.component.html:162:30 - error TS2339: Property 'updateStatus' does not exist on type 'POListComponent'.
+
+162                     (click)="updateStatus(po.id)"
+                                 ~~~~~~~~~~~~
+
+  src/app/features/purchase-orders/components/po-list/po-list.component.ts:42:16
+    42   templateUrl: './po-list.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component POListComponent.
+
+
+Error: src/app/features/purchase-orders/components/po-list/po-list.component.html:175:33 - error TS2339: Property 'selection' does not exist on type 'POListComponent'.
+
+175           [class.selected-row]="selection.isSelected(po)"
+                                    ~~~~~~~~~
+
+  src/app/features/purchase-orders/components/po-list/po-list.component.ts:42:16
+    42   templateUrl: './po-list.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component POListComponent.
+
+
+Error: src/app/features/purchase-orders/components/po-list/po-list.component.html:176:33 - error TS2339: Property 'selection' does not exist on type 'POListComponent'.
+
+176           [attr.aria-selected]="selection.isSelected(po)">
+                                    ~~~~~~~~~
+
+  src/app/features/purchase-orders/components/po-list/po-list.component.ts:42:16
+    42   templateUrl: './po-list.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component POListComponent.
+
+
+Error: src/app/features/purchase-orders/components/po-list/po-list.component.html:181:33 - error TS2571: Object is of type 'unknown'.
+
+181     <div *ngIf="!purchaseOrders.length"
+                                    ~~~~~~
+
+  src/app/features/purchase-orders/components/po-list/po-list.component.ts:42:16
+    42   templateUrl: './po-list.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component POListComponent.
+
+
+Error: src/app/features/purchase-orders/components/po-list/po-list.component.html:193:26 - error TS2339: Property 'onPageChange' does not exist on type 'POListComponent'.
+
+193                  (page)="onPageChange($event)">
+                             ~~~~~~~~~~~~
+
+  src/app/features/purchase-orders/components/po-list/po-list.component.ts:42:16
+    42   templateUrl: './po-list.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component POListComponent.
+
+
+Error: src/app/features/purchase-orders/components/po-list/po-list.component.html:23:9 - error NG8001: 'mat-icon' is not a known element:
+1. If 'mat-icon' is an Angular component, then verify that it is part of this module.
+2. If 'mat-icon' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+
+23         <mat-icon>download</mat-icon>
+           ~~~~~~~~~~
+
+  src/app/features/purchase-orders/components/po-list/po-list.component.ts:42:16
+    42   templateUrl: './po-list.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component POListComponent.
+
+
+Error: src/app/features/purchase-orders/components/po-list/po-list.component.html:40:9 - error NG8001: 'mat-icon' is not a known element:
+1. If 'mat-icon' is an Angular component, then verify that it is part of this module.
+2. If 'mat-icon' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+
+40         <mat-icon>refresh</mat-icon> Retry
+           ~~~~~~~~~~
+
+  src/app/features/purchase-orders/components/po-list/po-list.component.ts:42:16
+    42   templateUrl: './po-list.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component POListComponent.
+
+
+Error: src/app/features/purchase-orders/components/po-list/po-list.component.html:50:5 - error NG8001: 'mat-progress-spinner' is not a known element:
+1. If 'mat-progress-spinner' is an Angular component, then verify that it is part of this module.
+2. If 'mat-progress-spinner' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+
+50     <mat-progress-spinner mode="indeterminate"
+       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+51                          diameter="40">
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/features/purchase-orders/components/po-list/po-list.component.ts:42:16
+    42   templateUrl: './po-list.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component POListComponent.
+
+
+Error: src/app/features/purchase-orders/components/po-list/po-list.component.html:68:11 - error NG8001: 'mat-checkbox' is not a known element:
+1. If 'mat-checkbox' is an Angular component, then verify that it is part of this module.
+2. If 'mat-checkbox' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+
+68           <mat-checkbox (change)="$event ? masterToggle() : null"
+             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+69                       [checked]="selection.hasValue() && isAllSelected()"
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+70                       [indeterminate]="selection.hasValue() && !isAllSelected()"
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+71                       aria-label="Select all purchase orders">
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/features/purchase-orders/components/po-list/po-list.component.ts:42:16
+    42   templateUrl: './po-list.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component POListComponent.
+
+
+Error: src/app/features/purchase-orders/components/po-list/po-list.component.html:69:23 - error NG8002: Can't bind to 'checked' since it isn't a known property of 'mat-checkbox'.
+1. If 'mat-checkbox' is an Angular component and it has 'checked' input, then verify that it is part of this module.
+2. If 'mat-checkbox' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+3. To allow any property add 'NO_ERRORS_SCHEMA' to the '@NgModule.schemas' of this component.
+
+69                       [checked]="selection.hasValue() && isAllSelected()"
+                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/features/purchase-orders/components/po-list/po-list.component.ts:42:16
+    42   templateUrl: './po-list.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component POListComponent.
+
+
+Error: src/app/features/purchase-orders/components/po-list/po-list.component.html:70:23 - error NG8002: Can't bind to 'indeterminate' since it isn't a known property of 'mat-checkbox'.
+1. If 'mat-checkbox' is an Angular component and it has 'indeterminate' input, then verify that it is part of this module.
+2. If 'mat-checkbox' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+3. To allow any property add 'NO_ERRORS_SCHEMA' to the '@NgModule.schemas' of this component.
+
+70                       [indeterminate]="selection.hasValue() && !isAllSelected()"
+                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/features/purchase-orders/components/po-list/po-list.component.ts:42:16
+    42   templateUrl: './po-list.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component POListComponent.
+
+
+Error: src/app/features/purchase-orders/components/po-list/po-list.component.html:75:11 - error NG8001: 'mat-checkbox' is not a known element:
+1. If 'mat-checkbox' is an Angular component, then verify that it is part of this module.
+2. If 'mat-checkbox' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+
+75           <mat-checkbox (click)="$event.stopPropagation()"
+             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+76                       (change)="$event ? selection.toggle(po) : null"
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+77                       [checked]="selection.isSelected(po)"
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+78                       [aria-label]="'Select purchase order ' + po.po_number">
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/features/purchase-orders/components/po-list/po-list.component.ts:42:16
+    42   templateUrl: './po-list.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component POListComponent.
+
+
+Error: src/app/features/purchase-orders/components/po-list/po-list.component.html:77:23 - error NG8002: Can't bind to 'checked' since it isn't a known property of 'mat-checkbox'.
+1. If 'mat-checkbox' is an Angular component and it has 'checked' input, then verify that it is part of this module.
+2. If 'mat-checkbox' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+3. To allow any property add 'NO_ERRORS_SCHEMA' to the '@NgModule.schemas' of this component.
+
+77                       [checked]="selection.isSelected(po)"
+                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/features/purchase-orders/components/po-list/po-list.component.ts:42:16
+    42   templateUrl: './po-list.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component POListComponent.
+
+
+Error: src/app/features/purchase-orders/components/po-list/po-list.component.html:78:23 - error NG8002: Can't bind to 'aria-label' since it isn't a known property of 'mat-checkbox'.
+1. If 'mat-checkbox' is an Angular component and it has 'aria-label' input, then verify that it is part of this module.
+2. If 'mat-checkbox' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+3. To allow any property add 'NO_ERRORS_SCHEMA' to the '@NgModule.schemas' of this component.
+
+78                       [aria-label]="'Select purchase order ' + po.po_number">
+                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/features/purchase-orders/components/po-list/po-list.component.ts:42:16
+    42   templateUrl: './po-list.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component POListComponent.
+
+
+Error: src/app/features/purchase-orders/components/po-list/po-list.component.html:105:11 - error NG8001: 'mat-chip-list' is not a known element:
+1. If 'mat-chip-list' is an Angular component, then verify that it is part of this module.
+2. If 'mat-chip-list' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+
+105           <mat-chip-list aria-label="Purchase order status">
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/features/purchase-orders/components/po-list/po-list.component.ts:42:16
+    42   templateUrl: './po-list.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component POListComponent.
+
+
+Error: src/app/features/purchase-orders/components/po-list/po-list.component.html:106:13 - error NG8001: 'mat-chip' is not a known element:
+1. If 'mat-chip' is an Angular component, then verify that it is part of this module.
+2. If 'mat-chip' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+
+106             <mat-chip [color]="getStatusColor(po.status)"
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+107                      [selected]="true"
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+108                      [attr.aria-label]="'Status: ' + po.status">
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/features/purchase-orders/components/po-list/po-list.component.ts:42:16
+    42   templateUrl: './po-list.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component POListComponent.
+
+
+Error: src/app/features/purchase-orders/components/po-list/po-list.component.html:106:23 - error NG8002: Can't bind to 'color' since it isn't a known property of 'mat-chip'.
+1. If 'mat-chip' is an Angular component and it has 'color' input, then verify that it is part of this module.
+2. If 'mat-chip' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+3. To allow any property add 'NO_ERRORS_SCHEMA' to the '@NgModule.schemas' of this component.
+
+106             <mat-chip [color]="getStatusColor(po.status)"
+                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/features/purchase-orders/components/po-list/po-list.component.ts:42:16
+    42   templateUrl: './po-list.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component POListComponent.
+
+
+Error: src/app/features/purchase-orders/components/po-list/po-list.component.html:107:22 - error NG8002: Can't bind to 'selected' since it isn't a known property of 'mat-chip'.
+1. If 'mat-chip' is an Angular component and it has 'selected' input, then verify that it is part of this module.
+2. If 'mat-chip' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+3. To allow any property add 'NO_ERRORS_SCHEMA' to the '@NgModule.schemas' of this component.
+
+107                      [selected]="true"
+                         ~~~~~~~~~~~~~~~~~
+
+  src/app/features/purchase-orders/components/po-list/po-list.component.ts:42:16
+    42   templateUrl: './po-list.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component POListComponent.
+
+
+Error: src/app/features/purchase-orders/components/po-list/po-list.component.html:153:21 - error NG8002: Can't bind to 'matTooltip' since it isn't a known property of 'button'.
+
+153                     [matTooltip]="'Download ' + po.po_number"
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/features/purchase-orders/components/po-list/po-list.component.ts:42:16
+    42   templateUrl: './po-list.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component POListComponent.
+
+
+Error: src/app/features/purchase-orders/components/po-list/po-list.component.html:155:15 - error NG8001: 'mat-icon' is not a known element:
+1. If 'mat-icon' is an Angular component, then verify that it is part of this module.
+2. If 'mat-icon' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+
+155               <mat-icon>download</mat-icon>
+                  ~~~~~~~~~~
+
+  src/app/features/purchase-orders/components/po-list/po-list.component.ts:42:16
+    42   templateUrl: './po-list.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component POListComponent.
+
+
+Error: src/app/features/purchase-orders/components/po-list/po-list.component.html:163:21 - error NG8002: Can't bind to 'matTooltip' since it isn't a known property of 'button'.
+
+163                     [matTooltip]="'Update status for ' + po.po_number"
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/features/purchase-orders/components/po-list/po-list.component.ts:42:16
+    42   templateUrl: './po-list.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component POListComponent.
+
+
+Error: src/app/features/purchase-orders/components/po-list/po-list.component.html:165:15 - error NG8001: 'mat-icon' is not a known element:
+1. If 'mat-icon' is an Angular component, then verify that it is part of this module.
+2. If 'mat-icon' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+
+165               <mat-icon>edit</mat-icon>
+                  ~~~~~~~~~~
+
+  src/app/features/purchase-orders/components/po-list/po-list.component.ts:42:16
+    42   templateUrl: './po-list.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component POListComponent.
+
+
+Error: src/app/features/purchase-orders/components/po-generation/po-generation.component.html:10:12 - error TS2339: Property 'loading$' does not exist on type 'POGenerationComponent'.
+
+10     *ngIf="loading$ | async"
+              ~~~~~~~~
+
+  src/app/features/purchase-orders/components/po-generation/po-generation.component.ts:29:16
+    29   templateUrl: './po-generation.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component POGenerationComponent.
+
+
+Error: src/app/features/purchase-orders/components/po-generation/po-generation.component.html:16:15 - error TS2339: Property 'error$' does not exist on type 'POGenerationComponent'.
+
+16   <div *ngIf="error$ | async as error"
+                 ~~~~~~
+
+  src/app/features/purchase-orders/components/po-generation/po-generation.component.ts:29:16
+    29   templateUrl: './po-generation.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component POGenerationComponent.
+
+
+Error: src/app/features/purchase-orders/components/po-generation/po-generation.component.html:25:21 - error TS2339: Property 'onSubmit' does not exist on type 'POGenerationComponent'.
+
+25         (ngSubmit)="onSubmit()"
+                       ~~~~~~~~
+
+  src/app/features/purchase-orders/components/po-generation/po-generation.component.ts:29:16
+    29   templateUrl: './po-generation.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component POGenerationComponent.
+
+
+Error: src/app/features/purchase-orders/components/po-generation/po-generation.component.html:87:19 - error TS2339: Property 'previewData$' does not exist on type 'POGenerationComponent'.
+
+87            *ngIf="previewData$ | async as preview"
+                     ~~~~~~~~~~~~
+
+  src/app/features/purchase-orders/components/po-generation/po-generation.component.ts:29:16
+    29   templateUrl: './po-generation.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component POGenerationComponent.
+
+
+Error: src/app/features/purchase-orders/components/po-generation/po-generation.component.html:100:24 - error TS2339: Property 'onPreview' does not exist on type 'POGenerationComponent'.
+
+100               (click)="onPreview()"
+                           ~~~~~~~~~
+
+  src/app/features/purchase-orders/components/po-generation/po-generation.component.ts:29:16
+    29   templateUrl: './po-generation.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component POGenerationComponent.
+
+
+Error: src/app/features/purchase-orders/components/po-generation/po-generation.component.html:109:46 - error TS2339: Property 'loading$' does not exist on type 'POGenerationComponent'.
+
+109               [disabled]="poForm.invalid || (loading$ | async)"
+                                                 ~~~~~~~~
+
+  src/app/features/purchase-orders/components/po-generation/po-generation.component.ts:29:16
+    29   templateUrl: './po-generation.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component POGenerationComponent.
+
+
+Error: src/app/features/purchase-orders/components/po-generation/po-generation.component.html:53:9 - error NG8001: 'mat-radio-button' is not a known element:
+1. If 'mat-radio-button' is an Angular component, then verify that it is part of this module.
+2. If 'mat-radio-button' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+
+53         <mat-radio-button value="PDF">
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/features/purchase-orders/components/po-generation/po-generation.component.ts:29:16
+    29   templateUrl: './po-generation.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component POGenerationComponent.
+
+
+Error: src/app/features/purchase-orders/components/po-generation/po-generation.component.html:56:9 - error NG8001: 'mat-radio-button' is not a known element:
+1. If 'mat-radio-button' is an Angular component, then verify that it is part of this module.
+2. If 'mat-radio-button' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+
+56         <mat-radio-button value="DOCX">
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/features/purchase-orders/components/po-generation/po-generation.component.ts:29:16
+    29   templateUrl: './po-generation.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component POGenerationComponent.
+
+
+Error: src/app/features/purchase-orders/components/po-generation/po-generation.component.html:102:9 - error NG8001: 'mat-icon' is not a known element:
+1. If 'mat-icon' is an Angular component, then verify that it is part of this module.
+2. If 'mat-icon' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+
+102         <mat-icon>preview</mat-icon>
+            ~~~~~~~~~~
+
+  src/app/features/purchase-orders/components/po-generation/po-generation.component.ts:29:16
+    29   templateUrl: './po-generation.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component POGenerationComponent.
+
+
+Error: src/app/features/purchase-orders/components/po-generation/po-generation.component.html:112:9 - error NG8001: 'mat-icon' is not a known element:
+1. If 'mat-icon' is an Angular component, then verify that it is part of this module.
+2. If 'mat-icon' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+
+112         <mat-icon>description</mat-icon>
+            ~~~~~~~~~~
+
+  src/app/features/purchase-orders/components/po-generation/po-generation.component.ts:29:16
+    29   templateUrl: './po-generation.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component POGenerationComponent.
+
+
+Error: src/app/app.component.html:2:32 - error TS2551: Property 'currentTheme$' does not exist on type 'AppComponent'. Did you mean 'currentTheme'?
+
+2 <div class="app-root" [class]="currentTheme$ | async" role="application">
+                                 ~~~~~~~~~~~~~
+
+  src/app/app.component.ts:29:16
+    29   templateUrl: './app.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component AppComponent.
+
+
+Error: src/app/app.component.html:6:23 - error TS2339: Property 'loadingMessage' does not exist on type 'AppComponent'.
+
+6     [loadingMessage]="loadingMessage"
+                        ~~~~~~~~~~~~~~
+
+  src/app/app.component.ts:29:16
+    29   templateUrl: './app.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component AppComponent.
+
+
+Error: src/app/app.component.html:14:20 - error TS2339: Property 'currentUser$' does not exist on type 'AppComponent'.
+
+14     [currentUser]="currentUser$ | async"
+                      ~~~~~~~~~~~~
+
+  src/app/app.component.ts:29:16
+    29   templateUrl: './app.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component AppComponent.
+
+
+Error: src/app/app.component.html:15:21 - error TS2551: Property 'currentTheme$' does not exist on type 'AppComponent'. Did you mean 'currentTheme'?
+
+15     [currentTheme]="currentTheme$ | async"
+                       ~~~~~~~~~~~~~
+
+  src/app/app.component.ts:29:16
+    29   templateUrl: './app.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component AppComponent.
+
+
+Error: src/app/app.component.html:16:22 - error TS2339: Property 'onToggleSidebar' does not exist on type 'AppComponent'.
+
+16     (toggleSidebar)="onToggleSidebar()"
+                        ~~~~~~~~~~~~~~~
+
+  src/app/app.component.ts:29:16
+    29   templateUrl: './app.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component AppComponent.
+
+
+Error: src/app/app.component.html:22:58 - error TS2339: Property 'sidebarCollapsed' does not exist on type 'AppComponent'.
+
+22   <div class="main-container" [class.sidebar-collapsed]="sidebarCollapsed">
+                                                            ~~~~~~~~~~~~~~~~
+
+  src/app/app.component.ts:29:16
+    29   templateUrl: './app.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component AppComponent.
+
+
+Error: src/app/app.component.html:26:22 - error TS2339: Property 'sidebarCollapsed' does not exist on type 'AppComponent'.
+
+26       [isCollapsed]="sidebarCollapsed"
+                        ~~~~~~~~~~~~~~~~
+
+  src/app/app.component.ts:29:16
+    29   templateUrl: './app.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component AppComponent.
+
+
+Error: src/app/app.component.html:27:22 - error TS2339: Property 'isDarkTheme$' does not exist on type 'AppComponent'.
+
+27       [isDarkTheme]="isDarkTheme$ | async"
+                        ~~~~~~~~~~~~
+
+  src/app/app.component.ts:29:16
+    29   templateUrl: './app.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component AppComponent.
+
+
+Error: src/app/app.component.html:37:30 - error TS2339: Property 'sidebarCollapsed' does not exist on type 'AppComponent'.
+
+37       [attr.aria-expanded]="!sidebarCollapsed">
+                                ~~~~~~~~~~~~~~~~
+
+  src/app/app.component.ts:29:16
+    29   templateUrl: './app.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component AppComponent.
+
+
+Error: src/app/app.component.html:51:23 - error TS2339: Property 'onRouteActivate' does not exist on type 'AppComponent'.
+
+51           (activate)="onRouteActivate($event)">
+                         ~~~~~~~~~~~~~~~
+
+  src/app/app.component.ts:29:16
+    29   templateUrl: './app.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component AppComponent.
+
+
+Error: src/app/app.component.html:60:11 - error TS2339: Property 'accessibilityAnnouncement' does not exist on type 'AppComponent'.
+
+60         {{accessibilityAnnouncement}}
+             ~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/app.component.ts:29:16
+    29   templateUrl: './app.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component AppComponent.
+
+
+Error: src/app/app.component.html:4:3 - error NG8001: 'app-loading' is not a known element:
+1. If 'app-loading' is an Angular component, then verify that it is part of this module.
+2. If 'app-loading' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+
+  4   <app-loading
+      ~~~~~~~~~~~~
+  5     *ngIf="isLoading"
+    ~~~~~~~~~~~~~~~~~~~~~
+...
+  7     role="alert"
+    ~~~~~~~~~~~~~~~~
+  8     aria-live="polite">
+    ~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/app.component.ts:29:16
+    29   templateUrl: './app.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component AppComponent.
+
+
+Error: src/app/app.component.html:6:5 - error NG8002: Can't bind to 'loadingMessage' since it isn't a known property of 'app-loading'.
+1. If 'app-loading' is an Angular component and it has 'loadingMessage' input, then verify that it is part of this module.
+2. If 'app-loading' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+3. To allow any property add 'NO_ERRORS_SCHEMA' to the '@NgModule.schemas' of this component.
+
+6     [loadingMessage]="loadingMessage"
+      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/app.component.ts:29:16
+    29   templateUrl: './app.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component AppComponent.
+
+
+Error: src/app/app.component.html:12:3 - error NG8001: 'app-navbar' is not a known element:
+1. If 'app-navbar' is an Angular component, then verify that it is part of this module.
+2. If 'app-navbar' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+
+ 12   <app-navbar
+      ~~~~~~~~~~~
+ 13     class="navbar"
+    ~~~~~~~~~~~~~~~~~~
+...
+ 17     role="navigation"
+    ~~~~~~~~~~~~~~~~~~~~~
+ 18     aria-label="Main navigation">
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/app.component.ts:29:16
+    29   templateUrl: './app.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component AppComponent.
+
+
+Error: src/app/app.component.html:14:5 - error NG8002: Can't bind to 'currentUser' since it isn't a known property of 'app-navbar'.
+1. If 'app-navbar' is an Angular component and it has 'currentUser' input, then verify that it is part of this module.
+2. If 'app-navbar' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+3. To allow any property add 'NO_ERRORS_SCHEMA' to the '@NgModule.schemas' of this component.
+
+14     [currentUser]="currentUser$ | async"
+       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/app.component.ts:29:16
+    29   templateUrl: './app.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component AppComponent.
+
+
+Error: src/app/app.component.html:15:5 - error NG8002: Can't bind to 'currentTheme' since it isn't a known property of 'app-navbar'.
+1. If 'app-navbar' is an Angular component and it has 'currentTheme' input, then verify that it is part of this module.
+2. If 'app-navbar' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+3. To allow any property add 'NO_ERRORS_SCHEMA' to the '@NgModule.schemas' of this component.
+
+15     [currentTheme]="currentTheme$ | async"
+       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/app.component.ts:29:16
+    29   templateUrl: './app.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component AppComponent.
+
+
+Error: src/app/app.component.html:24:5 - error NG8001: 'app-sidebar' is not a known element:
+1. If 'app-sidebar' is an Angular component, then verify that it is part of this module.
+2. If 'app-sidebar' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+
+ 24     <app-sidebar
+        ~~~~~~~~~~~~
+ 25       class="sidebar"
+    ~~~~~~~~~~~~~~~~~~~~~
+...
+ 28       role="complementary"
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 29       aria-label="Side navigation">
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/app.component.ts:29:16
+    29   templateUrl: './app.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component AppComponent.
+
+
+Error: src/app/app.component.html:26:7 - error NG8002: Can't bind to 'isCollapsed' since it isn't a known property of 'app-sidebar'.
+1. If 'app-sidebar' is an Angular component and it has 'isCollapsed' input, then verify that it is part of this module.
+2. If 'app-sidebar' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+3. To allow any property add 'NO_ERRORS_SCHEMA' to the '@NgModule.schemas' of this component.
+
+26       [isCollapsed]="sidebarCollapsed"
+         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/app.component.ts:29:16
+    29   templateUrl: './app.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component AppComponent.
+
+
+Error: src/app/app.component.html:27:7 - error NG8002: Can't bind to 'isDarkTheme' since it isn't a known property of 'app-sidebar'.
+1. If 'app-sidebar' is an Angular component and it has 'isDarkTheme' input, then verify that it is part of this module.
+2. If 'app-sidebar' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+3. To allow any property add 'NO_ERRORS_SCHEMA' to the '@NgModule.schemas' of this component.
+
+27       [isDarkTheme]="isDarkTheme$ | async"
+         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/app.component.ts:29:16
+    29   templateUrl: './app.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component AppComponent.
+
+
+Error: src/app/shared/components/file-upload/file-upload.component.html:13:32 - error TS2339: Property 'isDragging' does not exist on type 'FileUploadComponent'.
+
+13        [ngClass]="{'dragging': isDragging, 'loading': isUploading}"
+                                  ~~~~~~~~~~
+
+  src/app/shared/components/file-upload/file-upload.component.ts:48:16
+    48   templateUrl: './file-upload.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component FileUploadComponent.
+
+
+Error: src/app/shared/components/file-upload/file-upload.component.html:13:55 - error TS2551: Property 'isUploading' does not exist on type 'FileUploadComponent'. Did you mean 'isUploading$'?
+
+13        [ngClass]="{'dragging': isDragging, 'loading': isUploading}"
+                                                         ~~~~~~~~~~~
+
+  src/app/shared/components/file-upload/file-upload.component.ts:48:16
+    48   templateUrl: './file-upload.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component FileUploadComponent.
+
+
+Error: src/app/shared/components/file-upload/file-upload.component.html:9:24 - error TS2339: Property 'onFilesDropped' does not exist on type 'FileUploadComponent'.
+
+9        (filesDropped)="onFilesDropped($event)"
+                         ~~~~~~~~~~~~~~
+
+  src/app/shared/components/file-upload/file-upload.component.ts:48:16
+    48   templateUrl: './file-upload.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component FileUploadComponent.
+
+
+Error: src/app/shared/components/file-upload/file-upload.component.html:10:24 - error TS2339: Property 'onInvalidFiles' does not exist on type 'FileUploadComponent'.
+
+10        (invalidFiles)="onInvalidFiles($event)"
+                          ~~~~~~~~~~~~~~
+
+  src/app/shared/components/file-upload/file-upload.component.ts:48:16
+    48   templateUrl: './file-upload.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component FileUploadComponent.
+
+
+Error: src/app/shared/components/file-upload/file-upload.component.html:11:27 - error TS2339: Property 'onDragStateChange' does not exist on type 'FileUploadComponent'.
+
+11        (dragStateChange)="onDragStateChange($event)"
+                             ~~~~~~~~~~~~~~~~~
+
+  src/app/shared/components/file-upload/file-upload.component.ts:48:16
+    48   templateUrl: './file-upload.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component FileUploadComponent.
+
+
+Error: src/app/shared/components/file-upload/file-upload.component.html:12:25 - error TS2339: Property 'triggerFileInput' does not exist on type 'FileUploadComponent'.
+
+12        (keydown.enter)="triggerFileInput()"
+                           ~~~~~~~~~~~~~~~~
+
+  src/app/shared/components/file-upload/file-upload.component.ts:48:16
+    48   templateUrl: './file-upload.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component FileUploadComponent.
+
+
+Error: src/app/shared/components/file-upload/file-upload.component.html:35:17 - error TS2339: Property 'onFileInputChange' does not exist on type 'FileUploadComponent'.
+
+35       (change)="onFileInputChange($event)"
+                   ~~~~~~~~~~~~~~~~~
+
+  src/app/shared/components/file-upload/file-upload.component.ts:48:16
+    48   templateUrl: './file-upload.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component FileUploadComponent.
+
+
+Error: src/app/shared/components/file-upload/file-upload.component.html:79:23 - error TS2339: Property 'getStatusIcon' does not exist on type 'FileUploadComponent'.
+
+79            [ngClass]="getStatusIcon(file.status)">
+                         ~~~~~~~~~~~~~
+
+  src/app/shared/components/file-upload/file-upload.component.ts:48:16
+    48   templateUrl: './file-upload.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component FileUploadComponent.
+
+
+Error: src/app/shared/components/file-upload/file-upload.component.html:81:33 - error TS2339: Property 'getStatusText' does not exist on type 'FileUploadComponent'.
+
+81         <span class="sr-only">{{getStatusText(file.status)}}</span>
+                                   ~~~~~~~~~~~~~
+
+  src/app/shared/components/file-upload/file-upload.component.ts:48:16
+    48   templateUrl: './file-upload.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component FileUploadComponent.
+
+
+Error: src/app/shared/components/file-upload/file-upload.component.html:86:24 - error TS2339: Property 'removeFile' does not exist on type 'FileUploadComponent'.
+
+86               (click)="removeFile(i)"
+                          ~~~~~~~~~~
+
+  src/app/shared/components/file-upload/file-upload.component.ts:48:16
+    48   templateUrl: './file-upload.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component FileUploadComponent.
+
+
+Error: src/app/shared/components/file-upload/file-upload.component.html:101:21 - error TS2339: Property 'totalSize' does not exist on type 'FileUploadComponent'.
+
+101       Total size: {{totalSize | fileSize}}
+                        ~~~~~~~~~
+
+  src/app/shared/components/file-upload/file-upload.component.ts:48:16
+    48   templateUrl: './file-upload.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component FileUploadComponent.
+
+
+Error: src/app/shared/components/file-upload/file-upload.component.html:104:9 - error TS2339: Property 'files' does not exist on type 'FileUploadComponent'.
+
+104       {{files.length}} {{files.length === 1 ? 'file' : 'files'}} selected
+            ~~~~~
+
+  src/app/shared/components/file-upload/file-upload.component.ts:48:16
+    48   templateUrl: './file-upload.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component FileUploadComponent.
+
+
+Error: src/app/shared/components/file-upload/file-upload.component.html:104:26 - error TS2339: Property 'files' does not exist on type 'FileUploadComponent'.
+
+104       {{files.length}} {{files.length === 1 ? 'file' : 'files'}} selected
+                             ~~~~~
+
+  src/app/shared/components/file-upload/file-upload.component.ts:48:16
+    48   templateUrl: './file-upload.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component FileUploadComponent.
+
+
+Error: src/app/shared/components/file-upload/file-upload.component.html:111:13 - error TS2339: Property 'alertType' does not exist on type 'FileUploadComponent'.
+
+111     [type]="alertType"
+                ~~~~~~~~~
+
+  src/app/shared/components/file-upload/file-upload.component.ts:48:16
+    48   templateUrl: './file-upload.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component FileUploadComponent.
+
+
+Error: src/app/shared/components/file-upload/file-upload.component.html:112:16 - error TS2339: Property 'alertMessage' does not exist on type 'FileUploadComponent'.
+
+112     [message]="alertMessage"
+                   ~~~~~~~~~~~~
+
+  src/app/shared/components/file-upload/file-upload.component.ts:48:16
+    48   templateUrl: './file-upload.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component FileUploadComponent.
+
+
+Error: src/app/shared/components/file-upload/file-upload.component.html:115:15 - error TS2339: Property 'onAlertClosed' does not exist on type 'FileUploadComponent'.
+
+115     (closed)="onAlertClosed()"
+                  ~~~~~~~~~~~~~
+
+  src/app/shared/components/file-upload/file-upload.component.ts:48:16
+    48   templateUrl: './file-upload.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component FileUploadComponent.
+
+
+Error: src/app/shared/components/file-upload/file-upload.component.html:13:8 - error NG8002: Can't bind to 'ngClass' since it isn't a known property of 'div'.
+
+13        [ngClass]="{'dragging': isDragging, 'loading': isUploading}"
+          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/shared/components/file-upload/file-upload.component.ts:48:16
+    48   templateUrl: './file-upload.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component FileUploadComponent.
+
+
+Error: src/app/shared/components/file-upload/file-upload.component.html:70:14 - error NG8002: Can't bind to 'ngStyle' since it isn't a known property of 'div'.
+
+70              [ngStyle]="{'width': file.progress + '%'}">
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/shared/components/file-upload/file-upload.component.ts:48:16
+    48   templateUrl: './file-upload.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component FileUploadComponent.
+
+
+Error: src/app/shared/components/file-upload/file-upload.component.html:76:32 - error NG8002: Can't bind to 'ngClass' since it isn't a known property of 'div'.
+
+76       <div class="file-status" [ngClass]="file.status">
+                                  ~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/shared/components/file-upload/file-upload.component.ts:48:16
+    48   templateUrl: './file-upload.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component FileUploadComponent.
+
+
+Error: src/app/shared/components/file-upload/file-upload.component.html:79:12 - error NG8002: Can't bind to 'ngClass' since it isn't a known property of 'i'.
+
+79            [ngClass]="getStatusIcon(file.status)">
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/shared/components/file-upload/file-upload.component.ts:48:16
+    48   templateUrl: './file-upload.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component FileUploadComponent.
+
+
+Error: src/app/shared/components/file-upload/file-upload.component.html:109:3 - error NG8001: 'app-alert' is not a known element:
+1. If 'app-alert' is an Angular component, then verify that it is part of this module.
+2. If 'app-alert' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+
+109   <app-alert
+      ~~~~~~~~~~
+110     *ngIf="alertMessage"
+    ~~~~~~~~~~~~~~~~~~~~~~~~
+...
+116     role="alert"
+    ~~~~~~~~~~~~~~~~
+117     aria-live="assertive">
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/shared/components/file-upload/file-upload.component.ts:48:16
+    48   templateUrl: './file-upload.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component FileUploadComponent.
+
+
+Error: src/app/shared/components/file-upload/file-upload.component.html:111:5 - error NG8002: Can't bind to 'type' since it isn't a known property of 'app-alert'.
+1. If 'app-alert' is an Angular component and it has 'type' input, then verify that it is part of this module.
+2. If 'app-alert' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+3. To allow any property add 'NO_ERRORS_SCHEMA' to the '@NgModule.schemas' of this component.
+
+111     [type]="alertType"
+        ~~~~~~~~~~~~~~~~~~
+
+  src/app/shared/components/file-upload/file-upload.component.ts:48:16
+    48   templateUrl: './file-upload.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component FileUploadComponent.
+
+
+Error: src/app/shared/components/file-upload/file-upload.component.html:112:5 - error NG8002: Can't bind to 'message' since it isn't a known property of 'app-alert'.
+1. If 'app-alert' is an Angular component and it has 'message' input, then verify that it is part of this module.
+2. If 'app-alert' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+3. To allow any property add 'NO_ERRORS_SCHEMA' to the '@NgModule.schemas' of this component.
+
+112     [message]="alertMessage"
+        ~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/shared/components/file-upload/file-upload.component.ts:48:16
+    48   templateUrl: './file-upload.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component FileUploadComponent.
+
+
+Error: src/app/shared/components/file-upload/file-upload.component.html:113:5 - error NG8002: Can't bind to 'autoClose' since it isn't a known property of 'app-alert'.
+1. If 'app-alert' is an Angular component and it has 'autoClose' input, then verify that it is part of this module.
+2. If 'app-alert' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+3. To allow any property add 'NO_ERRORS_SCHEMA' to the '@NgModule.schemas' of this component.
+
+113     [autoClose]="true"
+        ~~~~~~~~~~~~~~~~~~
+
+  src/app/shared/components/file-upload/file-upload.component.ts:48:16
+    48   templateUrl: './file-upload.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component FileUploadComponent.
+
+
+Error: src/app/shared/components/file-upload/file-upload.component.html:114:5 - error NG8002: Can't bind to 'autoCloseDelay' since it isn't a known property of 'app-alert'.
+1. If 'app-alert' is an Angular component and it has 'autoCloseDelay' input, then verify that it is part of this module.
+2. If 'app-alert' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+3. To allow any property add 'NO_ERRORS_SCHEMA' to the '@NgModule.schemas' of this component.
+
+114     [autoCloseDelay]="5000"
+        ~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/shared/components/file-upload/file-upload.component.ts:48:16
+    48   templateUrl: './file-upload.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component FileUploadComponent.
+
+
+Error: src/app/shared/components/file-upload/file-upload.component.html:58:63 - error NG8004: No pipe found with name 'fileSize'.
+
+58               [attr.aria-label]="'File size: ' + (file.size | fileSize)">
+                                                                 ~~~~~~~~
+
+  src/app/shared/components/file-upload/file-upload.component.ts:48:16
+    48   templateUrl: './file-upload.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component FileUploadComponent.
+
+
+Error: src/app/shared/components/file-upload/file-upload.component.html:59:25 - error NG8004: No pipe found with name 'fileSize'.
+
+59           {{file.size | fileSize}}
+                           ~~~~~~~~
+
+  src/app/shared/components/file-upload/file-upload.component.ts:48:16
+    48   templateUrl: './file-upload.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component FileUploadComponent.
+
+
+Error: src/app/shared/components/file-upload/file-upload.component.html:101:33 - error NG8004: No pipe found with name 'fileSize'.
+
+101       Total size: {{totalSize | fileSize}}
+                                    ~~~~~~~~
+
+  src/app/shared/components/file-upload/file-upload.component.ts:48:16
+    48   templateUrl: './file-upload.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component FileUploadComponent.
+
+
+Error: src/app/shared/components/navbar/navbar.component.html:2:94 - error TS2339: Property 'isDarkTheme$' does not exist on type 'NavbarComponent'.
+
+2 <nav class="navbar" role="navigation" aria-label="Main navigation" [ngClass]="{'dark-theme': isDarkTheme$ | async}">
+                                                                                               ~~~~~~~~~~~~
+
+  src/app/shared/components/navbar/navbar.component.ts:24:16
+    24   templateUrl: './navbar.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component NavbarComponent.
+
+
+Error: src/app/shared/components/navbar/navbar.component.html:12:35 - error TS2339: Property 'isDarkTheme$' does not exist on type 'NavbarComponent'.
+
+12         [ngClass]="{'dark-theme': isDarkTheme$ | async}"
+                                     ~~~~~~~~~~~~
+
+  src/app/shared/components/navbar/navbar.component.ts:24:16
+    24   templateUrl: './navbar.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component NavbarComponent.
+
+
+Error: src/app/shared/components/navbar/navbar.component.html:20:29 - error TS2551: Property 'isMenuOpen$' does not exist on type 'NavbarComponent'. Did you mean 'isMenuOpen'?
+
+20       [attr.aria-expanded]="isMenuOpen$ | async"
+                               ~~~~~~~~~~~
+
+  src/app/shared/components/navbar/navbar.component.ts:24:16
+    24   templateUrl: './navbar.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component NavbarComponent.
+
+
+Error: src/app/shared/components/navbar/navbar.component.html:23:32 - error TS2551: Property 'isMenuOpen$' does not exist on type 'NavbarComponent'. Did you mean 'isMenuOpen'?
+
+23       [ngClass]="{'is-active': isMenuOpen$ | async}"
+                                  ~~~~~~~~~~~
+
+  src/app/shared/components/navbar/navbar.component.ts:24:16
+    24   templateUrl: './navbar.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component NavbarComponent.
+
+
+Error: src/app/shared/components/navbar/navbar.component.html:34:28 - error TS2551: Property 'isMenuOpen$' does not exist on type 'NavbarComponent'. Did you mean 'isMenuOpen'?
+
+34     [ngClass]="{'is-open': isMenuOpen$ | async}"
+                              ~~~~~~~~~~~
+
+  src/app/shared/components/navbar/navbar.component.ts:24:16
+    24   templateUrl: './navbar.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component NavbarComponent.
+
+
+Error: src/app/shared/components/navbar/navbar.component.html:44:30 - error TS2341: Property 'router' is private and only accessible within class 'NavbarComponent'.
+
+44         [attr.aria-current]="router.url === '/dashboard' ? 'page' : null"
+                                ~~~~~~
+
+  src/app/shared/components/navbar/navbar.component.ts:24:16
+    24   templateUrl: './navbar.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component NavbarComponent.
+
+
+Error: src/app/shared/components/navbar/navbar.component.html:55:30 - error TS2341: Property 'router' is private and only accessible within class 'NavbarComponent'.
+
+55         [attr.aria-current]="router.url === '/contracts' ? 'page' : null"
+                                ~~~~~~
+
+  src/app/shared/components/navbar/navbar.component.ts:24:16
+    24   templateUrl: './navbar.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component NavbarComponent.
+
+
+Error: src/app/shared/components/navbar/navbar.component.html:66:30 - error TS2341: Property 'router' is private and only accessible within class 'NavbarComponent'.
+
+66         [attr.aria-current]="router.url === '/purchase-orders' ? 'page' : null"
+                                ~~~~~~
+
+  src/app/shared/components/navbar/navbar.component.ts:24:16
+    24   templateUrl: './navbar.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component NavbarComponent.
+
+
+Error: src/app/shared/components/navbar/navbar.component.html:80:28 - error TS2339: Property 'isDarkTheme$' does not exist on type 'NavbarComponent'.
+
+80       [attr.aria-pressed]="isDarkTheme$ | async"
+                              ~~~~~~~~~~~~
+
+  src/app/shared/components/navbar/navbar.component.ts:24:16
+    24   templateUrl: './navbar.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component NavbarComponent.
+
+
+Error: src/app/shared/components/navbar/navbar.component.html:91:31 - error TS2339: Property 'isProfileOpen' does not exist on type 'NavbarComponent'.
+
+91         [attr.aria-expanded]="isProfileOpen"
+                                 ~~~~~~~~~~~~~
+
+  src/app/shared/components/navbar/navbar.component.ts:24:16
+    24   templateUrl: './navbar.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component NavbarComponent.
+
+
+Error: src/app/shared/components/navbar/navbar.component.html:107:32 - error TS2339: Property 'isProfileOpen' does not exist on type 'NavbarComponent'.
+
+107         [ngClass]="{'is-open': isProfileOpen}"
+                                   ~~~~~~~~~~~~~
+
+  src/app/shared/components/navbar/navbar.component.ts:24:16
+    24   templateUrl: './navbar.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component NavbarComponent.
+
+
+Error: src/app/shared/components/navbar/navbar.component.html:134:28 - error TS2551: Property 'isMenuOpen$' does not exist on type 'NavbarComponent'. Did you mean 'isMenuOpen'?
+
+134   [ngClass]="{'is-active': isMenuOpen$ | async}"
+                               ~~~~~~~~~~~
+
+  src/app/shared/components/navbar/navbar.component.ts:24:16
+    24   templateUrl: './navbar.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component NavbarComponent.
+
+
+Error: src/app/shared/components/navbar/navbar.component.html:2:68 - error NG8002: Can't bind to 'ngClass' since it isn't a known property of 'nav'.
+
+2 <nav class="navbar" role="navigation" aria-label="Main navigation" [ngClass]="{'dark-theme': isDarkTheme$ | async}">
+                                                                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/shared/components/navbar/navbar.component.ts:24:16
+    24   templateUrl: './navbar.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component NavbarComponent.
+
+
+Error: src/app/shared/components/navbar/navbar.component.html:12:9 - error NG8002: Can't bind to 'ngClass' since it isn't a known property of 'img'.
+
+12         [ngClass]="{'dark-theme': isDarkTheme$ | async}"
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/shared/components/navbar/navbar.component.ts:24:16
+    24   templateUrl: './navbar.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component NavbarComponent.
+
+
+Error: src/app/shared/components/navbar/navbar.component.html:23:7 - error NG8002: Can't bind to 'ngClass' since it isn't a known property of 'button'.
+
+23       [ngClass]="{'is-active': isMenuOpen$ | async}"
+         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/shared/components/navbar/navbar.component.ts:24:16
+    24   templateUrl: './navbar.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component NavbarComponent.
+
+
+Error: src/app/shared/components/navbar/navbar.component.html:34:5 - error NG8002: Can't bind to 'ngClass' since it isn't a known property of 'div'.
+
+34     [ngClass]="{'is-open': isMenuOpen$ | async}"
+       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/shared/components/navbar/navbar.component.ts:24:16
+    24   templateUrl: './navbar.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component NavbarComponent.
+
+
+Error: src/app/shared/components/navbar/navbar.component.html:107:9 - error NG8002: Can't bind to 'ngClass' since it isn't a known property of 'div'.
+
+107         [ngClass]="{'is-open': isProfileOpen}"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/shared/components/navbar/navbar.component.ts:24:16
+    24   templateUrl: './navbar.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component NavbarComponent.
+
+
+Error: src/app/shared/components/navbar/navbar.component.html:134:3 - error NG8002: Can't bind to 'ngClass' since it isn't a known property of 'div'.
+
+134   [ngClass]="{'is-active': isMenuOpen$ | async}"
+      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/shared/components/navbar/navbar.component.ts:24:16
+    24   templateUrl: './navbar.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component NavbarComponent.
+
+
+Error: src/app/shared/components/navbar/navbar.component.html:2:109 - error NG8004: No pipe found with name 'async'.
+
+2 <nav class="navbar" role="navigation" aria-label="Main navigation" [ngClass]="{'dark-theme': isDarkTheme$ | async}">
+                                                                                                              ~~~~~
+
+  src/app/shared/components/navbar/navbar.component.ts:24:16
+    24   templateUrl: './navbar.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component NavbarComponent.
+
+
+Error: src/app/shared/components/navbar/navbar.component.html:12:50 - error NG8004: No pipe found with name 'async'.
+
+12         [ngClass]="{'dark-theme': isDarkTheme$ | async}"
+                                                    ~~~~~
+
+  src/app/shared/components/navbar/navbar.component.ts:24:16
+    24   templateUrl: './navbar.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component NavbarComponent.
+
+
+Error: src/app/shared/components/navbar/navbar.component.html:20:43 - error NG8004: No pipe found with name 'async'.
+
+20       [attr.aria-expanded]="isMenuOpen$ | async"
+                                             ~~~~~
+
+  src/app/shared/components/navbar/navbar.component.ts:24:16
+    24   templateUrl: './navbar.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component NavbarComponent.
+
+
+Error: src/app/shared/components/navbar/navbar.component.html:23:46 - error NG8004: No pipe found with name 'async'.
+
+23       [ngClass]="{'is-active': isMenuOpen$ | async}"
+                                                ~~~~~
+
+  src/app/shared/components/navbar/navbar.component.ts:24:16
+    24   templateUrl: './navbar.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component NavbarComponent.
+
+
+Error: src/app/shared/components/navbar/navbar.component.html:34:42 - error NG8004: No pipe found with name 'async'.
+
+34     [ngClass]="{'is-open': isMenuOpen$ | async}"
+                                            ~~~~~
+
+  src/app/shared/components/navbar/navbar.component.ts:24:16
+    24   templateUrl: './navbar.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component NavbarComponent.
+
+
+Error: src/app/shared/components/navbar/navbar.component.html:80:43 - error NG8004: No pipe found with name 'async'.
+
+80       [attr.aria-pressed]="isDarkTheme$ | async"
+                                             ~~~~~
+
+  src/app/shared/components/navbar/navbar.component.ts:24:16
+    24   templateUrl: './navbar.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component NavbarComponent.
+
+
+Error: src/app/shared/components/navbar/navbar.component.html:134:42 - error NG8004: No pipe found with name 'async'.
+
+134   [ngClass]="{'is-active': isMenuOpen$ | async}"
+                                             ~~~~~
+
+  src/app/shared/components/navbar/navbar.component.ts:24:16
+    24   templateUrl: './navbar.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component NavbarComponent.
+
+
+Error: src/app/shared/components/sidebar/sidebar.component.html:6:96 - error TS2339: Property 'isHighContrast' does not exist on type 'SidebarComponent'.
+
+6      [ngClass]="{'sidebar-collapsed': isCollapsed, 'dark-theme': isDarkTheme, 'high-contrast': isHighContrast}"
+                                                                                                 ~~~~~~~~~~~~~~
+
+  src/app/shared/components/sidebar/sidebar.component.ts:51:16
+    51   templateUrl: './sidebar.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component SidebarComponent.
+
+
+Error: src/app/shared/components/sidebar/sidebar.component.html:43:46 - error TS2339: Property 'currentRoute' does not exist on type 'SidebarComponent'.
+
+43          [attr.aria-current]="item.route === currentRoute ? 'page' : undefined">
+                                                ~~~~~~~~~~~~
+
+  src/app/shared/components/sidebar/sidebar.component.ts:51:16
+    51   templateUrl: './sidebar.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component SidebarComponent.
+
+
+Error: src/app/shared/components/sidebar/sidebar.component.html:61:51 - error TS2339: Property 'currentRoute' does not exist on type 'SidebarComponent'.
+
+61              [attr.aria-current]="child.route === currentRoute ? 'page' : undefined">
+                                                     ~~~~~~~~~~~~
+
+  src/app/shared/components/sidebar/sidebar.component.ts:51:16
+    51   templateUrl: './sidebar.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component SidebarComponent.
+
+
+Error: src/app/shared/components/sidebar/sidebar.component.html:91:34 - error TS2339: Property 'isHighContrast' does not exist on type 'SidebarComponent'.
+
+91             [attr.aria-pressed]="isHighContrast"
+                                    ~~~~~~~~~~~~~~
+
+  src/app/shared/components/sidebar/sidebar.component.ts:51:16
+    51   templateUrl: './sidebar.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component SidebarComponent.
+
+
+Error: src/app/shared/components/sidebar/sidebar.component.html:90:22 - error TS2339: Property 'toggleHighContrast' does not exist on type 'SidebarComponent'.
+
+90             (click)="toggleHighContrast()"
+                        ~~~~~~~~~~~~~~~~~~
+
+  src/app/shared/components/sidebar/sidebar.component.ts:51:16
+    51   templateUrl: './sidebar.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component SidebarComponent.
+
+
+Error: src/app/shared/components/sidebar/sidebar.component.html:95:11 - error TS2339: Property 'isHighContrast' does not exist on type 'SidebarComponent'.
+
+95         {{isHighContrast ? 'Normal Contrast' : 'High Contrast'}}
+             ~~~~~~~~~~~~~~
+
+  src/app/shared/components/sidebar/sidebar.component.ts:51:16
+    51   templateUrl: './sidebar.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component SidebarComponent.
+
+
+Error: src/app/shared/components/sidebar/sidebar.component.html:5:6 - error NG8002: Can't bind to 'aria-expanded' since it isn't a known property of 'nav'.
+
+5      aria-expanded="{{!isCollapsed}}"
+       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/shared/components/sidebar/sidebar.component.ts:51:16
+    51   templateUrl: './sidebar.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component SidebarComponent.
+
+
+Error: src/app/shared/components/sidebar/sidebar.component.html:6:6 - error NG8002: Can't bind to 'ngClass' since it isn't a known property of 'nav'.
+
+6      [ngClass]="{'sidebar-collapsed': isCollapsed, 'dark-theme': isDarkTheme, 'high-contrast': isHighContrast}"
+       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/shared/components/sidebar/sidebar.component.ts:51:16
+    51   templateUrl: './sidebar.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component SidebarComponent.
+
+
+Error: src/app/shared/components/sidebar/sidebar.component.html:14:10 - error NG8002: Can't bind to 'ngClass' since it isn't a known property of 'img'.
+
+14          [ngClass]="{'logo-collapsed': isCollapsed}">
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/shared/components/sidebar/sidebar.component.ts:51:16
+    51   templateUrl: './sidebar.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component SidebarComponent.
+
+
+Error: src/app/shared/components/sidebar/sidebar.component.html:36:9 - error NG8002: Can't bind to 'ngClass' since it isn't a known property of 'li'.
+
+36         [ngClass]="{'has-children': item.children}">
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/shared/components/sidebar/sidebar.component.ts:51:16
+    51   templateUrl: './sidebar.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component SidebarComponent.
+
+
+Error: src/app/shared/components/sidebar/sidebar.component.html:39:10 - error NG8002: Can't bind to 'routerLink' since it isn't a known property of 'a'.
+
+39       <a [routerLink]="[item.route]"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/shared/components/sidebar/sidebar.component.ts:51:16
+    51   templateUrl: './sidebar.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component SidebarComponent.
+
+
+Error: src/app/shared/components/sidebar/sidebar.component.html:57:14 - error NG8002: Can't bind to 'routerLink' since it isn't a known property of 'a'.
+
+57           <a [routerLink]="[child.route]"
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/shared/components/sidebar/sidebar.component.ts:51:16
+    51   templateUrl: './sidebar.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component SidebarComponent.
+
+
+
+
+** Angular Live Development Server is listening on localhost:4200, open your browser on http://localhost:4200/ **
+
+
+× Failed to compile.

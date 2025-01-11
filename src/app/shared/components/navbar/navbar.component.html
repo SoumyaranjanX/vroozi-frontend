@@ -1,0 +1,66 @@
+<!-- Main navigation bar with enhanced accessibility and responsive design -->
+<div class="navbar" [class.scrolled]="isScrolled" [class.dark-theme]="isDarkTheme">
+  <div class="navbar-content">
+    <button class="mobile-menu-toggle" (click)="toggleMenu()" aria-label="Toggle navigation menu" *ngIf="!isLoginPage">
+      <mat-icon>menu</mat-icon>
+    </button>
+    
+    <div class="navbar-brand">
+      <a class="navbar-logo-link" routerLink="/">
+        <img class="navbar-logo" src="assets/images/logo.svg" alt="Company Logo">
+      </a>
+    </div>
+
+    <nav class="navbar-nav" [class.is-open]="isMenuOpen$ | async" *ngIf="!isLoginPage">
+      <a class="nav-item" routerLink="/dashboard" routerLinkActive="active">
+        <mat-icon class="nav-icon">dashboard</mat-icon>
+        <span class="nav-text">Dashboard</span>
+      </a>
+      <a class="nav-item" routerLink="/purchase-orders" routerLinkActive="active">
+        <mat-icon class="nav-icon">shopping_cart</mat-icon>
+        <span class="nav-text">Purchase Orders</span>
+      </a>
+      <a class="nav-item" routerLink="/contracts" routerLinkActive="active">
+        <mat-icon class="nav-icon">description</mat-icon>
+        <span class="nav-text">Contracts</span>
+      </a>
+    </nav>
+
+    <div class="navbar-actions">
+      <button class="theme-toggle" (click)="toggleTheme()" aria-label="Toggle theme">
+        <mat-icon>{{ isDarkTheme ? 'light_mode' : 'dark_mode' }}</mat-icon>
+      </button>
+      
+      <div class="navbar-user" *ngIf="currentUser && !isLoginPage">
+        <button class="profile-button" [matMenuTriggerFor]="userMenu">
+          <div class="user-initials" *ngIf="!currentUser.avatarUrl">
+            {{currentUser.firstName.charAt(0)}}{{currentUser.lastName.charAt(0)}}
+          </div>
+          <div class="user-avatar" *ngIf="currentUser.avatarUrl">
+            <img [src]="currentUser.avatarUrl" [alt]="currentUser.firstName + ' ' + currentUser.lastName">
+          </div>
+          <span class="user-name">{{currentUser.firstName}} {{currentUser.lastName}}</span>
+          <mat-icon class="dropdown-icon">arrow_drop_down</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="mobile-menu-overlay" [class.is-active]="isMenuOpen$ | async" (click)="closeMenu()"></div>
+</div>
+
+<mat-menu #userMenu="matMenu">
+  <button mat-menu-item routerLink="/profile">
+    <mat-icon>person</mat-icon>
+    <span>Profile</span>
+  </button>
+  <button mat-menu-item routerLink="/settings">
+    <mat-icon>settings</mat-icon>
+    <span>Settings</span>
+  </button>
+  <mat-divider></mat-divider>
+  <button mat-menu-item (click)="logout()">
+    <mat-icon>exit_to_app</mat-icon>
+    <span>Logout</span>
+  </button>
+</mat-menu>

@@ -1,0 +1,697 @@
+// =============================================================================
+// Login Component Styles
+// Contract Processing System Frontend
+// Version: 2.0.0
+// =============================================================================
+
+@import '../../../../assets/styles/variables';
+@import '../../../../assets/styles/mixins';
+
+// -----------------------------------------------------------------------------
+// Login Container
+// Main container for the login page with centered content and background
+// -----------------------------------------------------------------------------
+
+.login-container {
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - 64px);
+  background: linear-gradient(135deg, rgba($navy, 0.02) 0%, rgba($gold, 0.05) 100%);
+  position: relative;
+}
+
+// -----------------------------------------------------------------------------
+// Main Content Area
+// Scrollable content area with proper spacing
+// -----------------------------------------------------------------------------
+
+.main-content {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 spacing(4);
+  min-height: calc(100vh - 64px - 80px); // Subtract header height and footer height
+
+  @include mobile {
+    padding: spacing(2);
+    align-items: flex-start;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Login Card
+// Enhanced card component with modern styling
+// -----------------------------------------------------------------------------
+
+.login-card {
+  width: 100%;
+  max-width: 420px;
+  padding: spacing(4);
+  border-radius: 12px;
+  background: $white;
+  box-shadow: 
+    0 4px 6px rgba($dark-gray, 0.02),
+    0 10px 15px rgba($dark-gray, 0.03);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba($dark-gray, 0.08);
+
+  @include theme-transition;
+  
+  @include mobile {
+    padding: spacing(3);
+    border-radius: 8px;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Login Header
+// Title and subtitle styling
+// -----------------------------------------------------------------------------
+
+.login-header {
+  text-align: center;
+  margin-bottom: spacing(3);
+
+  h1 {
+    font-size: $font-size-h1;
+    color: $dark-gray;
+    margin-bottom: spacing(1);
+    font-weight: $font-weight-bold;
+  }
+
+  p {
+    color: $dark-gray;
+    font-size: $font-size-body;
+    opacity: 0.7;
+  }
+}
+
+.alert-margin {
+  margin-bottom: spacing(3);
+}
+
+// -----------------------------------------------------------------------------
+// Login Form
+// Enhanced form styling with proper spacing and visual hierarchy
+// -----------------------------------------------------------------------------
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: spacing(2.5);
+}
+
+.form-group {
+  position: relative;
+  margin-bottom: 0;
+
+  .form-label {
+    display: block;
+    margin-bottom: spacing(1);
+    color: $dark-gray;
+    font-size: $font-size-small;
+    font-weight: $font-weight-medium;
+
+    .required {
+      color: $red;
+      margin-left: spacing(0.5);
+    }
+  }
+
+  .form-control {
+    width: 100%;
+    padding: spacing(1.5) spacing(2);
+    border: 2px solid rgba($dark-gray, 0.1);
+    border-radius: 8px;
+    font-size: $font-size-body;
+    color: $dark-gray;
+    transition: all 0.2s ease;
+    height: 42px;
+
+    &:focus {
+      border-color: $gold;
+      box-shadow: 0 0 0 3px rgba($gold, 0.1);
+    }
+
+    &.is-invalid {
+      border-color: $red;
+      
+      &:focus {
+        box-shadow: 0 0 0 3px rgba($red, 0.1);
+      }
+    }
+  }
+
+  .invalid-feedback {
+    color: $red;
+    font-size: $font-size-small;
+    margin-top: spacing(1);
+    display: flex;
+    align-items: center;
+    gap: spacing(1);
+
+    &::before {
+      content: '!';
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 16px;
+      height: 16px;
+      background: rgba($red, 0.1);
+      border-radius: 50%;
+      color: $red;
+      font-size: 12px;
+      font-weight: $font-weight-bold;
+    }
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Password Input
+// Custom styling for password input with toggle button
+// -----------------------------------------------------------------------------
+
+.password-input {
+  position: relative;
+
+  .password-toggle {
+    position: absolute;
+    right: spacing(2);
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: $dark-gray;
+    cursor: pointer;
+    padding: spacing(1);
+    transition: color 0.2s ease;
+    opacity: 0.5;
+
+    &:hover {
+      color: $dark-gray;
+      opacity: 0.8;
+    }
+
+    &:focus {
+      outline: none;
+      color: $gold;
+      opacity: 1;
+    }
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Form Options
+// Remember me and forgot password styling
+// -----------------------------------------------------------------------------
+
+.form-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: spacing(0.5) 0 spacing(1);
+  padding: 0 spacing(0.5);
+
+  .remember-me {
+    .custom-checkbox {
+      display: flex;
+      align-items: center;
+      position: relative;
+      cursor: pointer;
+      user-select: none;
+      gap: spacing(1);
+      padding: spacing(0.5) 0;
+
+      input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+        height: 0;
+        width: 0;
+
+        &:checked ~ .checkmark {
+          background-color: $gold;
+          border-color: $gold;
+
+          &:after {
+            display: block;
+          }
+        }
+
+        &:focus ~ .checkmark {
+          box-shadow: 0 0 0 3px rgba($gold, 0.1);
+        }
+      }
+
+      .checkmark {
+        position: relative;
+        height: 18px;
+        width: 18px;
+        background-color: transparent;
+        border: 2px solid rgba($dark-gray, 0.2);
+        border-radius: 4px;
+        transition: all 0.2s ease;
+
+        &:after {
+          content: "";
+          position: absolute;
+          display: none;
+          left: 5px;
+          top: 2px;
+          width: 4px;
+          height: 8px;
+          border: solid white;
+          border-width: 0 2px 2px 0;
+          transform: rotate(45deg);
+        }
+      }
+
+      .label-text {
+        color: $dark-gray;
+        font-size: $font-size-small;
+        font-weight: $font-weight-medium;
+      }
+
+      &:hover {
+        .checkmark {
+          border-color: $gold;
+        }
+        .label-text {
+          color: rgba($dark-gray, 0.8);
+        }
+      }
+    }
+  }
+
+  .forgot-password-link {
+    color: $blue;
+    font-size: $font-size-small;
+    font-weight: $font-weight-medium;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    padding: spacing(0.5) spacing(1);
+    border-radius: 4px;
+
+    &:hover {
+      color: darken($blue, 10%);
+      background: rgba($blue, 0.05);
+    }
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba($blue, 0.1);
+    }
+  }
+}
+
+.submit-group {
+  margin-top: spacing(1);
+  margin-bottom: 0;
+}
+
+// -----------------------------------------------------------------------------
+// Submit Button
+// Enhanced button styling with loading state
+// -----------------------------------------------------------------------------
+
+.btn-primary {
+  width: 100%;
+  padding: spacing(1.5) spacing(3);
+  height: 42px;
+  background: linear-gradient(135deg, $gold 0%, darken($gold, 5%) 100%);
+  color: $white;
+  border: none;
+  border-radius: 8px;
+  font-weight: $font-weight-bold;
+  font-size: $font-size-body;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover:not(:disabled) {
+    background: linear-gradient(135deg, darken($gold, 5%) 0%, darken($gold, 10%) 100%);
+    transform: translateY(-1px);
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(0);
+  }
+
+  &:disabled {
+    background: linear-gradient(135deg, lighten($dark-gray, 40%) 0%, lighten($dark-gray, 35%) 100%);
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  .spinner-border {
+    width: 20px;
+    height: 20px;
+    border-width: 2px;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Sign Up Link
+// Enhanced styling for the registration link
+// -----------------------------------------------------------------------------
+
+.signup-link {
+  text-align: center;
+  margin-top: spacing(3);
+  padding: spacing(1) 0;
+  color: $dark-gray;
+  font-size: $font-size-small;
+  opacity: 0.7;
+
+  a {
+    color: $gold;
+    font-weight: $font-weight-medium;
+    text-decoration: none;
+    margin-left: spacing(0.5);
+    transition: color 0.2s ease;
+    padding: spacing(0.5) spacing(1);
+    border-radius: 4px;
+
+    &:hover {
+      color: darken($gold, 10%);
+      text-decoration: underline;
+    }
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Dark Theme Support
+// Styles for dark theme
+// -----------------------------------------------------------------------------
+
+:host-context(.dark-theme) {
+  .login-container {
+    background: linear-gradient(135deg, rgba($navy, 0.1) 0%, rgba($gold, 0.05) 100%);
+  }
+
+  .login-card {
+    background: lighten($navy, 5%);
+    border-color: rgba($white, 0.1);
+  }
+
+  .login-header {
+    h1 {
+      color: $white;
+    }
+    
+    p {
+      color: rgba($white, 0.7);
+    }
+  }
+
+  .form-group {
+    .form-label {
+      color: $white;
+    }
+
+    .form-control {
+      background: rgba($white, 0.05);
+      border-color: rgba($white, 0.1);
+      color: $white;
+
+      &::placeholder {
+        color: rgba($white, 0.3);
+      }
+
+      &:focus {
+        border-color: $gold;
+      }
+    }
+  }
+
+  .form-options {
+    .remember-me {
+      .form-check-label {
+        color: rgba($white, 0.7);
+      }
+    }
+  }
+
+  .signup-link {
+    color: rgba($white, 0.7);
+  }
+
+  .password-toggle {
+    color: rgba($white, 0.7);
+
+    &:hover {
+      color: $white;
+    }
+  }
+
+  footer {
+    background-color: lighten($navy, 10%);
+    color: $white;
+    padding: spacing(2);
+    text-align: center;
+  }
+
+  .footer-links {
+    .footer-link {
+      color: rgba($white, 0.8);
+      transition: color 0.2s ease;
+
+      &:hover {
+        color: $gold;
+        text-decoration: underline;
+      }
+    }
+
+    .separator {
+      color: rgba($white, 0.5);
+    }
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Accessibility Enhancements
+// Improved focus states and reduced motion support
+// -----------------------------------------------------------------------------
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+// -----------------------------------------------------------------------------
+// Footer
+// Professional footer styling with links and copyright information
+// -----------------------------------------------------------------------------
+
+.login-footer {
+  width: 100%;
+  padding: spacing(2.5) spacing(4);
+  background: rgba($white, 0.98);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid rgba($dark-gray, 0.12);
+
+  @include mobile {
+    padding: spacing(2);
+    position: sticky;
+    bottom: 0;
+    z-index: 10;
+  }
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: spacing(2);
+
+  @include mobile {
+    gap: spacing(1.5);
+  }
+}
+
+.footer-links {
+  display: flex;
+  align-items: center;
+  gap: spacing(4);
+  flex-wrap: wrap;
+  justify-content: center;
+
+  .footer-link {
+    color: $dark-gray;
+    text-decoration: none;
+    font-size: $font-size-small;
+    opacity: 0.7;
+    transition: all 0.2s ease;
+    padding: spacing(1) spacing(2);
+    border-radius: 4px;
+
+    &:hover {
+      opacity: 1;
+      color: $gold;
+    }
+  }
+
+  .separator {
+    color: $dark-gray;
+    opacity: 0.4;
+    font-size: 12px;
+
+    @include mobile {
+      display: none;
+    }
+  }
+
+  @include mobile {
+    gap: 0;
+    width: 100%;
+    background: $white;
+    border: 1px solid rgba($dark-gray, 0.08);
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 0 spacing(1);
+
+    .footer-link {
+      width: 100%;
+      text-align: center;
+      padding: spacing(1.5);
+      border-bottom: 1px solid rgba($dark-gray, 0.08);
+      opacity: 0.8;
+      font-weight: $font-weight-medium;
+      border-radius: 0;
+
+      &:last-child {
+        border-bottom: none;
+      }
+
+      &:hover {
+        background: rgba($gold, 0.05);
+      }
+
+      &:active {
+        background: rgba($gold, 0.1);
+      }
+    }
+  }
+}
+
+.footer-info {
+  text-align: center;
+  padding: spacing(0.5) 0;
+
+  .copyright {
+    color: $dark-gray;
+    font-size: $font-size-small;
+    opacity: 0.6;
+    margin-bottom: spacing(0.5);
+    
+    @include mobile {
+      font-size: 12px;
+    }
+  }
+
+  .version {
+    color: $dark-gray;
+    font-size: 12px;
+    opacity: 0.5;
+    
+    @include mobile {
+      font-size: 11px;
+    }
+  }
+
+  @include mobile {
+    padding: spacing(1.5) 0;
+  }
+}
+
+// Update dark theme support for footer
+:host-context(.dark-theme) {
+  .login-footer {
+    background: rgba($navy, 0.98);
+    border-color: rgba($white, 0.15);
+  }
+
+  .footer-links {
+    @include mobile {
+      background: lighten($navy, 2%);
+      border-color: rgba($white, 0.1);
+
+      .footer-link {
+        color: rgba($white, 0.8);
+        border-color: rgba($white, 0.1);
+
+        &:hover {
+          color: $gold;
+          background: rgba($gold, 0.1);
+        }
+
+        &:active {
+          background: rgba($gold, 0.15);
+        }
+      }
+    }
+  }
+
+  .footer-info {
+    .copyright,
+    .version {
+      color: rgba($white, 0.7);
+    }
+  }
+}
+
+.btn {
+  position: relative;
+  min-height: 44px;
+  
+  &.loading {
+    .button-content {
+      visibility: hidden;
+    }
+    
+    .spinner-container {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      
+      .spinner {
+        width: 20px;
+        height: 20px;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        border-radius: 50%;
+        border-top-color: #fff;
+        animation: spin 1s linear infinite;
+      }
+      
+      .loading-text {
+        color: #fff;
+        font-size: 14px;
+      }
+    }
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

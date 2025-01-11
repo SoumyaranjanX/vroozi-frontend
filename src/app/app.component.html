@@ -1,0 +1,160 @@
+<!-- Root application container with dynamic theme class binding and ARIA role -->
+<div class="app-root" [ngClass]="{'dark-theme': currentTheme$ | async}" role="application">
+  <!-- Loading overlay with accessibility support -->
+  <app-loading 
+    *ngIf="isLoading" 
+    [loadingMessage]="loadingMessage"
+    role="alert" 
+    aria-live="polite">
+  </app-loading>
+
+  <!-- Main navigation header with accessibility features -->
+  <app-navbar 
+    class="navbar" 
+    [currentUser]="currentUser$ | async"
+    [isDarkTheme]="(currentTheme$ | async) ?? false"
+    role="navigation"
+    aria-label="Main navigation">
+  </app-navbar>
+
+  <!-- Main container with responsive layout -->
+  <div class="main-container">
+    <!-- Main content area with proper semantic structure -->
+    <main 
+      class="content-container" 
+      role="main"
+      tabindex="-1"
+      [class.no-nav]="router.url.includes('/auth/')">
+      
+      <!-- Skip to main content link for keyboard navigation -->
+      <a 
+        href="#main-content" 
+        class="skip-link"
+        tabindex="0">
+        Skip to main content
+      </a>
+
+      <!-- Main content wrapper with ID for skip link target -->
+      <div id="main-content" class="content-wrapper">
+        <!-- Router outlet with activation event binding -->
+        <router-outlet 
+          (activate)="onRouteActivate()">
+        </router-outlet>
+      </div>
+
+      <!-- Accessibility announcement region for dynamic updates -->
+      <div 
+        class="sr-only" 
+        role="status" 
+        aria-live="polite">
+        {{accessibilityAnnouncement}}
+      </div>
+    </main>
+  </div>
+</div>
+
+<!-- CSS for core layout and accessibility features -->
+<style>
+  .app-root {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #f5f7fa;
+  }
+
+  .main-container {
+    display: flex;
+    flex: 1;
+    margin-top: 64px;
+    min-height: calc(100vh - 64px);
+  }
+
+  .content-container {
+    flex: 1;
+    width: 100%;
+    min-height: 100%;
+    background-color: #f5f7fa;
+  }
+
+  .content-container.no-nav {
+    margin-left: 0;
+    background-color: white;
+  }
+
+  .content-wrapper {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 24px;
+    height: 100%;
+    box-sizing: border-box;
+  }
+
+  /* Auth pages (login, register) get special treatment */
+  .content-container.no-nav .content-wrapper {
+    max-width: 100%;
+    padding: 0;
+    height: calc(100vh - 64px);
+  }
+
+  .skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: #fff;
+    padding: 8px;
+    z-index: 100;
+    transition: top 0.3s;
+  }
+
+  .skip-link:focus {
+    top: 0;
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+  }
+
+  @media (max-width: 768px) {
+    .content-wrapper {
+      padding: 16px;
+    }
+  }
+
+  /* Dark theme adjustments */
+  :host-context(.dark-theme) {
+    .app-root {
+      background-color: #1a1f2c;
+    }
+
+    .content-container {
+      background-color: #1a1f2c;
+    }
+
+    .content-container.no-nav {
+      background-color: #1a1f2c;
+    }
+  }
+
+  /* High contrast mode adjustments */
+  @media (forced-colors: active) {
+    .app-root {
+      forced-color-adjust: none;
+    }
+  }
+
+  /* Reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+    .app-root,
+    .content-container,
+    .skip-link {
+      transition: none;
+    }
+  }
+</style>

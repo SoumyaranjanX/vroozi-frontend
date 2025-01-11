@@ -1,0 +1,78 @@
+.settings-container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+
+  &.dark-theme {
+    mat-card {
+      background-color: #424242;
+      color: #ffffff;
+    }
+
+    mat-card-title, h3 {
+      color: #ffffff;
+    }
+
+    .setting-label {
+      color: #ffffff;
+
+      mat-icon {
+        color: rgba(255, 255, 255, 0.7);
+      }
+    }
+
+    mat-divider {
+      border-color: rgba(255, 255, 255, 0.12);
+    }
+  }
+}
+
+.settings-section {
+  padding: 1.5rem 0;
+
+  h3 {
+    margin: 0 0 1rem;
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: rgba(0, 0, 0, 0.87);
+  }
+}
+
+.setting-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.setting-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: rgba(0, 0, 0, 0.87);
+
+  mat-icon {
+    opacity: 0.7;
+  }
+}
+
+mat-card {
+  padding: 2rem;
+}
+
+mat-card-header {
+  margin-bottom: 1rem;
+}
+
+mat-card-title {
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+mat-divider {
+  margin: 0 -2rem;
+} 

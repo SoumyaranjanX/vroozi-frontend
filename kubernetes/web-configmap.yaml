@@ -1,0 +1,129 @@
+# Kubernetes ConfigMap for Frontend Web Application
+# Version: 1.26+
+# Purpose: Environment-specific configuration for frontend application
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: web-config
+  namespace: default
+  labels:
+    app: contract-processing
+    component: frontend
+    environment: production
+data:
+  # API Configuration
+  API_URL: "https://api.contractprocessing.com/api/v1"
+  GOOGLE_VISION_API_URL: "https://vision.googleapis.com/v1"
+  S3_BUCKET_URL: "https://storage.contractprocessing.com"
+  
+  # Rate Limiting and Performance
+  API_RATE_LIMIT: "1000"
+  TOKEN_EXPIRY_TIME: "3600"
+  MAX_FILE_SIZE: "25000000"
+  SUPPORTED_FILE_TYPES: "application/pdf,image/jpeg,image/png,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+  
+  # Application Settings
+  LOG_LEVEL: "error"
+  ENABLE_MOCKS: "false"
+  ENABLE_MONITORING: "true"
+  ENABLE_CACHING: "true"
+  CACHE_TTL: "3600"
+  MAX_CONCURRENT_UPLOADS: "5"
+  
+  # Retry Configuration
+  RETRY_ATTEMPTS: "3"
+  RETRY_DELAY: "1000"
+  
+  # Session Management
+  SESSION_TIMEOUT: "1800"
+  IDLE_TIMEOUT: "900"
+  
+  # NGINX Configuration with enhanced security and performance settings
+  nginx.conf: |
+    worker_processes auto;
+    pid /tmp/nginx.pid;
+    worker_rlimit_nofile 65535;
+
+    events {
+        worker_connections 4096;
+        multi_accept on;
+        use epoll;
+    }
+
+    http {
+        server_tokens off;
+        client_max_body_size 25m;
+        client_body_timeout 60s;
+        client_header_timeout 60s;
+        keepalive_timeout 65s;
+        send_timeout 60s;
+        tcp_nopush on;
+        tcp_nodelay on;
+        types_hash_max_size 2048;
+        
+        # Compression Settings
+        gzip on;
+        gzip_vary on;
+        gzip_proxied any;
+        gzip_comp_level 6;
+        gzip_types text/plain text/css application/json application/javascript text/xml application/xml application/xml+rss text/javascript;
+        
+        # SSL Configuration
+        ssl_protocols TLSv1.2 TLSv1.3;
+        ssl_prefer_server_ciphers on;
+        ssl_ciphers ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384;
+        
+        # Security Headers
+        add_header X-Frame-Options SAMEORIGIN;
+        add_header X-Content-Type-Options nosniff;
+        add_header X-XSS-Protection "1; mode=block";
+        add_header Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline';";
+        add_header Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
+        
+        server {
+            listen 80;
+            server_name _;
+            root /usr/share/nginx/html;
+            index index.html;
+            
+            # SPA Configuration
+            location / {
+                try_files $uri $uri/ /index.html;
+                expires -1;
+                add_header Cache-Control 'no-store, no-cache, must-revalidate, proxy-revalidate';
+                add_header Pragma 'no-cache';
+            }
+            
+            # Static Assets Configuration
+            location /assets/ {
+                expires 1y;
+                access_log off;
+                add_header Cache-Control "public, no-transform";
+            }
+            
+            # API Proxy Configuration
+            location /api/ {
+                proxy_pass http://backend-service:8000;
+                proxy_http_version 1.1;
+                proxy_set_header Host $host;
+                proxy_set_header X-Real-IP $remote_addr;
+                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                proxy_set_header X-Forwarded-Proto $scheme;
+                proxy_buffering on;
+                proxy_buffer_size 128k;
+                proxy_buffers 4 256k;
+                proxy_busy_buffers_size 256k;
+                proxy_connect_timeout 60s;
+                proxy_send_timeout 60s;
+                proxy_read_timeout 60s;
+            }
+            
+            # Health Check Endpoint
+            location /health {
+                access_log off;
+                return 200 'healthy';
+                add_header Content-Type text/plain;
+            }
+        }
+    }

@@ -1,0 +1,312 @@
+<!-- Main container with accessibility region -->
+<div class="contract-list-container" role="region" aria-label="Contracts Management">
+  <!-- Header with title and upload button -->
+  <div class="header">
+    <h1>Contracts</h1>
+    <button mat-raised-button 
+            color="primary"
+            (click)="uploadNewContract()"
+            class="upload-button">
+      <mat-icon>upload</mat-icon>
+      Upload Contract
+    </button>
+  </div>
+
+  <!-- Search card -->
+  <mat-card class="filter-section">
+    <mat-card-content>
+      <div class="search-container">
+        <mat-form-field appearance="outline" class="search-field">
+          <mat-label>Search Contracts</mat-label>
+          <input matInput 
+                 (keyup)="applyFilter($event)"
+                 placeholder="Search by ID, name, or status"
+                 aria-label="Search contracts">
+          <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
+      </div>
+    </mat-card-content>
+  </mat-card>
+  
+  <!-- Error state with accessible alert -->
+  <div *ngIf="error$ | async as error" 
+       class="error-container" 
+       role="alert" 
+       aria-live="assertive">
+    <mat-error>{{error}}</mat-error>
+  </div>
+
+  <!-- Processing overlay -->
+  <div class="processing-overlay" *ngIf="processingContracts.length > 0">
+    <div class="processing-content">
+      <mat-spinner diameter="40"></mat-spinner>
+      <div class="processing-text">
+        <h3>Processing Contracts</h3>
+        <p>Processing {{ processingContracts.length }} {{ processingContracts.length === 1 ? 'contract' : 'contracts' }}...</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main table card -->
+  <div class="table-container mat-elevation-z8">
+    <mat-progress-bar *ngIf="loading$ | async" mode="indeterminate"></mat-progress-bar>
+    
+    <!-- Enhanced Material table with accessibility -->
+    <table mat-table 
+           [dataSource]="dataSource" 
+           matSort 
+           class="contracts-table"
+           role="grid"
+           aria-label="Contracts table">
+
+      <!-- Selection column -->
+      <ng-container matColumnDef="select">
+        <th mat-header-cell *matHeaderCellDef>
+          <mat-checkbox (change)="$event ? masterToggle() : null"
+                       [checked]="selection.hasValue() && isAllSelected()"
+                       [indeterminate]="selection.hasValue() && !isAllSelected()"
+                       aria-label="Select all contracts">
+          </mat-checkbox>
+        </th>
+        <td mat-cell *matCellDef="let contract">
+          <mat-checkbox (click)="$event.stopPropagation()"
+                       [checked]="selection.isSelected(contract)"
+                       [disabled]="contract.status !== ContractStatus.PENDING"
+                       (change)="contract.status === ContractStatus.PENDING ? selection.toggle(contract) : null"
+                       [attr.aria-label]="'Select contract ' + contract.id">
+          </mat-checkbox>
+        </td>
+      </ng-container>
+
+      <!-- Contract ID column -->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell 
+            *matHeaderCellDef 
+            mat-sort-header
+            aria-sort="none">
+          ID
+        </th>
+        <td mat-cell *matCellDef="let contract">#{{contract.id}}</td>
+      </ng-container>
+
+      <!-- Name column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell 
+            *matHeaderCellDef 
+            mat-sort-header
+            aria-sort="none">
+          File Name
+        </th>
+        <td mat-cell *matCellDef="let contract">
+          <div class="file-info">
+            <mat-icon class="file-icon">description</mat-icon>
+            <span class="file-name">{{getFileName(contract)}}</span>
+            <span class="file-size" *ngIf="contract.metadata?.file_size">({{formatFileSize(contract.metadata.file_size)}})</span>
+          </div>
+        </td>
+      </ng-container>
+
+      <!-- Created Date column -->
+      <ng-container matColumnDef="created_at">
+        <th mat-header-cell 
+            *matHeaderCellDef 
+            mat-sort-header
+            aria-sort="none">
+          Upload Date
+        </th>
+        <td mat-cell *matCellDef="let contract">
+          {{contract.created_at | date:'MMM d, y, h:mm a'}}
+        </td>
+      </ng-container>
+
+      <!-- Status column with enhanced indicators -->
+      <ng-container matColumnDef="status">
+        <th mat-header-cell 
+            *matHeaderCellDef 
+            mat-sort-header
+            aria-sort="none">
+          Status
+        </th>
+        <td mat-cell *matCellDef="let contract">
+          <div class="status-chip" [ngClass]="getStatusClass(contract.status)">
+            <mat-icon *ngIf="isProcessing(contract.id)" class="rotating">sync</mat-icon>
+            <mat-icon *ngIf="!isProcessing(contract.id)">{{ getStatusIcon(contract.status) }}</mat-icon>
+            <span>{{ formatStatus(contract.status) }}</span>
+          </div>
+        </td>
+      </ng-container>
+
+      <!-- Created By column -->
+      <ng-container matColumnDef="created_by">
+        <th mat-header-cell 
+            *matHeaderCellDef 
+            mat-sort-header
+            aria-sort="none">
+          Created By
+        </th>
+        <td mat-cell *matCellDef="let contract">
+          <span [matTooltip]="contract.created_by">{{formatUserId(contract.created_by)}}</span>
+        </td>
+      </ng-container>
+
+      <!-- Actions column -->
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>Actions</th>
+        <td mat-cell *matCellDef="let contract">
+          <div class="action-buttons">
+
+            <!-- View button - for all contracts -->
+            <button mat-icon-button
+                    color="primary"
+                    (click)="viewContract(contract); $event.stopPropagation()"
+                    [matTooltip]="'View Contract Details'"
+                    aria-label="View contract details">
+              <mat-icon>visibility</mat-icon>
+            </button>
+
+            <!-- Validate button - only for VALIDATION_REQUIRED contracts -->
+            <button mat-icon-button 
+                    color="primary"
+                    (click)="validateContract(contract); $event.stopPropagation()"
+                    [matTooltip]="'Validate Contract'"
+                    [disabled]="contract.status !== ContractStatus.VALIDATION_REQUIRED"
+                    aria-label="Validate contract">
+              <mat-icon>rule</mat-icon>
+            </button>
+
+            <!--Create Purchase Order button - only for VALIDATED contracts -->
+            <button mat-icon-button 
+                    color="primary"
+                    (click)="createPurchaseOrder(contract); $event.stopPropagation()"
+                    [matTooltip]="'New Purchase Order'"
+                    [disabled]="contract.status !== ContractStatus.VALIDATED"
+                    aria-label="Create purchase order">
+              <mat-icon>receipt</mat-icon>
+            </button>
+
+          </div>
+        </td>
+      </ng-container>
+
+      <!-- Header row -->
+      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+
+      <!-- Data row with hover and selection -->
+      <tr mat-row 
+          *matRowDef="let contract; columns: displayedColumns;"
+          [class.selected]="selection.isSelected(contract)"
+          (click)="onContractSelect(contract)"
+          class="contract-row"
+          [class.mat-row-hover]="!selection.isSelected(contract)">
+      </tr>
+
+      <!-- No data row -->
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="7">
+          <div class="empty-state">
+            <mat-icon>search</mat-icon>
+            <p>No contracts found</p>
+            <small *ngIf="filterForm.dirty">Try adjusting your filters</small>
+          </div>
+        </td>
+      </tr>
+    </table>
+
+    <!-- Paginator -->
+    <mat-paginator [pageSize]="10"
+                   [pageSizeOptions]="[5, 10, 25, 100]"
+                   showFirstLastButtons
+                   aria-label="Select page of contracts">
+    </mat-paginator>
+  </div>
+
+  <!-- Process Selected FAB -->
+  <button mat-flat-button
+          class="process-selected-fab"
+          *ngIf="hasPendingSelectedContracts()"
+          (click)="processSelectedContracts()"
+          [attr.aria-label]="'Process ' + pendingContractsCount() + ' selected contracts'">
+    <mat-icon>play_arrow</mat-icon>
+    <span class="fab-label">Process Selected ({{pendingContractsCount()}})</span>
+  </button>
+</div>
+
+<!-- Add styles for status chips -->
+<style>
+.status-chip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 12px;
+  border-radius: 16px;
+  font-size: 14px;
+  font-weight: 500;
+  width: fit-content;
+}
+
+.status-chip.pending {
+  background-color: #e3f2fd;
+  color: #1976d2;
+}
+
+.status-chip.processing {
+  background-color: #fff3e0;
+  color: #f57c00;
+}
+
+.status-chip.validation-required {
+  background-color: #ffebee;
+  color: #d32f2f;
+  animation: pulse 2s infinite;
+}
+
+.status-chip.validated {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+}
+
+.status-chip.failed {
+  background-color: #ffebee;
+  color: #d32f2f;
+}
+
+.status-chip.completed {
+  background-color: #f5f5f5;
+  color: #424242;
+}
+
+.rotating {
+  animation: rotate 1s linear infinite;
+}
+
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(211, 47, 47, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 6px rgba(211, 47, 47, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(211, 47, 47, 0);
+  }
+}
+
+.action-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.validation-required-action {
+  background-color: rgba(211, 47, 47, 0.1);
+  transform: scale(1.1);
+}
+
+.validation-required-action:hover {
+  background-color: rgba(211, 47, 47, 0.2);
+}
+</style>

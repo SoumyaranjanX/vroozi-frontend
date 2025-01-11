@@ -1,0 +1,33 @@
+<mat-card 
+  class="stats-card mat-elevation-z2" 
+  role="region"
+  [attr.aria-label]="getAriaLabel()"
+  data-testid="stats-card"
+  [ngStyle]="getCardStyles()">
+
+  <mat-card-header class="stats-card-header">
+    <mat-card-title 
+      class="stats-title"
+      data-testid="stats-card-title">
+      {{title}}
+    </mat-card-title>
+    
+    <mat-icon 
+      class="stats-icon"
+      [style.color]="color"
+      aria-hidden="true"
+      data-testid="stats-card-icon">
+      {{getIconName()}}
+    </mat-icon>
+  </mat-card-header>
+
+  <mat-card-content class="stats-card-content">
+    <div 
+      class="stats-value"
+      data-testid="stats-card-count">
+      {{getFormattedCount()}}
+    </div>
+  </mat-card-content>
+</mat-card>
+
+<!-- Responsive styles are handled in the accompanying SCSS file -->

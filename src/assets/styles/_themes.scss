@@ -1,0 +1,194 @@
+// =============================================================================
+// Theme Configuration
+// Contract Processing System Frontend
+// Version: 1.0.0
+// =============================================================================
+
+@import 'variables';
+@import 'mixins';
+
+// -----------------------------------------------------------------------------
+// Theme Transition Configuration
+// Defines smooth transitions between theme changes
+// -----------------------------------------------------------------------------
+
+$theme-transition-duration: 0.3s;
+$theme-transition-timing: ease-in-out;
+$theme-transition-properties: (
+  background-color,
+  color,
+  border-color,
+  box-shadow
+);
+
+// -----------------------------------------------------------------------------
+// Theme Color Functions
+// Utility functions for theme color management
+// -----------------------------------------------------------------------------
+
+@function get-theme-color($color-name) {
+  @if variable-exists('current-theme') {
+    @return map-get(map-get($themes, $current-theme), $color-name);
+  }
+  @return map-get(map-get($themes, 'light'), $color-name);
+}
+
+@function calculate-contrast($foreground, $background) {
+  $foreground-luminance: calc-relative-luminance($foreground);
+  $background-luminance: calc-relative-luminance($background);
+  
+  $lighter: max($foreground-luminance, $background-luminance);
+  $darker: min($foreground-luminance, $background-luminance);
+  
+  @return ($lighter + 0.05) / ($darker + 0.05);
+}
+
+@function calc-relative-luminance($color) {
+  $red: red($color) / 255;
+  $green: green($color) / 255;
+  $blue: blue($color) / 255;
+  
+  $red: if($red <= 0.03928, $red / 12.92, pow(($red + 0.055) / 1.055, 2.4));
+  $green: if($green <= 0.03928, $green / 12.92, pow(($green + 0.055) / 1.055, 2.4));
+  $blue: if($blue <= 0.03928, $blue / 12.92, pow(($blue + 0.055) / 1.055, 2.4));
+  
+  @return $red * 0.2126 + $green * 0.7152 + $blue * 0.0722;
+}
+
+// -----------------------------------------------------------------------------
+// Theme Definitions
+// Light and dark theme color palettes
+// -----------------------------------------------------------------------------
+
+$themes: (
+  light: (
+    primary-color: $gold,
+    secondary-color: $dark-gray,
+    accent-color: $blue,
+    corporate-color: $navy,
+    error-color: $red,
+    success-color: $green,
+    background-color: $white,
+    text-color: $dark-gray,
+    border-color: rgba($dark-gray, 0.2),
+    shadow-color: rgba($dark-gray, 0.1),
+    overlay-background: rgba($white, 0.95),
+    disabled-opacity: 0.6,
+    hover-opacity: 0.8
+  ),
+  dark: (
+    primary-color: $gold,
+    secondary-color: $white,
+    accent-color: $blue,
+    corporate-color: $navy,
+    error-color: $red,
+    success-color: $green,
+    background-color: $dark-gray,
+    text-color: $white,
+    border-color: rgba($white, 0.2),
+    shadow-color: rgba(black, 0.3),
+    overlay-background: rgba($dark-gray, 0.95),
+    disabled-opacity: 0.5,
+    hover-opacity: 0.7
+  )
+);
+
+// -----------------------------------------------------------------------------
+// Theme Mixins
+// Utility mixins for theme application and transitions
+// -----------------------------------------------------------------------------
+
+@mixin theme-transition {
+  transition-property: #{$theme-transition-properties};
+  transition-duration: $theme-transition-duration;
+  transition-timing-function: $theme-transition-timing;
+}
+
+@mixin apply-theme($theme: 'light') {
+  @each $property, $value in map-get($themes, $theme) {
+    --#{$property}: #{$value};
+  }
+}
+
+@mixin theme-aware-shadow {
+  @include card-shadow;
+  box-shadow: 0 2px 4px var(--shadow-color);
+  
+  &:hover {
+    box-shadow: 0 4px 8px var(--shadow-color);
+  }
+}
+
+@mixin theme-aware-hover {
+  &:hover {
+    opacity: var(--hover-opacity);
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Theme Implementation
+// Base theme setup and system preference detection
+// -----------------------------------------------------------------------------
+
+:root {
+  @include apply-theme('light');
+  @include theme-transition;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    @include apply-theme('dark');
+  }
+}
+
+// Theme Classes for Manual Override
+.theme-light {
+  @include apply-theme('light');
+}
+
+.theme-dark {
+  @include apply-theme('dark');
+}
+
+// -----------------------------------------------------------------------------
+// Accessibility Enhancements
+// Ensures proper contrast and focus visibility
+// -----------------------------------------------------------------------------
+
+@mixin high-contrast-mode {
+  @media (prefers-contrast: high) {
+    :root {
+      --border-color: #{$dark-gray};
+      --shadow-color: #{rgba($dark-gray, 0.3)};
+    }
+    
+    * {
+      border-color: var(--border-color) !important;
+      box-shadow: none !important;
+    }
+  }
+}
+
+// Apply high contrast mode
+@include high-contrast-mode;
+
+// Reduced Motion Preference
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --theme-transition-duration: 0s;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Exports
+// Theme variables and mixins available for component usage
+// -----------------------------------------------------------------------------
+
+:export {
+  primaryColor: var(--primary-color);
+  secondaryColor: var(--secondary-color);
+  accentColor: var(--accent-color);
+  errorColor: var(--error-color);
+  successColor: var(--success-color);
+  themeTransitionDuration: $theme-transition-duration;
+}

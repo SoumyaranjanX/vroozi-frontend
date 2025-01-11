@@ -1,0 +1,21 @@
+dist/**/*
+
+# Dependencies
+node_modules/**/*
+
+# Test coverage reports
+coverage/**/*
+
+# End-to-end test files
+e2e/**/*
+
+# Unit test files
+*.spec.ts
+
+# Environment configuration files
+environment.*.ts
+
+# Configuration files
+karma.conf.ts
+polyfills.ts
+test.ts

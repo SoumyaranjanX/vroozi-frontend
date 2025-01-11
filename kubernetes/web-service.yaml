@@ -1,0 +1,96 @@
+# Frontend Web Service Configuration
+# API Version: v1
+# Purpose: Service configuration for Angular frontend with enhanced monitoring and HA
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: web-service
+  namespace: contract-processing
+  labels:
+    app: contract-processing-web
+    environment: production
+    tier: frontend
+    managed-by: kubernetes
+  annotations:
+    # Prometheus monitoring configuration
+    prometheus.io/scrape: "true"
+    prometheus.io/port: "80"
+    prometheus.io/path: "/metrics"
+    
+    # AWS Load Balancer configuration
+    service.beta.kubernetes.io/aws-load-balancer-type: "nlb"
+    service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled: "true"
+    service.beta.kubernetes.io/aws-load-balancer-connection-draining-enabled: "true"
+    service.beta.kubernetes.io/aws-load-balancer-connection-draining-timeout: "60"
+    
+    # Additional monitoring annotations
+    service.beta.kubernetes.io/aws-load-balancer-healthcheck-protocol: "HTTP"
+    service.beta.kubernetes.io/aws-load-balancer-healthcheck-path: "/health"
+    service.beta.kubernetes.io/aws-load-balancer-healthcheck-port: "80"
+    service.beta.kubernetes.io/aws-load-balancer-healthcheck-interval: "10"
+    service.beta.kubernetes.io/aws-load-balancer-healthcheck-timeout: "5"
+    service.beta.kubernetes.io/aws-load-balancer-healthcheck-healthy-threshold: "2"
+    service.beta.kubernetes.io/aws-load-balancer-healthcheck-unhealthy-threshold: "3"
+
+spec:
+  # Service type configuration
+  type: ClusterIP
+  
+  # Port configuration for HTTP and HTTPS traffic
+  ports:
+    - name: http
+      port: 80
+      targetPort: 80
+      protocol: TCP
+    - name: https
+      port: 443
+      targetPort: 443
+      protocol: TCP
+  
+  # Selector matching deployment pod labels
+  selector:
+    app: contract-processing-web
+    tier: frontend
+  
+  # Session configuration
+  sessionAffinity: None
+  
+  # External traffic policy for better load balancing
+  externalTrafficPolicy: Local
+
+  # Additional spec configurations for enhanced service capabilities
+  publishNotReadyAddresses: false
+  
+  # IP family policy for IPv4/IPv6 support
+  ipFamilyPolicy: SingleStack
+  ipFamilies:
+    - IPv4
+
+---
+# Service Monitor for Prometheus metrics collection
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: web-service-monitor
+  namespace: contract-processing
+  labels:
+    app: contract-processing-web
+    release: prometheus
+spec:
+  selector:
+    matchLabels:
+      app: contract-processing-web
+      tier: frontend
+  endpoints:
+    - port: http
+      path: /metrics
+      interval: 15s
+      scrapeTimeout: 14s
+      metricRelabelings:
+        - sourceLabels: [__name__]
+          regex: 'http_(requests_total|request_duration_seconds|request_size_bytes|response_size_bytes|requests_in_flight|service_up)'
+          action: keep
+  namespaceSelector:
+    matchNames:
+      - contract-processing

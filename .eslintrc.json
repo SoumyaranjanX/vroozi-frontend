@@ -1,0 +1,82 @@
+{
+  "env": {
+    "browser": true,
+    "es2022": true,
+    "node": true,
+    "jasmine": true
+  },
+  "parser": "@typescript-eslint/parser", // @typescript-eslint/parser@5.47.0
+  "parserOptions": {
+    "project": "./tsconfig.json",
+    "ecmaVersion": 2022,
+    "sourceType": "module"
+  },
+  "plugins": [
+    "@typescript-eslint", // @typescript-eslint/eslint-plugin@5.47.0
+    "@angular-eslint"
+  ],
+  "extends": [
+    "eslint:recommended", // eslint@8.30.0
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/recommended-requiring-type-checking",
+    "plugin:@angular-eslint/recommended"
+  ],
+  "rules": {
+    "@typescript-eslint/explicit-function-return-type": "error",
+    "@typescript-eslint/explicit-member-accessibility": "error",
+    "@typescript-eslint/no-explicit-any": "error",
+    "@typescript-eslint/no-unused-vars": "error",
+    "@typescript-eslint/naming-convention": [
+      "error",
+      {
+        "selector": "interface",
+        "format": ["PascalCase"],
+        "prefix": ["I"]
+      },
+      {
+        "selector": "class",
+        "format": ["PascalCase"]
+      }
+    ],
+    "@angular-eslint/component-selector": [
+      "error",
+      {
+        "type": "element",
+        "prefix": "app",
+        "style": "kebab-case"
+      }
+    ],
+    "@angular-eslint/directive-selector": [
+      "error",
+      {
+        "type": "attribute",
+        "prefix": "app",
+        "style": "camelCase"
+      }
+    ],
+    "no-console": [
+      "error",
+      {
+        "allow": ["warn", "error"]
+      }
+    ],
+    "quotes": ["error", "single"],
+    "semi": ["error", "always"],
+    "indent": ["error", 2],
+    "max-len": [
+      "error",
+      {
+        "code": 120
+      }
+    ]
+  },
+  "overrides": [
+    {
+      "files": ["*.spec.ts"],
+      "rules": {
+        "@typescript-eslint/no-explicit-any": "off"
+      }
+    }
+  ],
+  "ignorePatterns": ["dist", "coverage", "node_modules", "*.js"]
+}

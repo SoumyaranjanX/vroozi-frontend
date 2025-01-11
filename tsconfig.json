@@ -1,0 +1,73 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ES2022",
+    "lib": [
+      "ES2022",
+      "dom",
+      "dom.iterable",
+      "webworker",
+      "ES2022.Array",
+      "ES2022.Object",
+      "ES2022.String"
+    ],
+    "outDir": "./dist",
+    "baseUrl": "./",
+    "sourceMap": true,
+    "declaration": false,
+    "composite": false,
+    
+    "strict": true,
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "strictPropertyInitialization": true,
+    "alwaysStrict": true,
+    
+    "moduleResolution": "node",
+    "paths": {
+      "@app/*": ["src/app/*"],
+      "@core/*": ["src/app/core/*"],
+      "@shared/*": ["src/app/shared/*"],
+      "@env/*": ["src/environments/*"],
+      "@store/*": ["src/app/store/*"],
+      "@features/*": ["src/app/features/*"],
+      "@assets/*": ["src/assets/*"]
+    },
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "preserveSymlinks": true,
+    "importHelpers": true,
+    "removeComments": false,
+    
+    "noUnusedLocals": false,
+    "noUnusedParameters": true
+  },
+  "angularCompilerOptions": {
+    "enableI18nLegacyMessageIdFormat": false,
+    "strictInjectionParameters": true,
+    "strictTemplates": true,
+    "strictInputAccessModifiers": true,
+    "strictAttributeTypes": true,
+    "fullTemplateTypeCheck": true,
+    "strictOutputEventTypes": true,
+    "strictDomEventTypes": true,
+    "strictSafeNavigationTypes": true,
+    "strictDomLocalRefTypes": true,
+    "strictLiteralTypes": true,
+    "preserveWhitespaces": false
+  },
+  "files": [],
+  "include": [],
+  "references": [
+    { "path": "./tsconfig.app.json" },
+    { "path": "./tsconfig.spec.json" }
+  ]
+}

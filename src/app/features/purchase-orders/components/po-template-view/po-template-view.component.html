@@ -1,0 +1,113 @@
+<div class="po-template-container">
+  <div class="header-actions">
+    <button mat-raised-button color="primary" (click)="print()">
+      <mat-icon>print</mat-icon>
+      Print
+    </button>
+  </div>
+
+  <div class="po-document" *ngIf="po">
+    <div class="po-header">
+      <div class="company-info">
+        <div class="company-logo">
+          <img [src]="companyLogo" alt="Company Logo" *ngIf="companyLogo">
+        </div>
+        <div class="company-details">
+          <h1>{{ companyName }}</h1>
+          <p>{{ companyAddress }}</p>
+          <p>{{ companyPhone }}</p>
+          <p>{{ companyEmail }}</p>
+        </div>
+      </div>
+      <div class="po-details">
+        <h2>Purchase Order</h2>
+        <div class="po-info">
+          <p><strong>PO Number:</strong> {{ po.po_number }}</p>
+          <p><strong>Contract ID:</strong> {{ po.contract_id }}</p>
+          <p><strong>Created Date:</strong> {{ po.created_at | date:'mediumDate' }}</p>
+          <p *ngIf="po.po_data?.order_date"><strong>Order Date:</strong> {{ po.po_data?.order_date | date:'mediumDate' }}</p>
+          <p *ngIf="po.po_data?.delivery_date"><strong>Delivery Date:</strong> {{ po.po_data?.delivery_date | date:'mediumDate' }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-grid">
+      <div class="vendor-info">
+        <h3>Vendor Information</h3>
+        <div class="info-content">
+          <p *ngIf="getVendorName()"><strong>{{ getVendorName() }}</strong></p>
+          <p *ngIf="getVendorAddress()">{{ getVendorAddress() }}</p>
+          <p *ngIf="getVendorPhone()">{{ getVendorPhone() }}</p>
+          <p *ngIf="getVendorEmail()">{{ getVendorEmail() }}</p>
+        </div>
+      </div>
+      <div class="buyer-info text-right">
+        <h3>Buyer Information</h3>
+        <div class="info-content">
+          <p *ngIf="getBuyerName()"><strong>{{ getBuyerName() }}</strong></p>
+          <p *ngIf="getBuyerAddress()">{{ getBuyerAddress() }}</p>
+          <p *ngIf="getBuyerPhone()">{{ getBuyerPhone() }}</p>
+          <p *ngIf="getBuyerEmail()">{{ getBuyerEmail() }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="payment-terms">
+      <h3>Payment Terms</h3>
+      <p>{{ getPaymentTerms() }}</p>
+    </div>
+
+    <div class="line-items">
+      <h3>Line Items</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th>Description</th>
+            <th>Quantity</th>
+            <th>Unit Price</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of getLineItems()">
+            <td>{{ item.name }}</td>
+            <td>{{ item.description }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>{{ item.unit_price | currency }}</td>
+            <td>{{ item.quantity * item.unit_price | currency }}</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="4" class="text-right"><strong>Subtotal:</strong></td>
+            <td>{{ getSubtotal() | currency }}</td>
+          </tr>
+          <tr *ngIf="po.tax">
+            <td colspan="4" class="text-right"><strong>Tax:</strong></td>
+            <td>{{ po.tax | currency }}</td>
+          </tr>
+          <tr>
+            <td colspan="4" class="text-right"><strong>Total:</strong></td>
+            <td>{{ getTotal() | currency }}</td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+
+    <div class="notes" *ngIf="getNotes()">
+      <h3>Notes</h3>
+      <p>{{ getNotes() }}</p>
+    </div>
+
+    <div class="po-footer">
+      <p>Thank you for your business!</p>
+      <p>For any questions, please contact us at {{ companyEmail }}</p>
+    </div>
+  </div>
+
+  <div class="empty-state" *ngIf="!po">
+    <mat-icon>error_outline</mat-icon>
+    <p>No purchase order data available</p>
+  </div>
+</div> 

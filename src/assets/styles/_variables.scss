@@ -1,0 +1,164 @@
+// =============================================================================
+// Design System Variables
+// Contract Processing System Frontend
+// =============================================================================
+
+// -----------------------------------------------------------------------------
+// Colors
+// Primary and semantic color palette for the application
+// -----------------------------------------------------------------------------
+
+// Brand Colors
+$gold: #ebb502;      // Primary brand color - used for primary actions and highlights
+$dark-gray: #2e2e2e; // Secondary color - used for text and borders
+$blue: #037fff;      // Accent color - used for interactive elements
+$navy: #0F2374;      // Corporate color - used for headers and navigation
+$white: #ffffff;     // Background color
+
+// Semantic Colors
+$red: #dc3545;       // Error and warning states
+$green: #28a745;     // Success states
+
+// -----------------------------------------------------------------------------
+// Typography
+// Font families, sizes, and weights for consistent text styling
+// -----------------------------------------------------------------------------
+
+// Font Families
+$font-family-primary: Arial, sans-serif;
+$font-family-secondary: Helvetica, sans-serif;
+
+// Font Sizes
+$font-size-base: 16px;
+$font-size-h1: 24px;
+$font-size-h2: 20px;
+$font-size-h3: 18px;
+$font-size-h4: 16px;
+$font-size-body: 16px;
+$font-size-small: 14px;
+$font-size-label: 14px;
+
+// Font Weights
+$font-weight-regular: 400;
+$font-weight-medium: 500;
+$font-weight-bold: 700;
+
+// -----------------------------------------------------------------------------
+// Spacing
+// Base spacing units and derived values for consistent layout spacing
+// -----------------------------------------------------------------------------
+
+$spacing-base: 8px;
+$spacing-small: 16px;    // 2x base
+$spacing-medium: 24px;   // 3x base
+$spacing-large: 32px;    // 4x base
+$grid-gutter: 24px;
+
+// Spacing function for consistent multiplication of base unit
+@function spacing($multiplier) {
+  @return $spacing-base * $multiplier;
+}
+
+// -----------------------------------------------------------------------------
+// Breakpoints
+// Screen size breakpoints for responsive design
+// -----------------------------------------------------------------------------
+
+// Mobile
+$breakpoint-mobile: 320px;
+$breakpoint-mobile-max: 767px;
+
+// Tablet
+$breakpoint-tablet: 768px;
+$breakpoint-tablet-max: 1023px;
+
+// Desktop
+$breakpoint-desktop: 1024px;
+$breakpoint-desktop-max: 1439px;
+
+// Large Desktop
+$breakpoint-large: 1440px;
+
+// -----------------------------------------------------------------------------
+// Layout
+// Structural measurements and z-index scales
+// -----------------------------------------------------------------------------
+
+// Container and Component Dimensions
+$container-max-width: 1200px;
+$sidebar-width: 250px;
+$header-height: 64px;
+
+// Z-index Scale
+$z-index-dropdown: 1000;
+$z-index-modal: 2000;
+$z-index-overlay: 3000;
+
+// Border radius
+$border-radius: 4px;
+$border-radius-small: 2px;
+$border-radius-large: 8px;
+
+// Motion durations
+$motion-duration-base: 0.3s;
+$motion-duration-fast: 0.15s;
+$motion-duration-slow: 0.5s;
+
+// Colors
+$primary-color: #1976d2;
+$accent-color: #ff4081;
+$warn-color: #f44336;
+$success-color: #4caf50;
+$info-color: #2196f3;
+
+// Typography
+$font-family-base: 'Roboto', sans-serif;
+$font-size-base: 16px;
+$line-height-base: 1.5;
+
+// Spacing
+$spacing-base: 8px;
+$spacing-unit: 16px;
+$spacing-large: 24px;
+$spacing-xlarge: 32px;
+
+// Transitions
+$transition-duration: 0.3s;
+$transition-timing: ease-in-out;
+
+// Breakpoints
+$breakpoint-xs: 0;
+$breakpoint-sm: 600px;
+$breakpoint-md: 960px;
+$breakpoint-lg: 1280px;
+$breakpoint-xl: 1920px;
+
+// Z-index
+$z-index-drawer: 100;
+$z-index-navbar: 200;
+$z-index-modal: 300;
+$z-index-tooltip: 400;
+
+// Mixins
+@mixin screen-reader-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@mixin rtl {
+  [dir="rtl"] & {
+    @content;
+  }
+}
+
+// Shadows
+$shadow-1: 0 2px 1px -1px rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 1px 3px 0 rgba(0,0,0,.12);
+$shadow-2: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
+$shadow-3: 0 3px 3px -2px rgba(0,0,0,.2), 0 3px 4px 0 rgba(0,0,0,.14), 0 1px 8px 0 rgba(0,0,0,.12);

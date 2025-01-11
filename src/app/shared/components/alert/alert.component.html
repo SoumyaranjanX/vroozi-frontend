@@ -1,0 +1,35 @@
+<div
+  class="alert"
+  [ngClass]="alertClass"
+  role="alert"
+  [attr.aria-live]="alertType === 'error' ? 'assertive' : 'polite'"
+  [attr.aria-atomic]="true"
+  *ngIf="show">
+
+  <!-- Alert Icon -->
+  <div class="alert-icon">
+    <mat-icon [ngClass]="iconClass">
+      {{ icon }}
+    </mat-icon>
+  </div>
+
+  <!-- Alert Content -->
+  <div class="alert-content">
+    <div class="alert-title" *ngIf="title">
+      {{ title }}
+    </div>
+    <div class="alert-message">
+      {{ message }}
+    </div>
+  </div>
+
+  <!-- Close Button -->
+  <button
+    mat-icon-button
+    class="alert-close"
+    (click)="close()"
+    [attr.aria-label]="'Close alert'"
+    *ngIf="dismissible">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>

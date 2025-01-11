@@ -1,0 +1,170 @@
+<div class="loading-overlay" *ngIf="isGenerating">
+  <mat-spinner diameter="40"></mat-spinner>
+  <span>Loading contract details...</span>
+</div>
+
+<div class="po-generation-container">
+  <div class="header">
+    <div class="header-left">
+      <button mat-icon-button (click)="navigateBack()" matTooltip="Back">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+      <h1>Generate Purchase Order</h1>
+    </div>
+  </div>
+
+  <div class="main-content">
+      <!-- Contract Details Card -->
+      <div class="contract-details-card">
+        <mat-card>
+          <mat-card-header>
+            <div mat-card-avatar>
+              <mat-icon>description</mat-icon>
+            </div>
+            <mat-card-title>Contract Details</mat-card-title>
+            <mat-card-subtitle>Contract #{{contract?.contract_number}}</mat-card-subtitle>
+          </mat-card-header>
+
+          <div class="info-section">
+            <h3 class="section-title">
+              <mat-icon>people</mat-icon>
+              Contract Parties
+            </h3>
+            <div class="parties-grid">
+              <div class="party-card" *ngFor="let party of parties">
+                <div class="party-header" [ngClass]="getPartyColor(party.role)">
+                  <mat-icon>{{party.role.toLowerCase().includes('buyer') ? 'account_balance' : 'business'}}</mat-icon>
+                  <span class="party-role">{{party.role}}</span>
+                </div>
+                <div class="party-content">
+                  <div class="party-name">{{party.name}}</div>
+                  <div class="party-address">
+                    <mat-icon>location_on</mat-icon>
+                    <span>{{party.address}}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="info-section">
+            <h3 class="section-title">
+              <mat-icon>event</mat-icon>
+              Contract Period
+            </h3>
+            <div class="form-grid">
+              <mat-form-field appearance="outline">
+                <mat-label>Effective Date</mat-label>
+                <input matInput [formControl]="effectiveDate" readonly>
+                <mat-icon matSuffix>calendar_today</mat-icon>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline">
+                <mat-label>Expiration Date</mat-label>
+                <input matInput [formControl]="expirationDate" readonly>
+                <mat-icon matSuffix>calendar_today</mat-icon>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="info-section">
+            <h3 class="section-title">
+              <mat-icon>attach_money</mat-icon>
+              Financial Details
+            </h3>
+            <div class="form-grid">
+              <mat-form-field appearance="outline">
+                <mat-label>Total Value</mat-label>
+                <input matInput [formControl]="totalValue" readonly>
+                <span matSuffix>{{contract?.extracted_data?.currency}}</span>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Payment Terms</mat-label>
+                <textarea matInput [formControl]="paymentTerms" readonly rows="3"></textarea>
+              </mat-form-field>
+            </div>
+          </div>
+        </mat-card>
+      </div>
+
+    <!-- Line Items Card -->
+      <mat-card class="form-card">
+        <mat-card-header>
+          <div mat-card-avatar>
+          <mat-icon>list_alt</mat-icon>
+          </div>
+        <mat-card-title>Line Items</mat-card-title>
+        <mat-card-subtitle>Items from the contract</mat-card-subtitle>
+        </mat-card-header>
+
+        <div class="info-section">
+        <div class="line-items-table">
+          <table mat-table [dataSource]="lineItems">
+            <!-- Name Column -->
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef>Item Name</th>
+              <td mat-cell *matCellDef="let item">{{item.name}}</td>
+              <td mat-footer-cell *matFooterCellDef>Total</td>
+            </ng-container>
+
+            <!-- Description Column -->
+            <ng-container matColumnDef="description">
+              <th mat-header-cell *matHeaderCellDef>Description</th>
+              <td mat-cell *matCellDef="let item">{{item.description}}</td>
+              <td mat-footer-cell *matFooterCellDef></td>
+            </ng-container>
+
+            <!-- Quantity Column -->
+            <ng-container matColumnDef="quantity">
+              <th mat-header-cell *matHeaderCellDef>Quantity</th>
+              <td mat-cell *matCellDef="let item">{{item.quantity}}</td>
+              <td mat-footer-cell *matFooterCellDef></td>
+            </ng-container>
+
+            <!-- Unit Price Column -->
+            <ng-container matColumnDef="unit_price">
+              <th mat-header-cell *matHeaderCellDef>Unit Price</th>
+              <td mat-cell *matCellDef="let item">{{formatCurrency(item.unit_price)}}</td>
+              <td mat-footer-cell *matFooterCellDef></td>
+            </ng-container>
+
+            <!-- Total Column -->
+            <ng-container matColumnDef="total">
+              <th mat-header-cell *matHeaderCellDef>Total</th>
+              <td mat-cell *matCellDef="let item">{{formatCurrency(item.total)}}</td>
+              <td mat-footer-cell *matFooterCellDef>{{formatCurrency(getTotalAmount())}}</td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="['name', 'description', 'quantity', 'unit_price', 'total']"></tr>
+            <tr mat-row *matRowDef="let row; columns: ['name', 'description', 'quantity', 'unit_price', 'total'];"></tr>
+            <tr mat-footer-row *matFooterRowDef="['name', 'description', 'quantity', 'unit_price', 'total']"></tr>
+          </table>
+          </div>
+        </div>
+      </mat-card>
+
+      <!-- Action Bar -->
+      <div class="action-bar">
+        <button mat-stroked-button type="button" (click)="navigateBack()">
+          <mat-icon>close</mat-icon>
+          Cancel
+        </button>
+      <button mat-flat-button color="primary" (click)="generatePurchaseOrder()" [disabled]="isGenerating">
+          <mat-icon>description</mat-icon>
+          Generate Purchase Order
+        </button>
+      </div>
+  </div>
+</div>
+
+<!-- Error Message -->
+<div class="error-message" *ngIf="error$ | async as error">
+  <mat-card class="error-card">
+    <mat-icon color="warn">error_outline</mat-icon>
+    <p>{{error}}</p>
+    <button mat-button color="warn" (click)="clearError()">
+      Dismiss
+    </button>
+  </mat-card>
+</div>

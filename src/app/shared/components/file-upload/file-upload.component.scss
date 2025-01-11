@@ -1,0 +1,231 @@
+// =============================================================================
+// File Upload Component Styles
+// Version: 1.0.0
+// =============================================================================
+
+@import '../../../../assets/styles/variables';
+@import '../../../../assets/styles/mixins';
+
+// -----------------------------------------------------------------------------
+// Main Container
+// -----------------------------------------------------------------------------
+
+.upload-container {
+  @include container-width($spacing-medium);
+  background-color: $white;
+  border-radius: $spacing-base;
+  box-shadow: 0 2px 8px rgba($dark-gray, 0.08);
+  transition: all 0.3s ease;
+
+  @include mobile {
+    padding: $spacing-small;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Drop Zone
+// -----------------------------------------------------------------------------
+
+.drop-zone {
+  @include flex-center;
+  flex-direction: column;
+  min-height: 200px;
+  border: 2px dashed rgba($gold, 0.3);
+  border-radius: $spacing-base;
+  padding: $spacing-large;
+  background-color: rgba($gold, 0.02);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  touch-action: none; // Prevents scrolling while dragging on touch devices
+
+  // Enhanced focus states for accessibility
+  &:focus-within {
+    @include focus-visible;
+  }
+
+  // Hover state
+  &:hover:not(.dragging) {
+    border-color: $gold;
+    background-color: rgba($gold, 0.05);
+    transform: translateY(-1px);
+  }
+
+  // Active dragging state
+  &.dragging {
+    border-color: $gold;
+    background-color: rgba($gold, 0.1);
+    transform: scale(1.02);
+    
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-color: rgba($white, 0.6);
+      pointer-events: none;
+    }
+  }
+
+  @include mobile {
+    min-height: 120px;
+    padding: $spacing-small;
+  }
+
+  @include tablet {
+    min-height: 160px;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// File List
+// -----------------------------------------------------------------------------
+
+.file-list {
+  margin-top: $spacing-medium;
+  max-height: 300px;
+  overflow-y: auto;
+  @include scrollbar;
+
+  // Enhanced scrollbar styling
+  scrollbar-width: thin;
+  scrollbar-color: rgba($gold, 0.3) transparent;
+
+  @include tablet {
+    max-height: 400px;
+    padding-inline: $spacing-medium;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// File Items
+// -----------------------------------------------------------------------------
+
+.file-item {
+  display: flex;
+  align-items: center;
+  padding: $spacing-small;
+  border-bottom: 1px solid rgba($dark-gray, 0.1);
+  transition: background-color 0.2s ease;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &:hover {
+    background-color: rgba($gold, 0.05);
+  }
+
+  &:focus-within {
+    background-color: rgba($gold, 0.08);
+    outline: none;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// File Name
+// -----------------------------------------------------------------------------
+
+.file-name {
+  flex: 1;
+  @include truncate-text;
+  margin-inline-end: $spacing-small;
+  color: $dark-gray;
+  font-size: $font-size-body;
+  font-family: $font-family-primary;
+  direction: ltr; // Ensures correct file name display in RTL layouts
+  unicode-bidi: isolate;
+}
+
+// -----------------------------------------------------------------------------
+// Progress Indicator
+// -----------------------------------------------------------------------------
+
+.progress-bar {
+  width: 100px;
+  height: 4px;
+  background-color: rgba($dark-gray, 0.1);
+  border-radius: $spacing-base;
+  overflow: hidden;
+  margin-inline: $spacing-small;
+
+  .progress {
+    height: 100%;
+    background-color: $gold;
+    transition: width 0.3s ease;
+    border-radius: inherit;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Action Buttons
+// -----------------------------------------------------------------------------
+
+.remove-file {
+  @include button-base;
+  background: none;
+  border: none;
+  color: $red;
+  padding: $spacing-base;
+  margin-left: $spacing-small;
+  border-radius: $spacing-base / 2;
+  line-height: 0;
+
+  &:hover {
+    background-color: rgba($red, 0.1);
+  }
+
+  &:focus {
+    @include focus-visible;
+  }
+
+  // Icon styling
+  svg {
+    width: 16px;
+    height: 16px;
+    fill: currentColor;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Status Messages
+// -----------------------------------------------------------------------------
+
+.upload-message {
+  @include body-text;
+  text-align: center;
+  color: $dark-gray;
+  margin-top: $spacing-small;
+
+  &.error {
+    color: $red;
+  }
+
+  &.success {
+    color: $green;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Accessibility Enhancements
+// -----------------------------------------------------------------------------
+
+@media (prefers-reduced-motion: reduce) {
+  .drop-zone,
+  .file-item,
+  .progress .progress-bar,
+  .remove-file {
+    transition: none;
+  }
+}
+
+// High contrast mode adjustments
+@media (forced-colors: active) {
+  .drop-zone {
+    border: 2px dashed CanvasText;
+  }
+
+  .progress-bar {
+    border: 1px solid CanvasText;
+  }
+}

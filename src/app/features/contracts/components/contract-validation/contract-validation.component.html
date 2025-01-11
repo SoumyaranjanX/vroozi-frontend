@@ -1,0 +1,248 @@
+<div class="validation-page">
+    <!-- Loading state -->
+    <div class="loading-overlay" *ngIf="isLoading">
+        <mat-spinner diameter="40"></mat-spinner>
+        <span class="loading-text">Loading contract data...</span>
+    </div>
+
+    <!-- Main content -->
+    <div class="validation-content" *ngIf="!isLoading">
+        <!-- Header section -->
+        <div class="validation-header">
+            <div class="header-left">
+                <button mat-icon-button (click)="navigateBack()" matTooltip="Back to contracts">
+                    <mat-icon>arrow_back</mat-icon>
+                </button>
+                <h1>Contract Validation</h1>
+            </div>
+            <div class="confidence-indicator" [ngClass]="getConfidenceClass()">
+                <mat-icon>{{ getConfidenceIcon() }}</mat-icon>
+                <span>OCR Confidence: {{ confidenceLevel | number:'1.0-2' }}%</span>
+            </div>
+        </div>
+
+        <div class="validation-container">
+            <!-- Document viewer section -->
+            <div class="document-section">
+                <div class="document-toolbar">
+                    <h2>Document Preview</h2>
+                    <div class="zoom-controls">
+                        <button mat-icon-button (click)="zoomOut()" [disabled]="zoomLevel <= minZoom">
+                            <mat-icon>zoom_out</mat-icon>
+                        </button>
+                        <span class="zoom-level">{{ (zoomLevel * 100) | number:'1.0-0' }}%</span>
+                        <button mat-icon-button (click)="zoomIn()" [disabled]="zoomLevel >= maxZoom">
+                            <mat-icon>zoom_in</mat-icon>
+                        </button>
+                        <button mat-icon-button (click)="resetZoom()">
+                            <mat-icon>zoom_out_map</mat-icon>
+                        </button>
+                    </div>
+                </div>
+                <div class="document-viewer" [style.transform]="'scale(' + zoomLevel + ')'">
+                    <ng-container *ngIf="documentUrl">
+                        <iframe [src]="documentUrl" title="Contract document viewer"></iframe>
+                    </ng-container>
+                    <div class="no-document" *ngIf="!documentUrl">
+                        <mat-icon>description</mat-icon>
+                        <p>No document preview available</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Validation form section -->
+            <div class="form-section">
+                <form [formGroup]="validationForm" (ngSubmit)="submitValidation()" class="validation-form">
+                    <h2>Contract Details</h2>
+                    
+                    <div class="form-grid">
+                        <!-- Contract Number -->
+                        <mat-form-field appearance="outline" floatLabel="always">
+                            <mat-label>Contract Number</mat-label>
+                            <input matInput formControlName="contract_number" required>
+                            <mat-error *ngIf="getFieldError('contract_number')">
+                                {{ getFieldError('contract_number') }}
+                            </mat-error>
+                        </mat-form-field>
+
+                        <!-- Total Value -->
+                        <mat-form-field appearance="outline" floatLabel="always">
+                            <mat-label>Total Value</mat-label>
+                            <input matInput type="number" formControlName="total_value" required>
+                            <span matPrefix>$&nbsp;</span>
+                            <mat-error *ngIf="getFieldError('total_value')">
+                                {{ getFieldError('total_value') }}
+                            </mat-error>
+                        </mat-form-field>
+
+                        <!-- Effective Date -->
+                        <mat-form-field appearance="outline" floatLabel="always">
+                            <mat-label>Effective Date</mat-label>
+                            <input matInput formControlName="effective_date" required>
+                            <mat-error *ngIf="getFieldError('effective_date')">
+                                {{ getFieldError('effective_date') }}
+                            </mat-error>
+                        </mat-form-field>
+
+                        <!-- Expiration Date -->
+                        <mat-form-field appearance="outline" floatLabel="always">
+                            <mat-label>Expiration Date</mat-label>
+                            <input matInput formControlName="expiration_date" required>
+                            <mat-error *ngIf="getFieldError('expiration_date')">
+                                {{ getFieldError('expiration_date') }}
+                            </mat-error>
+                        </mat-form-field>
+
+                        <!-- Payment Terms -->
+                        <mat-form-field appearance="outline" floatLabel="always" class="full-width">
+                            <mat-label>Payment Terms</mat-label>
+                            <textarea matInput formControlName="payment_terms" rows="3"></textarea>
+                        </mat-form-field>
+                    </div>
+
+                    <!-- Parties Section -->
+                    <div class="parties-section">
+                        <div class="section-header">
+                            <h3>Parties</h3>
+                            <button type="button" mat-stroked-button color="primary" (click)="addParty()">
+                                <mat-icon>add</mat-icon> Add Party
+                            </button>
+                        </div>
+
+                        <div class="parties-list" formArrayName="parties">
+                            <div *ngFor="let party of partiesFormArray.controls; let i = index" [formGroupName]="i" class="party-item">
+                                <div class="party-header">
+                                    <h4>Party {{ i + 1 }}</h4>
+                                    <button type="button" mat-icon-button color="warn" (click)="removeParty(i)" matTooltip="Remove Party">
+                                        <mat-icon>delete</mat-icon>
+                                    </button>
+                                </div>
+
+                                <div class="party-fields">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Name</mat-label>
+                                        <input matInput formControlName="name" required>
+                                        <mat-error *ngIf="getFieldError('parties.' + i + '.name')">
+                                            {{ getFieldError('parties.' + i + '.name') }}
+                                        </mat-error>
+                                    </mat-form-field>
+
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Role</mat-label>
+                                        <input matInput formControlName="role" required>
+                                        <mat-error *ngIf="getFieldError('parties.' + i + '.role')">
+                                            {{ getFieldError('parties.' + i + '.role') }}
+                                        </mat-error>
+                                    </mat-form-field>
+
+                                    <mat-form-field appearance="outline" class="full-width">
+                                        <mat-label>Address</mat-label>
+                                        <input matInput formControlName="address">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Items Section -->
+                    <div class="items-section">
+                        <div class="section-header">
+                            <h3>Items</h3>
+                            <button type="button" mat-stroked-button color="primary" (click)="addItem()">
+                                <mat-icon>add</mat-icon> Add Item
+                            </button>
+                        </div>
+
+                        <div class="items-list" formArrayName="items">
+                            <div *ngFor="let item of itemsFormArray.controls; let i = index" [formGroupName]="i" class="item-card">
+                                <div class="item-header">
+                                    <h4>Item {{ i + 1 }}</h4>
+                                    <button type="button" mat-icon-button color="warn" (click)="removeItem(i)" matTooltip="Remove Item">
+                                        <mat-icon>delete</mat-icon>
+                                    </button>
+                                </div>
+
+                                <div class="item-fields">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Name</mat-label>
+                                        <input matInput formControlName="name" required>
+                                        <mat-error *ngIf="getFieldError('items.' + i + '.name')">
+                                            {{ getFieldError('items.' + i + '.name') }}
+                                        </mat-error>
+                                    </mat-form-field>
+
+                                    <mat-form-field appearance="outline" class="full-width">
+                                        <mat-label>Description</mat-label>
+                                        <textarea matInput formControlName="description" required rows="2"></textarea>
+                                        <mat-error *ngIf="getFieldError('items.' + i + '.description')">
+                                            {{ getFieldError('items.' + i + '.description') }}
+                                        </mat-error>
+                                    </mat-form-field>
+
+                                    <div class="item-details">
+                                        <mat-form-field appearance="outline">
+                                            <mat-label>Quantity</mat-label>
+                                            <input matInput type="number" formControlName="quantity">
+                                        </mat-form-field>
+
+                                        <mat-form-field appearance="outline">
+                                            <mat-label>Unit Price</mat-label>
+                                            <input matInput type="number" formControlName="unit_price">
+                                            <span matPrefix>$&nbsp;</span>
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Form Actions -->
+                    <div class="form-actions">
+                        <div class="secondary-actions">
+                            <button type="button" mat-stroked-button (click)="cancelValidation()">
+                                <mat-icon>close</mat-icon> Cancel
+                            </button>
+                            <button type="button" mat-stroked-button color="warn" (click)="rejectContract()" [disabled]="isSubmitting">
+                                <mat-icon>block</mat-icon> Reject
+                            </button>
+                        </div>
+                        <button type="button" mat-stroked-button color="primary" (click)="saveChanges()" [disabled]="!validationForm.valid || isSubmitting">
+                            <mat-icon>save</mat-icon> Save Changes
+                        </button>
+                        <button type="submit" mat-flat-button color="primary" [disabled]="!validationForm.valid || isSubmitting">
+                            <mat-icon>check</mat-icon> Validate Contract
+                        </button>
+                    </div>
+
+                    <!-- Validation errors -->
+                    <div class="validation-errors" *ngIf="validationErrors.length > 0">
+                        <h3>Please fix the following errors:</h3>
+                        <ul>
+                            <li *ngFor="let error of validationErrors">{{ error }}</li>
+                        </ul>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Keyboard shortcuts overlay -->
+    <div class="keyboard-shortcuts-overlay" *ngIf="showKeyboardShortcuts">
+        <div class="keyboard-shortcuts">
+            <div class="shortcuts-header">
+                <h3>Keyboard Shortcuts</h3>
+                <button mat-icon-button (click)="toggleKeyboardShortcuts()">
+                    <mat-icon>close</mat-icon>
+                </button>
+            </div>
+            <ul>
+                <li><strong>{{ shortcuts.save }}</strong>: Save changes</li>
+                <li><strong>{{ shortcuts.cancel }}</strong>: Cancel validation</li>
+                <li><strong>{{ shortcuts.zoomIn }}</strong>: Zoom in</li>
+                <li><strong>{{ shortcuts.zoomOut }}</strong>: Zoom out</li>
+                <li><strong>{{ shortcuts.resetZoom }}</strong>: Reset zoom</li>
+                <li><strong>{{ shortcuts.toggleShortcuts }}</strong>: Toggle this help</li>
+            </ul>
+        </div>
+    </div>
+</div>

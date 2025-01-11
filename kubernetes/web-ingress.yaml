@@ -1,0 +1,99 @@
+# Frontend Web Application Ingress Configuration
+# API Version: networking.k8s.io/v1
+# Purpose: Production-grade ingress configuration with enhanced security and routing
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: web-ingress
+  namespace: default
+  labels:
+    app: contract-processing-web
+    environment: production
+    tier: frontend
+    managed-by: kubernetes
+  annotations:
+    # Ingress Controller Configuration
+    kubernetes.io/ingress.class: "nginx"
+    
+    # TLS/Certificate Management
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    cert-manager.io/renewal-check-period: "24h"
+    
+    # SSL Configuration
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/ssl-protocols: "TLSv1.3"
+    nginx.ingress.kubernetes.io/ssl-ciphers: "ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384"
+    
+    # Security Headers
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      more_set_headers "Strict-Transport-Security: max-age=31536000; includeSubDomains; preload";
+      more_set_headers "X-Frame-Options: DENY";
+      more_set_headers "X-Content-Type-Options: nosniff";
+      more_set_headers "X-XSS-Protection: 1; mode=block";
+      more_set_headers "Referrer-Policy: strict-origin-when-cross-origin";
+    
+    # CORS Configuration
+    nginx.ingress.kubernetes.io/enable-cors: "true"
+    nginx.ingress.kubernetes.io/cors-allow-methods: "GET, POST, PUT, DELETE, OPTIONS"
+    nginx.ingress.kubernetes.io/cors-allow-credentials: "true"
+    
+    # Load Balancing and Performance
+    nginx.ingress.kubernetes.io/proxy-body-size: "25m"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "300"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "300"
+    nginx.ingress.kubernetes.io/connection-proxy-header: "keep-alive"
+    nginx.ingress.kubernetes.io/load-balance: "ewma"
+    nginx.ingress.kubernetes.io/upstream-hash-by: "$remote_addr"
+    
+    # Rate Limiting
+    nginx.ingress.kubernetes.io/limit-rps: "1000"
+    nginx.ingress.kubernetes.io/limit-connections: "2000"
+
+spec:
+  # TLS Configuration
+  tls:
+    - hosts:
+        - app.contractprocessing.com
+      secretName: web-tls-cert
+  
+  # Routing Rules
+  rules:
+    - host: app.contractprocessing.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: web-service
+                port:
+                  number: 80
+
+---
+# Prometheus ServiceMonitor for Ingress Metrics
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: web-ingress-monitor
+  namespace: default
+  labels:
+    app: contract-processing-web
+    release: prometheus
+spec:
+  selector:
+    matchLabels:
+      app: contract-processing-web
+  endpoints:
+    - port: metrics
+      interval: 15s
+      path: /metrics
+  namespaceSelector:
+    matchNames:
+      - default
+  metrics:
+    - nginx_ingress_controller_requests
+    - nginx_ingress_controller_response_duration_seconds
+    - nginx_ingress_controller_response_size_bytes
+    - nginx_ingress_controller_connections
+    - nginx_ingress_controller_ssl_expire_time_seconds

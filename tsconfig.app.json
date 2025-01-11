@@ -1,0 +1,63 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "tsBuildInfoFile": "./dist/app/.tsbuildinfo",
+    "outDir": "./dist/app",
+    "types": [
+      "node"
+    ],
+    "sourceMap": true,
+    "incremental": true,
+    "paths": {
+      "@app/*": ["src/app/*"],
+      "@core/*": ["src/app/core/*"],
+      "@shared/*": ["src/app/shared/*"],
+      "@env/*": ["src/environments/*"],
+      "@store/*": ["src/app/store/*"],
+      "@features/*": ["src/app/features/*"],
+      "@assets/*": ["src/assets/*"]
+    },
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+    "importHelpers": true,
+    "noEmitOnError": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "removeComments": true,
+    "inlineSources": true,
+    "inlineSourceMap": false,
+    "downlevelIteration": true
+  },
+  "files": [
+    "src/main.ts",
+    "src/polyfills.ts"
+  ],
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.d.ts"
+  ],
+  "exclude": [
+    "src/**/*.spec.ts",
+    "src/**/*.test.ts",
+    "src/test.ts",
+    "src/**/__tests__/*",
+    "src/**/*.stories.ts",
+    "src/**/*.mock.ts"
+  ],
+  "angularCompilerOptions": {
+    "enableIvy": true,
+    "fullTemplateTypeCheck": true,
+    "strictInjectionParameters": true,
+    "strictTemplates": true,
+    "preserveWhitespaces": false,
+    "strictInputAccessModifiers": true,
+    "strictOutputEventTypes": true,
+    "strictDomEventTypes": true,
+    "strictAttributeTypes": true,
+    "strictSafeNavigationTypes": true,
+    "strictDomLocalRefTypes": true,
+    "strictLiteralTypes": true,
+    "enableResourceInlining": true,
+    "trace": false
+  }
+}

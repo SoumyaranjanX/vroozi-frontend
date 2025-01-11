@@ -1,0 +1,13 @@
+{
+  "/api": {
+    "target": "https://vroozi-backend-pz5d.onrender.com",
+    "secure": true,
+    "changeOrigin": true,
+    "followRedirects": true,
+    "logLevel": "debug",
+    "headers": {
+      "Origin": "http://localhost:4200"
+    },
+    "protocolRewrite": "https"
+  }
+} 

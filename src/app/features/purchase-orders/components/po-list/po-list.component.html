@@ -1,0 +1,126 @@
+<!-- Main container with ARIA landmarks -->
+<div class="po-list-container" role="main" aria-label="Purchase Orders List">
+  <div class="header">
+    <h1>Purchase Orders</h1>
+    <button mat-raised-button color="primary" [routerLink]="['/purchase-orders/new']">
+      <mat-icon>add</mat-icon>
+      New Purchase Order
+    </button>
+  </div>
+
+  <mat-card class="filter-section">
+    <mat-card-content>
+      <form [formGroup]="filterForm" class="filter-form">
+        <mat-form-field appearance="outline">
+          <mat-label>Contract ID</mat-label>
+          <input matInput formControlName="contract_id" placeholder="Enter Contract ID">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Status</mat-label>
+          <mat-select formControlName="status">
+            <mat-option value="">All</mat-option>
+            <mat-option value="ACTIVE">Active</mat-option>
+            <mat-option value="PENDING">Pending</mat-option>
+            <mat-option value="CANCELLED">Cancelled</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Date Range</mat-label>
+          <mat-date-range-input [rangePicker]="picker">
+            <input matStartDate placeholder="Start date" formControlName="start_date">
+            <input matEndDate placeholder="End date" formControlName="end_date">
+          </mat-date-range-input>
+          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-date-range-picker #picker></mat-date-range-picker>
+        </mat-form-field>
+      </form>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Loading Overlay -->
+  <div class="loading-overlay" *ngIf="loading">
+    <mat-spinner></mat-spinner>
+  </div>
+
+  <!-- Purchase Orders Table -->
+  <div class="table-container">
+    <table mat-table [dataSource]="dataSource" matSort class="po-table">
+      <!-- PO Number Column -->
+      <ng-container matColumnDef="po_number">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> PO Number </th>
+        <td mat-cell *matCellDef="let po"> {{po.po_number}} </td>
+      </ng-container>
+
+      <!-- Contract ID Column -->
+      <ng-container matColumnDef="contract_id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Contract ID </th>
+        <td mat-cell *matCellDef="let po"> {{po.contract_id}} </td>
+      </ng-container>
+
+      <!-- Amount Column -->
+      <ng-container matColumnDef="amount">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Amount </th>
+        <td mat-cell *matCellDef="let po"> {{formatAmount(po.amount)}} </td>
+      </ng-container>
+
+      <!-- Created At Column -->
+      <ng-container matColumnDef="created_at">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Created Date </th>
+        <td mat-cell *matCellDef="let po"> {{formatDate(po.created_at)}} </td>
+      </ng-container>
+
+      <!-- Actions Column -->
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>Actions</th>
+        <td mat-cell *matCellDef="let po">
+          <div class="action-buttons">
+            <!-- Preview button -->
+            <button mat-icon-button
+                    color="primary"
+                    (click)="previewPurchaseOrder(po); $event.stopPropagation()"
+                    [matTooltip]="'Preview Purchase Order'"
+                    aria-label="Preview purchase order">
+              <mat-icon>preview</mat-icon>
+            </button>
+
+            <!-- Send PO button -->
+            <button mat-icon-button
+                    color="accent"
+                    (click)="sendPurchaseOrder(po); $event.stopPropagation()"
+                    [matTooltip]="'Send Purchase Order'"
+                    aria-label="Send purchase order">
+              <mat-icon>send</mat-icon>
+            </button>
+
+            <!-- Print button -->
+            <button mat-icon-button
+                    color="primary"
+                    (click)="printPurchaseOrder(po); $event.stopPropagation()"
+                    [matTooltip]="'Print Purchase Order'"
+                    aria-label="Print purchase order">
+              <mat-icon>print</mat-icon>
+            </button>
+          </div>
+        </td>
+      </ng-container>
+
+      <!-- Empty state message -->
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="6">
+          <div class="empty-state">
+            <mat-icon>search</mat-icon>
+            <p>No purchase orders found</p>
+            <small *ngIf="filterForm.dirty">Try adjusting your filters</small>
+          </div>
+        </td>
+      </tr>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of purchase orders"></mat-paginator>
+  </div>
+</div>

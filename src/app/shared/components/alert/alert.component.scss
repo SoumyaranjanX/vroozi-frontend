@@ -1,0 +1,163 @@
+// Import design system variables and mixins
+@import '../../../../assets/styles/variables';
+@import '../../../../assets/styles/mixins';
+
+// Alert type-specific colors with semantic meaning
+$alert-colors: (
+  'success': $green,
+  'error': $red,
+  'warning': $gold,
+  'info': $blue
+);
+
+// Base alert container styles
+.alert {
+  display: flex;
+  align-items: center;
+  padding: $spacing-small;
+  border-radius: $border-radius;
+  margin-bottom: $spacing-small;
+  font-size: $font-size-body;
+  font-family: $font-family-primary;
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  box-sizing: border-box;
+  animation: fade-in 0.2s ease-in-out;
+  transition: opacity $transition-duration ease-in-out;
+
+  // Generate alert type variations
+  @each $type, $color in $alert-colors {
+    &.alert-#{$type} {
+      background-color: rgba($color, 0.1);
+      border: 1px solid rgba($color, 0.2);
+      color: darken($color, 10%);
+
+      .alert-icon {
+        color: $color;
+      }
+    }
+  }
+
+  // Print styles - hide alerts when printing
+  @media print {
+    display: none;
+  }
+
+  // Responsive styles for mobile devices
+  @include mobile {
+    padding: ($spacing-small / 2);
+    margin-bottom: ($spacing-small / 2);
+    font-size: 14px;
+    max-width: 100%;
+  }
+
+  // Respect user's motion preferences
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+    transition: none;
+  }
+
+  // Dark mode support
+  @media (prefers-color-scheme: dark) {
+    background-color: rgba($white, 0.05);
+    border-color: rgba($white, 0.1);
+  }
+}
+
+// Alert content container
+.alert-content {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: $spacing-small;
+  margin-inline-end: $spacing-small;
+  word-break: break-word;
+  min-width: 0;
+
+  // RTL support
+  @include rtl {
+    margin-inline-end: 0;
+    margin-inline-start: $spacing-small;
+  }
+
+  // Responsive styles
+  @include mobile {
+    gap: ($spacing-small / 2);
+  }
+}
+
+// Alert icon styles
+.alert-icon {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  aria-hidden: true;
+}
+
+// Close button styles
+.alert-close {
+  background: transparent;
+  border: none;
+  padding: 4px;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity $transition-duration ease-in-out;
+  touch-action: manipulation;
+  color: currentColor;
+
+  // Enhanced focus styles for accessibility
+  &:focus {
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
+  }
+
+  // Hover state
+  &:hover {
+    opacity: 1;
+  }
+
+  // Touch device optimization
+  @media (hover: none) {
+    padding: 8px;
+  }
+}
+
+// Animation keyframes
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// High contrast mode support
+@media (forced-colors: active) {
+  .alert {
+    border: 2px solid currentColor;
+  }
+  
+  .alert-close {
+    border: 1px solid currentColor;
+  }
+}
+
+// Screen reader only text
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

@@ -1,0 +1,296 @@
+@use "sass:math";
+
+// =============================================================================
+// Core SCSS Mixins
+// Contract Processing System Frontend
+// Version: 1.0.0
+// =============================================================================
+
+@import 'variables';
+
+// -----------------------------------------------------------------------------
+// Functions
+// -----------------------------------------------------------------------------
+
+@function calculate-rem($pixel-value) {
+  @return #{math.div($pixel-value, $font-size-base)}rem;
+}
+
+// -----------------------------------------------------------------------------
+// Responsive Design Mixins
+// Breakpoint implementations based on design specifications
+// -----------------------------------------------------------------------------
+
+@mixin mobile {
+  @media screen and (min-width: #{$breakpoint-mobile}) and (max-width: #{$breakpoint-mobile-max}) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media screen and (min-width: #{$breakpoint-tablet}) and (max-width: #{$breakpoint-tablet-max}) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media screen and (min-width: #{$breakpoint-desktop}) and (max-width: #{$breakpoint-desktop-max}) {
+    @content;
+  }
+}
+
+@mixin large-screen {
+  @media screen and (min-width: #{$breakpoint-large}) {
+    @content;
+  }
+}
+
+@mixin retina {
+  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    @content;
+  }
+}
+
+@mixin print {
+  @media print {
+    @content;
+  }
+}
+
+@mixin landscape {
+  @media screen and (orientation: landscape) {
+    @content;
+  }
+}
+
+@mixin portrait {
+  @media screen and (orientation: portrait) {
+    @content;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Layout Mixins
+// Core layout patterns for consistent component styling
+// -----------------------------------------------------------------------------
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin grid-container($columns: 12, $gap: $grid-gutter) {
+  display: grid;
+  grid-template-columns: repeat($columns, 1fr);
+  gap: $gap;
+}
+
+@mixin card-shadow {
+  box-shadow: 0 2px 4px rgba($dark-gray, 0.1);
+  transition: box-shadow 0.3s ease;
+
+  &:hover {
+    box-shadow: 0 4px 8px rgba($dark-gray, 0.15);
+  }
+}
+
+@mixin container-width($padding: $spacing-medium) {
+  width: 100%;
+  max-width: $container-max-width;
+  margin: 0 auto;
+  padding-left: $padding;
+  padding-right: $padding;
+}
+
+@mixin z-index($level) {
+  @if $level == 'dropdown' {
+    z-index: $z-index-dropdown;
+  } @else if $level == 'modal' {
+    z-index: $z-index-modal;
+  } @else if $level == 'overlay' {
+    z-index: $z-index-overlay;
+  }
+}
+
+@mixin focus-visible {
+  &:focus-visible {
+    outline: 2px solid $blue;
+    outline-offset: 2px;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Typography Mixins
+// Text styling patterns for consistent typography
+// -----------------------------------------------------------------------------
+
+@mixin heading-styles($level) {
+  font-family: $font-family-primary;
+  font-weight: $font-weight-bold;
+  
+  @if $level == 1 {
+    font-size: calculate-rem($font-size-h1);
+    line-height: 1.2;
+  } @else if $level == 2 {
+    font-size: calculate-rem($font-size-h2);
+    line-height: 1.3;
+  } @else if $level == 3 {
+    font-size: calculate-rem($font-size-h3);
+    line-height: 1.4;
+  } @else if $level == 4 {
+    font-size: calculate-rem($font-size-h4);
+    line-height: 1.5;
+  }
+}
+
+@mixin body-text($size: 'regular') {
+  font-family: $font-family-primary;
+  
+  @if $size == 'regular' {
+    font-size: calculate-rem($font-size-body);
+    line-height: 1.5;
+  } @else if $size == 'small' {
+    font-size: calculate-rem($font-size-small);
+    line-height: 1.4;
+  }
+}
+
+@mixin truncate-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@mixin multi-line-truncate($lines: 2) {
+  display: -webkit-box;
+  -webkit-line-clamp: $lines;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+@mixin line-height($multiplier) {
+  line-height: $multiplier;
+}
+
+@mixin letter-spacing($value) {
+  letter-spacing: #{$value}px;
+}
+
+// -----------------------------------------------------------------------------
+// Component Styling Mixins
+// Reusable patterns for consistent component styling
+// -----------------------------------------------------------------------------
+
+@mixin button-base {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: spacing(1.5) spacing(3);
+  border-radius: 4px;
+  font-weight: $font-weight-medium;
+  transition: all 0.2s ease;
+  cursor: pointer;
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+@mixin form-input {
+  width: 100%;
+  padding: spacing(1.5);
+  border: 1px solid rgba($dark-gray, 0.2);
+  border-radius: 4px;
+  font-family: $font-family-primary;
+  font-size: calculate-rem($font-size-body);
+  transition: border-color 0.2s ease;
+
+  &:focus {
+    border-color: $blue;
+    outline: none;
+  }
+
+  &::placeholder {
+    color: rgba($dark-gray, 0.5);
+  }
+}
+
+@mixin scrollbar {
+  &::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: rgba($dark-gray, 0.1);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgba($dark-gray, 0.3);
+    border-radius: 4px;
+
+    &:hover {
+      background: rgba($dark-gray, 0.4);
+    }
+  }
+}
+
+// Theme transition mixin
+@mixin theme-transition {
+  transition: 
+    background-color 0.3s ease-in-out,
+    color 0.3s ease-in-out,
+    border-color 0.3s ease-in-out,
+    box-shadow 0.3s ease-in-out;
+}
+
+// Print styles mixin
+@mixin print-styles {
+  @media print {
+    .no-print {
+      display: none !important;
+    }
+    
+    body {
+      margin: 0;
+      padding: 0;
+      background: white;
+    }
+    
+    a {
+      text-decoration: none;
+      color: black;
+    }
+    
+    .page-break {
+      page-break-before: always;
+    }
+  }
+}
+
+// Add missing mixins
+@mixin rtl-support {
+  [dir="rtl"] & {
+    @content;
+  }
+}
+
+@mixin theme-aware-shadow {
+  box-shadow: 0 2px 4px rgba($dark-gray, 0.1);
+  transition: box-shadow 0.3s ease;
+}
+
+@mixin gpu-accelerate {
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+@mixin absolute-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

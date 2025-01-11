@@ -1,0 +1,207 @@
+<!-- Main dashboard container with accessibility role and label -->
+<main class="dashboard-container" role="main" aria-label="Contract Processing Dashboard">
+  <!-- Dashboard Header -->
+  <div class="dashboard-header">
+    <h1>Dashboard Overview</h1>
+    <!-- Quick Actions -->
+    <div class="header-actions">
+      <!-- Upload Contract button -->
+      <button mat-raised-button 
+              color="primary"
+              routerLink="/contracts/upload"
+              aria-label="Upload new contract">
+        <mat-icon>upload_file</mat-icon>
+        Upload Contract
+      </button>
+
+      <!-- Create PO button -->
+      <button mat-raised-button 
+              color="accent"
+              routerLink="/purchase-orders/generate"
+              aria-label="Create new purchase order">
+        <mat-icon>note_add</mat-icon>
+        Create PO
+      </button>
+    </div>
+  </div>
+
+  <!-- Metrics grid section -->
+  <mat-grid-list class="metrics-grid" 
+                 [cols]="gridCols$ | async" 
+                 rowHeight="180px" 
+                 gutterSize="24px"
+                 role="region"
+                 aria-label="Dashboard Metrics">
+    
+    <!-- Active Contracts metric card -->
+    <mat-grid-tile>
+      <app-stats-card
+        title="Active Contracts"
+        [count]="metrics.activeContracts"
+        icon="description"
+        color="#ebb502"
+        [loading]="loading"
+        [error]="error"
+        aria-label="Active contracts statistics">
+      </app-stats-card>
+    </mat-grid-tile>
+
+    <!-- Processing Queue metric card -->
+    <mat-grid-tile>
+      <app-stats-card
+        title="Processing Queue"
+        [count]="metrics.processingQueue"
+        icon="pending"
+        color="#037fff"
+        [loading]="loading"
+        [error]="error"
+        aria-label="Processing queue statistics">
+      </app-stats-card>
+    </mat-grid-tile>
+
+    <!-- Pending Review metric card -->
+    <mat-grid-tile>
+      <app-stats-card
+        title="Pending Review"
+        [count]="metrics.pendingReview"
+        icon="rate_review"
+        color="#dc3545"
+        [loading]="loading"
+        [error]="error"
+        aria-label="Pending review statistics">
+      </app-stats-card>
+    </mat-grid-tile>
+
+    <!-- POs Generated metric card -->
+    <mat-grid-tile>
+      <app-stats-card
+        title="POs Generated"
+        [count]="metrics.posGenerated"
+        icon="assignment_turned_in"
+        color="#28a745"
+        [loading]="loading"
+        [error]="error"
+        aria-label="Purchase orders generated statistics">
+      </app-stats-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+
+  <!-- Recent Activity section -->
+  <section class="activity-section" 
+           role="complementary" 
+           aria-label="Recent Activity">
+    <div class="section-header">
+      <h2>Recent Activity</h2>
+    </div>
+    <app-recent-activity></app-recent-activity>
+  </section>
+</main>
+
+<!-- Loading overlay -->
+<div class="loading-overlay" *ngIf="loading" aria-live="polite">
+  <mat-spinner diameter="48" aria-label="Loading dashboard data"></mat-spinner>
+  <span class="visually-hidden">Loading dashboard data</span>
+</div>
+
+<!-- Error message -->
+<div class="error-message" 
+     *ngIf="error" 
+     role="alert" 
+     aria-live="assertive">
+  <mat-icon color="warn">error</mat-icon>
+  <span>Failed to load dashboard data. Please try again later.</span>
+</div>
+
+<!-- CSS will be in a separate SCSS file -->
+<style>
+  .dashboard-container {
+    display: grid;
+    grid-template-rows: auto auto auto;
+    gap: 24px;
+    padding: 24px;
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  .metrics-grid {
+    width: 100%;
+  }
+
+  .activity-section {
+    background: white;
+    border-radius: 4px;
+    padding: 24px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+
+  .quick-actions {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255,255,255,0.8);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+  }
+
+  .error-message {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 16px;
+    background: #fde7e9;
+    border-radius: 4px;
+    color: #dc3545;
+    margin-bottom: 24px;
+  }
+
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    border: 0;
+  }
+
+  /* Responsive breakpoints */
+  @media (max-width: 767px) {
+    .dashboard-container {
+      padding: 16px;
+    }
+    
+    .quick-actions {
+      flex-direction: column;
+    }
+  }
+
+  @media (min-width: 768px) and (max-width: 1023px) {
+    .dashboard-container {
+      max-width: 768px;
+    }
+  }
+
+  @media (min-width: 1024px) and (max-width: 1439px) {
+    .dashboard-container {
+      max-width: 1024px;
+    }
+  }
+
+  @media (min-width: 1440px) {
+    .dashboard-container {
+      max-width: 1440px;
+    }
+  }
+</style>

@@ -1,0 +1,35 @@
+{
+  "COMMON": {
+    "LOADING": "Loading...",
+    "ERROR": "Error",
+    "SUCCESS": "Success",
+    "SAVE": "Save",
+    "CANCEL": "Cancel",
+    "DELETE": "Delete",
+    "EDIT": "Edit",
+    "CLOSE": "Close"
+  },
+  "AUTH": {
+    "LOGIN": "Login",
+    "LOGOUT": "Logout",
+    "EMAIL": "Email",
+    "PASSWORD": "Password",
+    "REMEMBER_ME": "Remember me",
+    "FORGOT_PASSWORD": "Forgot password?",
+    "LOGIN_ERROR": "Invalid email or password"
+  },
+  "ERROR": {
+    "GENERAL": "An error occurred: {{message}}",
+    "CLIENT_SIDE": "Client error: {{message}}",
+    "UNAUTHORIZED": "Please log in to continue",
+    "FORBIDDEN": "You don't have permission to access this resource",
+    "NOT_FOUND": "Resource not found",
+    "SERVER_ERROR": "Server error occurred",
+    "VALIDATION": "Validation error occurred",
+    "UNKNOWN": "Unknown error occurred ({{status}})"
+  },
+  "LOADING": {
+    "PLEASE_WAIT": "Please wait...",
+    "PROCESSING": "Processing your request..."
+  }
+} 

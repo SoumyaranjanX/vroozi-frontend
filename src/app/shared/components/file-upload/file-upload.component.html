@@ -1,0 +1,80 @@
+<!-- Main upload container with ARIA region -->
+<div class="file-upload-container" 
+     [class.drag-over]="dragOver"
+     (dragover)="onDragOver($event)"
+     (dragleave)="onDragLeave($event)"
+     (drop)="onDrop($event)">
+
+  <!-- Hidden file input -->
+  <input type="file" 
+         #fileInput
+         [accept]="accept"
+         [multiple]="multiple"
+         (change)="onFileSelected($event)"
+         class="sr-only"
+         aria-label="Choose files to upload">
+
+  <!-- Upload area -->
+  <div class="upload-area"
+       [class.dragging]="dragOver"
+       [class.uploading]="uploading"
+       role="button"
+       tabindex="0"
+       (click)="triggerFileInput()"
+       (keydown.enter)="triggerFileInput()"
+       (keydown.space)="triggerFileInput()">
+
+    <mat-icon class="upload-icon" aria-hidden="true">
+      cloud_upload
+    </mat-icon>
+
+    <div class="upload-text">
+      <span class="primary-text">
+        Drag and drop files here or click to select
+      </span>
+      <span class="secondary-text">
+        Supported formats: {{allowedTypes.join(', ') || accept}}
+      </span>
+      <span class="size-limit">
+        Maximum file size: {{formatFileSize(maxFileSize)}}
+      </span>
+    </div>
+  </div>
+
+  <!-- File list -->
+  <div class="file-list" *ngIf="files.length > 0" role="list">
+    <div class="file-item" *ngFor="let file of files; let i = index" role="listitem">
+      <div class="file-info">
+        <mat-icon aria-hidden="true">insert_drive_file</mat-icon>
+        <span class="file-name" [title]="file.name">{{file.name}}</span>
+        <span class="file-size">({{formatFileSize(file.size)}})</span>
+      </div>
+
+      <div class="file-actions">
+        <button mat-icon-button
+                type="button"
+                color="warn"
+                (click)="removeFile(i)"
+                aria-label="Remove file">
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Upload progress -->
+  <div class="upload-progress" *ngIf="uploading">
+    <mat-progress-bar
+      [value]="uploadProgressValue"
+      [mode]="'determinate'"
+      [color]="'primary'"
+      aria-label="Upload progress">
+    </mat-progress-bar>
+    <span class="progress-text">{{uploadProgressValue}}% Complete</span>
+  </div>
+
+  <!-- Status text for screen readers -->
+  <div class="sr-only" role="status" aria-live="polite">
+    {{getStatusText(status)}}
+  </div>
+</div>

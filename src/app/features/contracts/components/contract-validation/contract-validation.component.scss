@@ -1,0 +1,475 @@
+@import '../../../../../assets/styles/variables';
+@import '../../../../../assets/styles/mixins';
+
+.validation-page {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: #f5f5f5;
+}
+
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.9);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+
+    .loading-text {
+        margin-top: 16px;
+        font-size: 16px;
+        color: rgba(0, 0, 0, 0.87);
+    }
+}
+
+.validation-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.validation-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 24px;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+    .header-left {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+
+        h1 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: 500;
+        }
+    }
+
+    .confidence-indicator {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 16px;
+        border-radius: 20px;
+        font-weight: 500;
+
+        &.high {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        &.medium {
+            background-color: #fff3e0;
+            color: #f57c00;
+        }
+
+        &.low {
+            background-color: #ffebee;
+            color: #c62828;
+        }
+
+        mat-icon {
+            font-size: 20px;
+            height: 20px;
+            width: 20px;
+        }
+    }
+}
+
+.validation-container {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 480px;
+    gap: 24px;
+    padding: 24px;
+    overflow: hidden;
+    height: calc(100vh - 80px);
+}
+
+.document-section {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.document-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    border-bottom: 1px solid #e0e0e0;
+    background-color: white;
+
+    h2 {
+        margin: 0;
+        font-size: 18px;
+        font-weight: 500;
+    }
+
+    .zoom-controls {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+
+        .zoom-level {
+            min-width: 48px;
+            text-align: center;
+            font-size: 14px;
+            color: rgba(0, 0, 0, 0.6);
+        }
+    }
+}
+
+.document-viewer {
+    flex: 1;
+    position: relative;
+    overflow: auto;
+    background-color: #f5f5f5;
+    transition: transform 0.2s ease;
+
+    iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+        background: white;
+    }
+
+    .no-document {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        color: rgba(0, 0, 0, 0.38);
+
+        mat-icon {
+            font-size: 48px;
+            height: 48px;
+            width: 48px;
+            margin-bottom: 16px;
+        }
+    }
+}
+
+.form-section {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    max-height: 100%;
+}
+
+.validation-form {
+    padding: 24px;
+    overflow-y: auto;
+    flex: 1;
+
+    h2 {
+        margin: 0 0 24px;
+        font-size: 18px;
+        font-weight: 500;
+        color: rgba(0, 0, 0, 0.87);
+    }
+
+    .form-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 16px;
+        margin-bottom: 24px;
+
+        .full-width {
+            grid-column: 1 / -1;
+        }
+
+        .total-value-group {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 16px;
+        }
+    }
+}
+
+.parties-section {
+    margin-top: 24px;
+    padding-top: 24px;
+    border-top: 1px solid #e0e0e0;
+
+    .section-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 16px;
+
+        h3 {
+            margin: 0;
+            font-size: 16px;
+            font-weight: 500;
+            color: rgba(0, 0, 0, 0.87);
+        }
+    }
+
+    .parties-list {
+        display: grid;
+        gap: 16px;
+    }
+
+    .party-item {
+        background-color: #f8f9fa;
+        border-radius: 8px;
+        padding: 16px;
+        border: 1px solid #e0e0e0;
+
+        .party-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+
+            h4 {
+                margin: 0;
+                font-size: 14px;
+                font-weight: 500;
+                color: rgba(0, 0, 0, 0.87);
+            }
+        }
+
+        .party-fields {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+
+            .full-width {
+                grid-column: 1 / -1;
+            }
+        }
+    }
+}
+
+.form-actions {
+    position: sticky;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px 24px;
+    background-color: white;
+    border-top: 1px solid #e0e0e0;
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.05);
+    z-index: 10;
+
+    .secondary-actions {
+        display: flex;
+        gap: 12px;
+    }
+
+    button {
+        height: 36px;
+        border-radius: 4px;
+        font-weight: 500;
+        font-size: 13px;
+        transition: all 0.2s ease;
+        
+        &[mat-stroked-button] {
+            background: white;
+            
+            // Cancel & Reject buttons
+            &:not([color]), &[color="warn"] {
+                flex: 1;  // Make them equal width
+                min-width: 0;  // Allow shrinking
+            }
+            
+            // Cancel button
+            &:not([color]) {
+                border: none;
+                color: #5f6368;
+                
+                &:hover {
+                    background-color: #f1f3f4;
+                }
+            }
+            
+            // Reject button
+            &[color="warn"] {
+                border: 1px solid #d93025;
+                color: #d93025;
+                
+                &:hover {
+                    background-color: #fce8e6;
+                }
+            }
+            
+            // Save button
+            &[color="primary"] {
+                width: 100%;
+                border: 1px solid #1a73e8;
+                color: #1a73e8;
+                
+                &:hover {
+                    background-color: #e8f0fe;
+                }
+            }
+
+            &:disabled {
+                background-color: white !important;
+                border-color: #dadce0 !important;
+                color: rgba(0, 0, 0, 0.38) !important;
+            }
+        }
+        
+        // Validate button
+        &[mat-flat-button][color="primary"] {
+            width: 100%;
+            background-color: #1a73e8;
+            color: white;
+            border: none;
+            
+            &:hover {
+                background-color: #1557b0;
+            }
+
+            &:disabled {
+                background-color: rgba(0, 0, 0, 0.12) !important;
+                color: rgba(0, 0, 0, 0.38) !important;
+            }
+        }
+        
+        mat-icon {
+            font-size: 18px;
+            height: 18px;
+            width: 18px;
+            margin-right: 6px;
+            vertical-align: text-bottom;
+        }
+
+        &:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+    }
+}
+
+.validation-errors {
+    margin-top: 16px;
+    padding: 16px;
+    background-color: #ffebee;
+    border-radius: 4px;
+    border: 1px solid #ffcdd2;
+
+    h3 {
+        margin: 0 0 8px;
+        font-size: 14px;
+        font-weight: 500;
+        color: #c62828;
+    }
+
+    ul {
+        margin: 0;
+        padding-left: 24px;
+        color: #c62828;
+        font-size: 14px;
+    }
+}
+
+:host ::ng-deep {
+    .mat-form-field-appearance-outline {
+        .mat-form-field-wrapper {
+            margin: 0 !important;
+            padding-bottom: 0 !important;
+        }
+        
+        .mat-form-field-flex {
+            background-color: white;
+        }
+    }
+}
+
+.items-section {
+    margin-top: 24px;
+    padding-top: 24px;
+    border-top: 1px solid #e0e0e0;
+
+    .section-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 16px;
+
+        h3 {
+            margin: 0;
+            font-size: 16px;
+            font-weight: 500;
+            color: rgba(0, 0, 0, 0.87);
+        }
+    }
+
+    .items-list {
+        display: grid;
+        gap: 16px;
+    }
+
+    .item-card {
+        background-color: #f8f9fa;
+        border-radius: 8px;
+        padding: 16px;
+        border: 1px solid #e0e0e0;
+
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+
+            h4 {
+                margin: 0;
+                font-size: 14px;
+                font-weight: 500;
+                color: rgba(0, 0, 0, 0.87);
+            }
+        }
+
+        .item-fields {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+
+            .full-width {
+                grid-column: 1 / -1;
+            }
+
+            .item-details {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 16px;
+            }
+        }
+    }
+}
+
+// Update form grid for better layout
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+
+    .full-width {
+        grid-column: 1 / -1;
+    }
+} 

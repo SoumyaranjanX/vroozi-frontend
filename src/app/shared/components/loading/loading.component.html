@@ -1,0 +1,45 @@
+<!-- 
+  Loading Component Template
+  Provides visual feedback during async operations with enhanced accessibility
+  Version: 1.0.0
+-->
+
+<div 
+  *ngIf="isLoading"
+  class="loading-container"
+  role="alert"
+  aria-live="assertive"
+  aria-label="Loading in progress"
+  tabindex="-1"
+>
+  <!-- 
+    Semi-transparent overlay that covers the entire viewport
+    Uses SCSS variables for consistent styling and z-indexing
+  -->
+  <div 
+    class="loading-overlay"
+    aria-hidden="true"
+  ></div>
+
+  <!-- 
+    Animated spinner with ARIA attributes for accessibility
+    Uses brand colors from design system variables
+  -->
+  <div 
+    class="spinner"
+    role="progressbar"
+    aria-valuemin="0"
+    aria-valuemax="100"
+    aria-valuenow="50"
+    aria-busy="true"
+    aria-label="Content is loading"
+  ></div>
+
+  <!-- 
+    Screen reader text for enhanced accessibility
+    Visually hidden but available to assistive technologies
+  -->
+  <span class="sr-loading-text">
+    Please wait while content is loading
+  </span>
+</div>

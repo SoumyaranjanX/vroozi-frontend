@@ -1,0 +1,164 @@
+# Frontend Web Application Deployment Configuration
+# API Version: apps/v1
+# Purpose: Production deployment configuration for Angular frontend with enhanced HA and security
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-deployment
+  namespace: default
+  labels:
+    app: contract-processing-web
+    environment: production
+    tier: frontend
+  annotations:
+    kubernetes.io/change-cause: "Production deployment with enhanced HA"
+    prometheus.io/scrape: "true"
+    prometheus.io/port: "80"
+    prometheus.io/path: "/metrics"
+    seccomp.security.alpha.kubernetes.io/pod: "runtime/default"
+    container.apparmor.security.beta.kubernetes.io/web: "runtime/default"
+
+spec:
+  # High availability with 5 replicas as per requirements
+  replicas: 5
+  
+  # Rolling update strategy for zero-downtime deployments
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 2
+      maxUnavailable: 0
+  
+  # Pod selector matching service labels
+  selector:
+    matchLabels:
+      app: contract-processing-web
+      tier: frontend
+  
+  template:
+    metadata:
+      labels:
+        app: contract-processing-web
+        tier: frontend
+    
+    spec:
+      # Pod anti-affinity for high availability
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: app
+                  operator: In
+                  values:
+                  - contract-processing-web
+              topologyKey: kubernetes.io/hostname
+
+      # Enhanced security context
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        fsGroup: 2000
+        seccompProfile:
+          type: RuntimeDefault
+
+      containers:
+      - name: web
+        image: contract-processing/web:latest
+        imagePullPolicy: Always
+        
+        # Container port configuration
+        ports:
+        - containerPort: 80
+          protocol: TCP
+        
+        # Resource limits and requests
+        resources:
+          requests:
+            cpu: "200m"
+            memory: "512Mi"
+          limits:
+            cpu: "750m"
+            memory: "1Gi"
+        
+        # Environment configuration from ConfigMap
+        envFrom:
+        - configMapRef:
+            name: web-config
+        
+        # Liveness probe for container health
+        livenessProbe:
+          httpGet:
+            path: /health/live
+            port: 80
+          initialDelaySeconds: 30
+          periodSeconds: 15
+          timeoutSeconds: 5
+          failureThreshold: 3
+        
+        # Readiness probe for service availability
+        readinessProbe:
+          httpGet:
+            path: /health/ready
+            port: 80
+          initialDelaySeconds: 5
+          periodSeconds: 10
+          timeoutSeconds: 5
+          successThreshold: 1
+          failureThreshold: 3
+        
+        # Startup probe for initialization
+        startupProbe:
+          httpGet:
+            path: /health/startup
+            port: 80
+          initialDelaySeconds: 10
+          periodSeconds: 5
+          failureThreshold: 30
+        
+        # Volume mounts for configuration
+        volumeMounts:
+        - name: nginx-config
+          mountPath: /etc/nginx/nginx.conf
+          subPath: nginx.conf
+        - name: tmp-volume
+          mountPath: /tmp
+        
+        # Security context for container
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          capabilities:
+            drop:
+            - ALL
+            add:
+            - NET_BIND_SERVICE
+
+      # Volumes configuration
+      volumes:
+      - name: nginx-config
+        configMap:
+          name: web-config
+          items:
+          - key: nginx.conf
+            path: nginx.conf
+      - name: tmp-volume
+        emptyDir: {}
+
+      # Pod termination grace period
+      terminationGracePeriodSeconds: 60
+
+      # Node selector for production workloads
+      nodeSelector:
+        type: frontend
+        environment: production
+
+      # Tolerations for node taints
+      tolerations:
+      - key: "frontend"
+        operator: "Equal"
+        value: "true"
+        effect: "NoSchedule"

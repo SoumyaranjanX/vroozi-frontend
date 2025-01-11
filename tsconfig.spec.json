@@ -1,0 +1,30 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "incremental": true,
+    "tsBuildInfoFile": "./dist/spec/.tsbuildinfo",
+    /* Output Configuration */
+    "outDir": "./dist/spec",
+    "sourceMap": true,
+
+    /* Module Resolution */
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    
+    /* Decorators */
+    "emitDecoratorMetadata": true,
+    
+    /* Testing Types */
+    "types": [
+      "jasmine",
+      "node",
+      "jest"
+    ]
+  },
+  "include": [
+    "src/**/*.spec.ts",
+    "src/**/*.test.ts",
+    "src/**/*.d.ts",
+    "src/test.ts"
+  ]
+}

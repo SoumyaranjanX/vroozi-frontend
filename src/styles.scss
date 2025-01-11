@@ -1,0 +1,256 @@
+// =============================================================================
+// Global Stylesheet
+// Contract Processing System Frontend
+// Version: 1.0.0
+// =============================================================================
+
+// -----------------------------------------------------------------------------
+// External Dependencies
+// -----------------------------------------------------------------------------
+
+// Angular Material Theme - v15.0.0
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+
+// Modern CSS Reset - v2.0.0
+@import 'modern-normalize';
+
+// -----------------------------------------------------------------------------
+// Internal Dependencies
+// -----------------------------------------------------------------------------
+
+@import 'assets/styles/variables';
+@import 'assets/styles/mixins';
+@import 'assets/styles/themes';
+
+// -----------------------------------------------------------------------------
+// Root Configuration
+// -----------------------------------------------------------------------------
+
+:root {
+  font-size: $font-size-base;
+  --transition-speed: 0.3s;
+  
+  @include theme-transition;
+  @include apply-theme('light');
+}
+
+// -----------------------------------------------------------------------------
+// Global Reset and Base Styles
+// -----------------------------------------------------------------------------
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  font-family: $font-family-primary;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  line-height: 1.5;
+  overflow-x: hidden;
+  
+  &.loading {
+    cursor: wait;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Typography System
+// -----------------------------------------------------------------------------
+
+h1, h2, h3, h4, h5, h6 {
+  @include heading-styles(1);
+  margin-bottom: spacing(2);
+}
+
+h1 { @include heading-styles(1); }
+h2 { @include heading-styles(2); }
+h3 { @include heading-styles(3); }
+h4 { @include heading-styles(4); }
+
+p {
+  @include body-text('regular');
+  margin-bottom: spacing(2);
+}
+
+small {
+  @include body-text('small');
+}
+
+// -----------------------------------------------------------------------------
+// Layout Containers
+// -----------------------------------------------------------------------------
+
+.container {
+  @include container-width;
+  container-type: inline-size;
+  container-name: main;
+
+  @include mobile {
+    padding-left: $spacing-small;
+    padding-right: $spacing-small;
+  }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: $spacing-base;
+  container-type: inline-size;
+
+  @include mobile {
+    grid-template-columns: 1fr;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Accessibility Utilities
+// -----------------------------------------------------------------------------
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+
+  &:focus {
+    position: fixed;
+    top: $spacing-small;
+    left: $spacing-small;
+    z-index: $z-index-overlay;
+    width: auto;
+    height: auto;
+    padding: $spacing-small;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    outline: 2px solid var(--accent-color);
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Angular Material Theme Customization
+// -----------------------------------------------------------------------------
+
+.mat-typography {
+  font-family: $font-family-primary;
+}
+
+.mat-button, .mat-raised-button, .mat-flat-button {
+  font-family: $font-family-primary;
+  font-weight: $font-weight-medium;
+}
+
+// -----------------------------------------------------------------------------
+// Print Styles
+// -----------------------------------------------------------------------------
+
+@media print {
+  body {
+    background: white;
+    color: black;
+    font-size: 12pt;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  a[href]::after {
+    content: " (" attr(href) ")";
+  }
+
+  @page {
+    margin: 2cm;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// RTL Support
+// -----------------------------------------------------------------------------
+
+[dir="rtl"] {
+  .container {
+    direction: rtl;
+  }
+
+  .mat-icon {
+    transform: scaleX(-1);
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Reduced Motion
+// -----------------------------------------------------------------------------
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Enhanced Focus Styles
+// -----------------------------------------------------------------------------
+
+:focus {
+  @include focus-visible;
+}
+
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+// -----------------------------------------------------------------------------
+// Scrollbar Styling
+// -----------------------------------------------------------------------------
+
+* {
+  @include scrollbar;
+}
+
+// -----------------------------------------------------------------------------
+// High Contrast Mode Support
+// -----------------------------------------------------------------------------
+
+@media (forced-colors: active) {
+  * {
+    border-color: CanvasText;
+  }
+
+  :focus {
+    outline: 2px solid CanvasText;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Container Queries
+// -----------------------------------------------------------------------------
+
+@container main (min-width: 50em) {
+  .grid {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+}
+
+@container main (min-width: 80em) {
+  .grid {
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  }
+}

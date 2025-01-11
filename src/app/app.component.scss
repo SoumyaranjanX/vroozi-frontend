@@ -1,0 +1,194 @@
+// =============================================================================
+// Root Application Component Styles
+// Contract Processing System Frontend
+// Version: 1.0.0
+// =============================================================================
+
+@import '../assets/styles/variables';
+@import '../assets/styles/mixins';
+@import '../assets/styles/themes';
+
+// -----------------------------------------------------------------------------
+// Root Container
+// Main application wrapper with theme support
+// -----------------------------------------------------------------------------
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  @include theme-transition;
+}
+
+// -----------------------------------------------------------------------------
+// Header Component
+// Fixed position header with theme-aware styling
+// -----------------------------------------------------------------------------
+
+.app-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: $header-height;
+  z-index: $z-index-dropdown;
+  background-color: var(--background-color);
+  border-bottom: 1px solid var(--border-color);
+  box-shadow: 0 2px 4px var(--shadow-color);
+  @include theme-transition;
+  
+  @include mobile {
+    height: calc($header-height * 0.875); // Slightly smaller on mobile
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Main Content Area
+// Flexible content container with sidebar integration
+// -----------------------------------------------------------------------------
+
+.app-content {
+  display: flex;
+  flex: 1;
+  margin-top: $header-height;
+  padding: $spacing-base;
+  @include theme-transition;
+
+  @include mobile {
+    margin-top: calc($header-height * 0.875);
+    padding: $spacing-base / 2;
+    flex-direction: column;
+  }
+
+  @include tablet {
+    padding: $spacing-medium;
+  }
+
+  @include desktop {
+    padding: $spacing-large;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Sidebar Component
+// Collapsible sidebar with responsive behavior
+// -----------------------------------------------------------------------------
+
+.app-sidebar {
+  width: $sidebar-width;
+  background-color: var(--background-color);
+  border-right: 1px solid var(--border-color);
+  overflow-y: auto;
+  @include theme-transition;
+  @include scrollbar;
+
+  @include mobile {
+    position: fixed;
+    left: 0;
+    top: calc($header-height * 0.875);
+    bottom: 0;
+    transform: translateX(-100%);
+    z-index: $z-index-dropdown - 1;
+    transition: transform $theme-transition-duration $theme-transition-timing;
+
+    &.sidebar-open {
+      transform: translateX(0);
+    }
+  }
+
+  @include tablet {
+    width: 200px;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Main Content
+// Primary content area with responsive padding
+// -----------------------------------------------------------------------------
+
+.app-main {
+  flex: 1;
+  padding: $spacing-base;
+  overflow-y: auto;
+  background-color: var(--background-color);
+  @include theme-transition;
+  @include scrollbar;
+
+  @include mobile {
+    padding: $spacing-base / 2;
+  }
+
+  @include tablet {
+    padding: $spacing-medium;
+  }
+
+  @include desktop {
+    padding: $spacing-large;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Loading State
+// Full-screen loading overlay
+// -----------------------------------------------------------------------------
+
+.app-loading {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--overlay-background);
+  z-index: $z-index-overlay;
+  @include flex-center;
+  @include theme-transition;
+}
+
+// -----------------------------------------------------------------------------
+// Print Styles
+// Optimized layout for printed pages
+// -----------------------------------------------------------------------------
+
+@include print {
+  .app-header,
+  .app-sidebar {
+    display: none;
+  }
+
+  .app-content {
+    margin: 0;
+    padding: 0;
+  }
+
+  .app-main {
+    padding: 0;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Accessibility Enhancements
+// High contrast and reduced motion support
+// -----------------------------------------------------------------------------
+
+@media (prefers-reduced-motion: reduce) {
+  .app-sidebar,
+  .app-container,
+  .app-header,
+  .app-main {
+    transition: none;
+  }
+}
+
+// High contrast mode adjustments
+@media (prefers-contrast: high) {
+  .app-header {
+    border-bottom: 2px solid var(--text-color);
+    box-shadow: none;
+  }
+
+  .app-sidebar {
+    border-right: 2px solid var(--text-color);
+  }
+}

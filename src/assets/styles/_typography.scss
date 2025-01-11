@@ -1,0 +1,249 @@
+// =============================================================================
+// Typography System
+// Contract Processing System Frontend
+// Version: 1.0.0
+// =============================================================================
+
+@import 'variables';
+@import 'mixins';
+
+// -----------------------------------------------------------------------------
+// Font Loading Optimization
+// -----------------------------------------------------------------------------
+
+@font-face {
+  font-family: $font-family-primary;
+  font-display: swap;
+  font-weight: $font-weight-regular;
+  src: local('Arial');
+}
+
+@font-face {
+  font-family: $font-family-primary;
+  font-display: swap;
+  font-weight: $font-weight-medium;
+  src: local('Arial');
+}
+
+@font-face {
+  font-family: $font-family-primary;
+  font-display: swap;
+  font-weight: $font-weight-bold;
+  src: local('Arial');
+}
+
+// -----------------------------------------------------------------------------
+// Base Typography
+// -----------------------------------------------------------------------------
+
+html {
+  font-size: $font-size-base;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-size-adjust: 100%;
+}
+
+body {
+  font-family: $font-family-primary, system-ui, -apple-system, BlinkMacSystemFont;
+  font-size: calculate-rem($font-size-base);
+  font-weight: $font-weight-regular;
+  line-height: 1.5;
+  color: $dark-gray;
+  text-rendering: optimizeLegibility;
+}
+
+// -----------------------------------------------------------------------------
+// Heading Styles
+// -----------------------------------------------------------------------------
+
+.h1 {
+  font-size: clamp(24px, 5vw, 32px);
+  font-weight: $font-weight-bold;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin-bottom: calculate-rem(24px);
+}
+
+.h2 {
+  font-size: clamp(20px, 4vw, 28px);
+  font-weight: $font-weight-medium;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  margin-bottom: calculate-rem(20px);
+}
+
+.h3 {
+  font-size: clamp(18px, 3vw, 24px);
+  font-weight: $font-weight-medium;
+  line-height: 1.4;
+  margin-bottom: calculate-rem(16px);
+}
+
+.h4 {
+  font-size: clamp(16px, 2vw, 20px);
+  font-weight: $font-weight-medium;
+  line-height: 1.4;
+  margin-bottom: calculate-rem(12px);
+}
+
+// -----------------------------------------------------------------------------
+// Body Text Styles
+// -----------------------------------------------------------------------------
+
+.body-large {
+  font-size: calculate-rem(16px);
+  line-height: 1.5;
+  letter-spacing: 0.01em;
+}
+
+.body-regular {
+  font-size: calculate-rem(14px);
+  line-height: 1.5;
+}
+
+.body-small {
+  font-size: calculate-rem(12px);
+  line-height: 1.5;
+}
+
+// -----------------------------------------------------------------------------
+// Utility Text Styles
+// -----------------------------------------------------------------------------
+
+.text-label {
+  font-size: calculate-rem(14px);
+  font-weight: $font-weight-medium;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.text-button {
+  font-size: calculate-rem(16px);
+  font-weight: $font-weight-bold;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.text-link {
+  font-size: calculate-rem(16px);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  color: $blue;
+  
+  &:hover {
+    text-decoration-thickness: 2px;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Accessibility Classes
+// -----------------------------------------------------------------------------
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+.screen-reader-text {
+  @extend .visually-hidden;
+  
+  &:focus {
+    clip: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    position: static;
+    width: auto;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Text Utilities
+// -----------------------------------------------------------------------------
+
+.text-truncate {
+  @include truncate-text;
+}
+
+.text-wrap {
+  white-space: normal;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.text-nowrap {
+  white-space: nowrap;
+}
+
+// -----------------------------------------------------------------------------
+// RTL Support
+// -----------------------------------------------------------------------------
+
+[dir="rtl"] {
+  .text-label,
+  .text-button {
+    letter-spacing: -0.02em;
+  }
+  
+  .h1,
+  .h2,
+  .h3,
+  .h4 {
+    letter-spacing: 0;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Print Styles
+// -----------------------------------------------------------------------------
+
+@media print {
+  body {
+    font-size: 12pt;
+    line-height: 1.4;
+  }
+
+  .print-heading {
+    font-size: 16pt;
+    font-weight: $font-weight-bold;
+    margin-bottom: 12pt;
+  }
+
+  .print-body {
+    font-size: 12pt;
+    line-height: 1.4;
+  }
+
+  // Ensure links are readable in print
+  .text-link {
+    text-decoration: underline;
+    color: $dark-gray;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// High Contrast & Reduced Motion Support
+// -----------------------------------------------------------------------------
+
+@media (prefers-contrast: high) {
+  body {
+    text-shadow: none;
+  }
+
+  .text-link {
+    text-decoration-thickness: 2px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}

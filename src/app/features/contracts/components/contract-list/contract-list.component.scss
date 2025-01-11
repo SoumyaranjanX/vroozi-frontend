@@ -1,0 +1,276 @@
+// Variables
+$primary-color: #1976d2;
+$accent-color: #ff4081;
+$success-color: #4caf50;
+$warning-color: #ffa726;
+$error-color: #f44336;
+$text-primary: rgba(0, 0, 0, 0.87);
+$text-secondary: rgba(0, 0, 0, 0.54);
+$border-color: #e0e0e0;
+$hover-color: #f5f5f5;
+$card-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+// Mixins
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin status-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 12px;
+  border-radius: 16px;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: 0.25px;
+  min-width: 100px;
+  justify-content: center;
+
+  .status-icon {
+    font-size: 14px;
+    margin-right: 6px;
+    height: 14px;
+    width: 14px;
+  }
+}
+
+// Component styles
+.contract-list-container {
+  padding: 24px;
+  height: 100%;
+  box-sizing: border-box;
+  background-color: #f8f9fa;
+  min-height: calc(100vh - 64px);
+  position: relative;
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+
+    h1 {
+      margin: 0;
+      font-size: 24px;
+      font-weight: 500;
+      color: #1a237e;
+    }
+  }
+
+  .filter-section {
+    margin-bottom: 24px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: $card-shadow;
+
+    .search-container {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+
+      .search-field {
+        flex: 1;
+        min-width: 200px;
+      }
+    }
+  }
+
+  .table-container {
+    background: white;
+    border-radius: 8px;
+    overflow-x: auto;
+    position: relative;
+    width: 100%;
+    -webkit-overflow-scrolling: touch;
+
+    .mat-progress-bar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+    }
+
+    .contracts-table {
+      width: 100%;
+      min-width: 900px;
+
+      th.mat-header-cell {
+        background-color: #f5f5f5;
+        color: #424242;
+        font-weight: 500;
+        padding: 16px;
+        white-space: nowrap;
+      }
+
+      td.mat-cell {
+        padding: 16px;
+        white-space: nowrap;
+      }
+
+      tr.mat-row:hover {
+        background-color: #f5f5f5;
+      }
+
+      .empty-state {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 32px 16px;
+        color: $text-secondary;
+
+        mat-icon {
+          font-size: 48px;
+          width: 48px;
+          height: 48px;
+          margin-bottom: 16px;
+          opacity: 0.7;
+        }
+
+        p {
+          margin: 0;
+          font-size: 16px;
+          margin-bottom: 8px;
+        }
+
+        small {
+          font-size: 14px;
+          opacity: 0.7;
+        }
+      }
+    }
+  }
+}
+
+.error-container {
+  margin: 16px 0;
+  padding: 16px;
+  border-radius: 4px;
+  background-color: #ffebee;
+}
+
+.processing-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.9);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .processing-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    text-align: center;
+
+    h3 {
+      margin: 0;
+      color: $primary-color;
+    }
+
+    p {
+      margin: 0;
+      color: $text-secondary;
+    }
+  }
+}
+
+.action-buttons {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: flex-start;
+
+  button {
+    &[disabled] {
+      opacity: 0.5;
+    }
+  }
+}
+
+.actions-header {
+  text-align: center;
+}
+
+// Status chip styles
+.status-chip {
+  @include status-chip;
+  
+  &.pending {
+    background-color: #fff3e0;
+    color: #f57c00;
+  }
+  
+  &.processing {
+    background-color: #e3f2fd;
+    color: #1976d2;
+  }
+
+  &.extracted {
+    background-color: rgba($accent-color, 0.12);
+    color: darken($accent-color, 5%);
+  }
+
+  &.validating {
+    background-color: rgba($primary-color, 0.12);
+    color: darken($primary-color, 5%);
+  }
+
+  &.validated {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+  }
+
+  &.error {
+    background-color: #ffebee;
+    color: #c62828;
+  }
+
+  mat-icon {
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+    margin-right: 8px;
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.rotating {
+  animation: rotate 1.5s linear infinite;
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .contract-list-container {
+    padding: 16px;
+
+    .header {
+      flex-direction: column;
+      gap: 16px;
+      align-items: stretch;
+    }
+
+    .search-container {
+      flex-direction: column;
+      
+      .search-field {
+        width: 100%;
+      }
+    }
+  }
+}

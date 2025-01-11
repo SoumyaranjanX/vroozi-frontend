@@ -1,0 +1,91 @@
+node_modules
+.npm/*
+
+# Build outputs and caches
+dist
+.angular/*
+tmp/*
+
+# Test artifacts
+coverage
+*.spec.ts
+e2e
+e2e/*
+
+# Development configurations
+.vscode
+.idea
+.editorconfig
+
+# Version control
+.git
+.gitignore
+
+# Security-sensitive files
+.env*
+*.key
+*.pem
+*config.json
+*.env.local
+*.env.development
+*.env.test
+*.env.production
+
+# Documentation
+docs/*
+*.md
+CHANGELOG.md
+README.md
+LICENSE
+
+# Logs and debugging
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS and editor files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# Project-specific build artifacts
+stats.json
+report.html
+
+# Cache directories
+.cache/*
+.temp/*
+
+# Test coverage and reports
+coverage/*
+.nyc_output
+test-results/*
+
+# Development assets
+src/assets/dev/*
+
+# Temporary and backup files
+*.bak
+*.tmp
+*.temp
+
+# Package manager files
+package-lock.json
+yarn.lock
+npm-shrinkwrap.json
+
+# IDE specific files
+.settings/*
+.project
+.classpath
+*.sublime-*
+.history/*
+
+# Build tools and configurations
+karma.conf.js
+protractor.conf.js
+tsconfig.spec.json
+tslint.json

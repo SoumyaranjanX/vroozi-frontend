@@ -1,0 +1,40 @@
+<!-- Recent Activity Section with ARIA attributes for accessibility -->
+<section class="recent-activity"
+         role="complementary"
+         [attr.aria-label]="'DASHBOARD.RECENT_ACTIVITY.SECTION_LABEL' | translate">
+  
+  <!-- Loading state -->
+  <div *ngIf="loading$ | async" class="loading-container">
+    <app-loading [loadingMessage]="'Loading recent activities...'"></app-loading>
+  </div>
+
+  <!-- Error state -->
+  <div *ngIf="error$ | async as error" class="error-container">
+    <p class="error-message">{{error}}</p>
+    <button mat-button color="primary" (click)="retryLoad()">
+      <mat-icon>refresh</mat-icon>
+      Retry
+    </button>
+  </div>
+
+  <!-- Activities list -->
+  <div class="activities-list" *ngIf="(loading$ | async) === false && !(error$ | async)">
+    <ng-container *ngIf="activities$ | async as activities">
+      <div class="activity-item" *ngFor="let activity of activities; trackBy: trackById">
+        <mat-icon [class]="activity.type.toLowerCase()">
+          {{getActivityIcon(activity.type)}}
+        </mat-icon>
+        <div class="activity-content">
+          <p class="activity-message">{{activity.description}}</p>
+          <span class="activity-timestamp">{{activity.timestamp | date:'medium'}}</span>
+        </div>
+      </div>
+
+      <!-- No activities message -->
+      <div *ngIf="activities.length === 0" class="no-activities">
+        <mat-icon>info</mat-icon>
+        <p>{{ 'DASHBOARD.RECENT_ACTIVITY.NO_ACTIVITIES' | translate }}</p>
+      </div>
+    </ng-container>
+  </div>
+</section>

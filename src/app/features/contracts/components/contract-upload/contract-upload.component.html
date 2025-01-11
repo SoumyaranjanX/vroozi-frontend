@@ -1,0 +1,137 @@
+<!-- Main upload container with ARIA region -->
+<div class="file-upload-container" 
+     [class.drag-over]="dragOver"
+     (dragover)="onDragOver($event)"
+     (dragleave)="onDragLeave($event)"
+     (drop)="onDrop($event)"
+     role="region"
+     aria-label="Contract Upload">
+
+  <!-- Header with title and list button -->
+  <div class="header">
+    <h1>Upload Contract</h1>
+    <button mat-raised-button 
+            color="primary" 
+            [routerLink]="['/contracts']">
+      <mat-icon>list</mat-icon>
+      Contract List
+    </button>
+  </div>
+
+  <div class="upload-content">
+    <!-- Hidden file input -->
+    <input type="file" 
+           #fileInput
+           [accept]="accept"
+           [multiple]="multiple"
+           (change)="onFileSelected($event)"
+           class="sr-only"
+           aria-label="Choose files to upload">
+
+    <!-- Upload area -->
+    <div class="upload-area"
+         [class.dragging]="dragOver"
+         [class.uploading]="uploading"
+         role="button"
+         tabindex="0"
+         (click)="triggerFileInput()"
+         (keydown.enter)="triggerFileInput()"
+         (keydown.space)="triggerFileInput()">
+
+      <mat-icon class="upload-icon" aria-hidden="true">
+        {{dragOver ? 'file_download' : 'cloud_upload'}}
+      </mat-icon>
+
+      <div class="upload-text">
+        <h2 class="primary-text">
+          {{dragOver ? 'Drop files here' : 'Drag and drop contract files here'}}
+        </h2>
+        <span class="secondary-text">
+          or <button type="button" class="browse-button" (click)="$event.stopPropagation(); triggerFileInput()">browse</button> to choose files
+        </span>
+        <div class="file-info">
+          <span class="supported-formats">
+            Supported formats: {{allowedTypes.join(', ')}}
+          </span>
+          <span class="size-limit">
+            Maximum file size: {{formatFileSize(maxFileSize)}}
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- File queue -->
+    <div class="file-queue" *ngIf="files.length > 0">
+      <h3 class="queue-title">
+        Selected Files ({{files.length}})
+        <button mat-button color="warn" (click)="files = []" class="clear-all">
+          Clear All
+        </button>
+      </h3>
+
+      <div class="queue-list">
+        <div *ngFor="let file of files; let i = index" class="queue-item">
+          <div class="file-info">
+            <mat-icon class="file-icon">description</mat-icon>
+            <span class="file-name">{{file.name}}</span>
+            <span class="file-size">{{formatFileSize(file.size)}}</span>
+          </div>
+          
+          <div class="file-actions">
+            <mat-progress-bar 
+              *ngIf="uploadQueue.get(file.name)?.status === 'uploading'"
+              [value]="uploadQueue.get(file.name)?.progress || 0"
+              class="upload-progress">
+            </mat-progress-bar>
+            
+            <span class="status-text" [ngSwitch]="uploadQueue.get(file.name)?.status">
+              <span *ngSwitchCase="'completed'" class="success">Uploaded</span>
+              <span *ngSwitchCase="'error'" class="error">{{uploadQueue.get(file.name)?.error}}</span>
+              <span *ngSwitchCase="'uploading'" class="uploading">
+                {{uploadQueue.get(file.name)?.progress}}%
+              </span>
+            </span>
+
+            <button mat-icon-button 
+                    color="warn" 
+                    (click)="removeFile(i)"
+                    aria-label="Remove file">
+              <mat-icon>close</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="queue-actions">
+        <button mat-raised-button 
+                color="primary" 
+                [disabled]="uploading || files.length === 0"
+                (click)="uploadFiles()">
+          <mat-icon>cloud_upload</mat-icon>
+          Upload {{files.length}} {{files.length === 1 ? 'File' : 'Files'}}
+        </button>
+      </div>
+    </div>
+
+    <!-- Upload progress -->
+    <div class="upload-progress-container" *ngIf="uploading">
+      <mat-progress-bar mode="determinate" [value]="totalProgress"></mat-progress-bar>
+      <span class="progress-text">
+        Uploading {{uploadQueue.size}} {{uploadQueue.size === 1 ? 'file' : 'files'}}... {{totalProgress}}%
+      </span>
+    </div>
+
+    <!-- Status text for screen readers -->
+    <div class="sr-only" role="status" aria-live="polite">
+      {{getStatusText(status)}}
+    </div>
+
+    <!-- Alert messages -->
+    <div *ngIf="alertMessage" 
+         class="alert-message" 
+         [class]="alertType"
+         role="alert">
+      {{alertMessage}}
+    </div>
+  </div>
+</div>

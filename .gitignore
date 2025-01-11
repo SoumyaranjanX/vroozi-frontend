@@ -1,0 +1,95 @@
+# Compiled output
+/dist
+/tmp
+/out-tsc
+/.angular
+/.angular/cache
+/bazel-out
+
+# Dependencies
+/node_modules
+
+# Testing
+/coverage
+/libpeerconnection.log
+/testem.log
+/e2e/*.js
+/e2e/*.map
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.history/*
+
+# IDE - JetBrains
+.idea/*
+*.iws
+*.iml
+*.ipr
+
+# IDE - Sublime Text
+*.sublime-workspace
+*.sublime-project
+
+# Logs and debugging
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+debug.log
+
+# System Files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Build and cache
+.sass-cache/
+connect.lock
+/typings
+*.css.map
+*.js.map
+*.sass.map
+*.scss.map
+
+# Environment and secrets
+.env
+.env.local
+.env.*
+!.env.example
+*.pem
+*.key
+*.cert
+*.crt
+
+# Temporary files
+*.swp
+*.swo
+*.tmp
+*.temp
+*~
+
+# Test coverage and reports
+/reports
+/junit
+/.nyc_output
+/cypress/videos/
+/cypress/screenshots/
+
+# Miscellaneous
+/.sass-cache
+/chrome-profiler-events*.json
+/speed-measure-plugin*.json
+/.versions
+/.changelog
+/.github
+/.husky/_
+
+# Project-specific
+/src/assets/temp/*
+!/src/assets/temp/.gitkeep
+/.cache
