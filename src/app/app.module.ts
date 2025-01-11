@@ -6,7 +6,7 @@
  */
 
 // Angular Core - v15.0.0
-import { NgModule, isDevMode } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
@@ -95,8 +95,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     }),
 
     ServiceWorkerModule.register('ngsw-worker.js', {
-      enabled: !isDevMode(),
-      registrationStrategy: 'registerWhenStable:30000'
+      enabled: environment.production,
+      registrationStrategy: 'registerImmediately'
     })
   ],
   providers: [],
