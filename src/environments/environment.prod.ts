@@ -59,7 +59,7 @@ export const environment: Environment = {
     enableCSP: true,
     enableXSRF: true,
     maxSessionDuration: 28_800,
-    tokenEncryptionKey: process.env['TOKEN_ENCRYPTION_KEY'] || 'production-key'
+    tokenEncryptionKey: 'production-encryption-key'
   },
 
   // Company Information

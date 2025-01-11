@@ -92,4 +92,3 @@ connect.lock
 # Project-specific
 /src/assets/temp/*
 !/src/assets/temp/.gitkeep
-/.cache
