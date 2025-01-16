@@ -6,12 +6,13 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { SelectionModel } from '@angular/cdk/collections';
 import { Observable, BehaviorSubject, forkJoin, switchMap, interval, takeWhile, take, from, concatMap, finalize, takeUntil, Subject } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, filter } from 'rxjs/operators';
 import { IContract, ContractStatus } from '../../../../shared/models/contract.model';
 import { ContractService } from '../../services/contract.service';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { FormGroup } from '@angular/forms';
+import { NavigationEnd } from '@angular/router';
 
 interface ContractMetadata {
   name?: string;
@@ -69,6 +70,15 @@ export class ContractListComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.loadContracts();
+
+    // Subscribe to router events to refresh data when returning to the list
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd),
+      takeUntil(this.destroy$)
+    ).subscribe(() => {
+      // Refresh contracts when navigating back to the list
+      this.loadContracts();
+    });
   }
 
   ngOnDestroy(): void {

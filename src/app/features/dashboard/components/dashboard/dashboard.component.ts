@@ -1,7 +1,7 @@
 // Angular v15.0.0
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router, NavigationEnd } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -9,7 +9,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { Store } from '@ngrx/store';
 import { Observable, Subject, BehaviorSubject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { takeUntil, filter } from 'rxjs/operators';
 
 import { IAppState } from '@store/state/app.state';
 import { IActivity } from '@shared/models/activity.model';
@@ -59,17 +59,46 @@ export class DashboardComponent implements OnInit, OnDestroy {
   // Grid columns based on screen size
   gridCols$ = new BehaviorSubject<number>(4);
 
-  constructor(private store: Store<IAppState>) {
+  constructor(
+    private store: Store<IAppState>,
+    private router: Router
+  ) {
     this.activities$ = this.store.select(selectRecentActivities);
   }
 
   ngOnInit(): void {
+    // Initial load
+    this.loadActivities();
     this.setupGridColumns();
+
+    // Subscribe to router events to refresh data when returning to dashboard
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd),
+      filter(event => (event as NavigationEnd).url === '/dashboard'),
+      takeUntil(this.destroy$)
+    ).subscribe(() => {
+      this.loadActivities();
+    });
+
+    // Set up auto-refresh every 30 seconds
+    const REFRESH_INTERVAL = 30000; // 30 seconds
+    const refreshInterval = setInterval(() => {
+      if (document.visibilityState === 'visible') {
+        this.loadActivities();
+      }
+    }, REFRESH_INTERVAL);
+
+    // Clean up interval on destroy
+    this.destroy$.subscribe(() => clearInterval(refreshInterval));
   }
 
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
+  }
+
+  private loadActivities(): void {
+    this.store.dispatch(ActivityActions.loadActivities());
   }
 
   private setupGridColumns(): void {
@@ -92,5 +121,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
     // Listen for window resize
     window.addEventListener('resize', updateGridCols);
+
+    // Clean up event listener on destroy
+    this.destroy$.subscribe(() => {
+      window.removeEventListener('resize', updateGridCols);
+    });
   }
 }

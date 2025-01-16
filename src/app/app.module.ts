@@ -34,7 +34,9 @@ import { LoadingComponent } from './shared/components/loading/loading.component'
 
 // Store Configuration
 import { poReducer } from './store/reducers/po.reducer';
+import { activityReducer } from './store/reducers/activity.reducer';
 import { PurchaseOrderEffects } from './store/effects/po.effects';
+import { ActivityEffects } from './store/effects/activity.effects';
 
 // Environment Configuration
 import { environment } from '../environments/environment';
@@ -80,12 +82,14 @@ export function HttpLoaderFactory(http: HttpClient) {
 
     // NgRx Store Configuration
     StoreModule.forRoot({
-      purchaseOrders: poReducer
+      purchaseOrders: poReducer,
+      activity: activityReducer
     }),
 
     // NgRx Effects Configuration
     EffectsModule.forRoot([
-      PurchaseOrderEffects
+      PurchaseOrderEffects,
+      ActivityEffects
     ]),
 
     // Development Tools Configuration

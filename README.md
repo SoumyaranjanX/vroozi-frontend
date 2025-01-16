@@ -80,7 +80,7 @@ vi .env
 ### Environment Configuration
 1. Configure the `.env` file with required variables:
 ```plaintext
-API_BASE_URL=http://localhost:8000
+API_BASE_URL=https://vroozi-backend-pz5d.onrender.com
 AUTH_SERVICE_URL=http://localhost:8001
 GOOGLE_VISION_API_KEY=[your-key]
 ENVIRONMENT=development

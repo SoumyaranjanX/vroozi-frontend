@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { IActivity } from '../../shared/models/activity.model';
+import { IActivity } from '@shared/models/activity.model';
 
 // Load activities
 export const loadActivities = createAction(

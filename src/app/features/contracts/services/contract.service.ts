@@ -38,6 +38,13 @@ export class ContractService {
     ) {}
 
     /**
+     * Invalidates the contracts cache, forcing the next getContracts() call to fetch fresh data
+     */
+    invalidateContractsCache(): void {
+        this.contractsCache$ = undefined;
+    }
+
+    /**
      * Retrieves a cached list of contracts
      * Implements caching with invalidation on updates
      * @returns Observable<IContract[]> Stream of contracts
@@ -98,65 +105,25 @@ export class ContractService {
             formData.append('metadata.original_name', contract.file.name);
             formData.append('metadata.file_size', contract.file.size.toString());
             formData.append('metadata.file_type', contract.file.type);
-            formData.append('metadata.status', 'UPLOADED');
 
-            const xhr = new XMLHttpRequest();
-            
-            // Handle progress
-            xhr.upload.onprogress = (event) => {
-                if (event.lengthComputable) {
-                    observer.next({
-                        type: HttpEventType.UploadProgress,
-                        loaded: event.loaded,
-                        total: event.total
-                    } as HttpEvent<IContract>);
-                }
-            };
+            const req = new HttpRequest('POST', this.apiUrl, formData, {
+                reportProgress: true
+            });
 
-            // Handle response
-            xhr.onload = () => {
-                if (xhr.status >= 200 && xhr.status < 300) {
-                    const response = new HttpResponse<IContract>({
-                        body: JSON.parse(xhr.response),
-                        status: xhr.status,
-                        statusText: xhr.statusText,
-                        headers: new HttpHeaders(xhr.getAllResponseHeaders()),
-                        url: xhr.responseURL
-                    });
-                    observer.next(response);
-                    observer.complete();
-                    this.invalidateCache();
-                } else {
-                    observer.error(new HttpErrorResponse({
-                        error: xhr.response,
-                        status: xhr.status,
-                        statusText: xhr.statusText,
-                        url: xhr.responseURL
-                    }));
-                }
-            };
+            const subscription = this.http.request<IContract>(req).pipe(
+                tap(event => {
+                    if (event.type === HttpEventType.Response) {
+                        // Invalidate cache after successful upload
+                        this.invalidateContractsCache();
+                    }
+                })
+            ).subscribe({
+                next: (event) => observer.next(event),
+                error: (error) => observer.error(error),
+                complete: () => observer.complete()
+            });
 
-            // Handle error
-            xhr.onerror = () => {
-                observer.error(new HttpErrorResponse({
-                    error: xhr.response,
-                    status: xhr.status,
-                    statusText: xhr.statusText,
-                    url: xhr.responseURL
-                }));
-            };
-
-            // Open and send request
-            xhr.open('POST', this.apiUrl, true);
-            xhr.setRequestHeader('Authorization', `Bearer ${this.authService.getToken()}`);
-            xhr.withCredentials = true;  // Enable CORS with credentials
-            xhr.responseType = 'json';   // Set response type to JSON
-            xhr.send(formData);
-
-            // Cleanup
-            return () => {
-                xhr.abort();
-            };
+            return () => subscription.unsubscribe();
         });
     }
 
