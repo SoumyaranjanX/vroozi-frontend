@@ -22,7 +22,7 @@ export class AuthInterceptor implements HttpInterceptor {
 
     // Don't intercept auth requests
     if (this.isAuthRequest(request.url)) {
-      return next.handle(request.clone({ withCredentials: true })).pipe(finalize(() => this.loadingService.hide()));
+      return next.handle(request).pipe(finalize(() => this.loadingService.hide()));
     }
 
     // Clone the request and add base URL for non-external requests
@@ -32,9 +32,6 @@ export class AuthInterceptor implements HttpInterceptor {
     if (!this.isAuthRequest(request.url)) {
       request = this.addAuthHeader(request);
     }
-
-    // Add credentials for cookie handling
-    request = request.clone({ withCredentials: true });
 
     return next.handle(request).pipe(
       catchError(error => {

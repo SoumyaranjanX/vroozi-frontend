@@ -63,22 +63,33 @@ export class ApiInterceptor implements HttpInterceptor {
     // Clone the request to modify
     let modifiedRequest = request.clone();
 
-    // Add base URL for internal requests
-    if (!this.isExternalRequest(request.url)) {
+    // Special handling for auth endpoints
+    if (request.url.includes('/auth/')) {
       modifiedRequest = request.clone({
-        url: `${this.apiUrl}${request.url}`,
-        headers: this.getSecureHeaders(request.headers)
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        }),
+        withCredentials: false
       });
-    }
+    } 
+    // Add base URL for internal requests
+    else if (!this.isExternalRequest(request.url)) {
+      modifiedRequest = request.clone({
+        url: request.url.startsWith('/') ? request.url : `/${request.url}`,
+        headers: this.getSecureHeaders(request.headers),
+        withCredentials: false
+      });
 
-    // Add auth token if available
-    const token = this.authService.getToken();
-    if (token) {
-      modifiedRequest = modifiedRequest.clone({
-        setHeaders: {
-          Authorization: `Bearer ${token}`
-        }
-      });
+      // Add auth token if available
+      const token = this.authService.getToken();
+      if (token) {
+        modifiedRequest = modifiedRequest.clone({
+          setHeaders: {
+            Authorization: `Bearer ${token}`
+          }
+        });
+      }
     }
 
     return next.handle(modifiedRequest).pipe(
@@ -207,15 +218,7 @@ export class ApiInterceptor implements HttpInterceptor {
     // Add common headers
     headers = headers
       .set('Content-Type', 'application/json')
-      .set('Accept', 'application/json')
-      .set('X-Requested-With', 'XMLHttpRequest');
-
-    // Add security headers for internal requests
-    headers = headers
-      .set('X-Content-Type-Options', 'nosniff')
-      .set('X-Frame-Options', 'DENY')
-      .set('X-XSS-Protection', '1; mode=block')
-      .set('Strict-Transport-Security', 'max-age=31536000; includeSubDomains');
+      .set('Accept', 'application/json');
 
     // Add CSRF token if available
     const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');

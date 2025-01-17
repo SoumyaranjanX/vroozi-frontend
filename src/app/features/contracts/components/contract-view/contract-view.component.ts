@@ -184,13 +184,17 @@ export class ContractViewComponent implements OnInit, OnDestroy {
         }
     }
 
-    createPurchaseOrder(): void {
-        if (this.contractId && this.contract.status === 'VALIDATED') {
-            this.router.navigate(['/purchase-orders/create'], {
-                queryParams: { contractId: this.contractId }
-            });
+    createPurchaseOrder(contract: IContract): void {
+        if (contract.status !== ContractStatus.VALIDATED) {
+          this.showMessage('Only validated contracts can be used to create purchase orders', 'error');
+          return;
         }
-    }
+    
+        // Navigate to purchase order creation page with contract ID
+        this.router.navigate(['/purchase-orders/new'], {
+          queryParams: { contractId: contract.id }
+        });
+      }
 
     getConfidenceClass(): string {
         if (this.confidenceLevel >= 90) {

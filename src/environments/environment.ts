@@ -6,7 +6,7 @@ export const environment: Environment = {
   apiUrl: 'https://vroozi-backend-pz5d.onrender.com/api/v1',
   googleVisionApiUrl: 'https://vision.googleapis.com/v1',
   s3BucketUrl: 'https://pub-dc2feb6aa8314296ab626daad5932a49.r2.dev',
-  cdnUrl: 'https://cdn.vroozi.com',
+  cdnUrl: 'https://vroozi-backend-pz5d.onrender.com',
 
   apiRateLimit: {
     requestsPerMinute: 100,

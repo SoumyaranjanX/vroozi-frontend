@@ -58,7 +58,7 @@ export class AuthService {
   login(email: string, password: string): Observable<IUserResponse> {
     console.log('AuthService: Making login API call to:', `${this.apiUrl}/auth/login`);
     return this.http
-      .post<IUserResponse>(`${this.apiUrl}/auth/login`, { email, password }, { withCredentials: true })
+      .post<IUserResponse>(`${this.apiUrl}/auth/login`, { email, password })
       .pipe(
         tap(response => {
           console.log('AuthService: Login API response:', response);
