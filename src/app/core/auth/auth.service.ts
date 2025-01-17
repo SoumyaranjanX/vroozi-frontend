@@ -7,7 +7,7 @@
 
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, BehaviorSubject, catchError } from 'rxjs';
+import { Observable, BehaviorSubject, catchError, of } from 'rxjs';
 import { finalize, map, tap } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 import { IUser, IUserResponse, IRegistrationResponse } from '../../shared/models/user.model';
@@ -77,15 +77,17 @@ export class AuthService {
   }
 
   logout(): Observable<void> {
+    // Clear local state immediately
+    this.clearAuthData();
+    this.currentUserSubject.next(null);
+    this.loadingService.hide();
+    this.router.navigate(['/auth/login']);
+
     const refreshToken = localStorage.getItem('refreshToken');
     const accessToken = this.getToken();
 
-    // If we don't have an access token, just clear local state
+    // If we don't have an access token, just return
     if (!accessToken) {
-      this.clearAuthData();
-      this.currentUserSubject.next(null);
-      this.loadingService.hide();
-      this.router.navigate(['/auth/login']);
       return new Observable(subscriber => {
         subscriber.next();
         subscriber.complete();
@@ -95,29 +97,21 @@ export class AuthService {
     // Prepare request body - only include refresh token if it exists
     const body = refreshToken ? { refresh_token: refreshToken } : {};
 
-    return this.http.post<void>(`${this.apiUrl}/auth/logout`, body).pipe(
-      tap(() => {
-        // Only clear auth data after successful logout
-        this.clearAuthData();
-        this.currentUserSubject.next(null);
-        this.loadingService.hide();
-        this.router.navigate(['/auth/login']);
-      }),
-      catchError(error => {
-        console.error('AuthService: Logout error:', error);
-        // If we get a 401 error, clear local state anyway
-        if (error.status === 401) {
-          this.clearAuthData();
-          this.currentUserSubject.next(null);
-          this.loadingService.hide();
-          this.router.navigate(['/auth/login']);
-        }
-        throw error;
-      }),
-      finalize(() => {
-        this.loadingService.hide();
-      })
-    );
+    // Make the backend call but don't wait for it
+    this.http.post<void>(`${this.apiUrl}/auth/logout`, body)
+      .pipe(
+        catchError(error => {
+          console.error('AuthService: Logout error:', error);
+          return of(void 0); // Ignore errors during logout
+        })
+      )
+      .subscribe();
+
+    // Return immediately
+    return new Observable(subscriber => {
+      subscriber.next();
+      subscriber.complete();
+    });
   }
 
   // refreshToken(token: string): Observable<IUserResponse> {
@@ -140,17 +134,23 @@ export class AuthService {
       .post<IUserResponse>(
         `${this.apiUrl}/auth/refresh`,
         {},
-        { withCredentials: true } // Enable cookies
+        { withCredentials: true }
       )
       .pipe(
         tap(response => {
-          this.storeAuthData(response);
-          this.refreshTokenSubject.next(response);
+          if (response && response.user) {
+            this.storeAuthData(response);
+            this.currentUserSubject.next(response.user);
+            this.refreshTokenSubject.next(response);
+          } else {
+            this.refreshTokenSubject.next(null);
+            throw new Error('Invalid refresh token response');
+          }
         }),
-        catchError(() => {
-          this.handleSessionExpired();
+        catchError(error => {
+          console.error('Token refresh failed:', error);
           this.refreshTokenSubject.next(null);
-          return this.refreshTokenSubject.asObservable();
+          throw error;
         }),
         finalize(() => {
           this.refreshTokenInProgress = false;
@@ -159,16 +159,19 @@ export class AuthService {
   }
 
   public handleTokenExpiration(): void {
-    this.refreshToken().subscribe({
-      next: response => {
-        if (!response) {
+    // Only attempt refresh if we're not already in progress
+    if (!this.refreshTokenInProgress) {
+      this.refreshToken().subscribe({
+        next: response => {
+          if (!response) {
+            this.handleSessionExpired();
+          }
+        },
+        error: () => {
           this.handleSessionExpired();
-        }
-      },
-      error: () => {
-        this.handleSessionExpired();
-      },
-    });
+        },
+      });
+    }
   }
 
   public handleSessionExpired(): void {
@@ -177,8 +180,13 @@ export class AuthService {
     this.loadingService.hide();
     this.notificationService.showWarning('Your session has expired. Please log in again.');
 
+    // Navigate to login with return URL
+    const currentUrl = window.location.pathname;
     this.router.navigate(['/auth/login'], {
-      queryParams: { expired: 'true' },
+      queryParams: { 
+        expired: 'true',
+        returnUrl: currentUrl !== '/auth/login' ? currentUrl : undefined
+      }
     });
   }
 

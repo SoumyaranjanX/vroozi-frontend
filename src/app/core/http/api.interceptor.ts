@@ -65,11 +65,21 @@ export class ApiInterceptor implements HttpInterceptor {
 
     // Special handling for auth endpoints
     if (request.url.includes('/auth/')) {
+      let headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      });
+
+      // Add auth token for logout endpoint
+      if (request.url.includes('/auth/logout')) {
+        const token = this.authService.getToken();
+        if (token) {
+          headers = headers.set('Authorization', `Bearer ${token}`);
+        }
+      }
+
       modifiedRequest = request.clone({
-        headers: new HttpHeaders({
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        }),
+        headers: headers,
         withCredentials: false
       });
     } 
@@ -156,8 +166,14 @@ export class ApiInterceptor implements HttpInterceptor {
           errorMessage = 'Bad Request: ' + this.extractErrorMessage(error);
           break;
         case 401:
+          // Check if it's a token expiration error
+          if (error.error?.detail?.includes('expired') || error.error?.message?.includes('expired')) {
+            this.authService.handleTokenExpiration();
+            return throwError(() => error);
+          }
+          // For other unauthorized errors, force logout
           errorMessage = 'Unauthorized: Please log in again';
-          this.authService.logout();
+          this.authService.handleSessionExpired();
           break;
         case 403:
           errorMessage = 'Access Denied: Insufficient permissions';
@@ -176,8 +192,10 @@ export class ApiInterceptor implements HttpInterceptor {
       }
     }
 
-    // Show notification to user
-    this.notificationService.showError(errorMessage);
+    // Show notification to user except for token expiration which is handled separately
+    if (!(error.status === 401 && (error.error?.detail?.includes('expired') || error.error?.message?.includes('expired')))) {
+      this.notificationService.showError(errorMessage);
+    }
 
     // Return the error for further handling
     return throwError(() => error);

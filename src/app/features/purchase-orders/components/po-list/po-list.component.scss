@@ -14,6 +14,9 @@
 
 .po-list-container {
   padding: 24px;
+  background: var(--background-color);
+  color: var(--text-color);
+  @include theme-transition;
 
   .header {
     display: flex;
@@ -23,11 +26,15 @@
 
     h1 {
       margin: 0;
+      color: var(--text-color);
+      @include theme-transition;
     }
   }
 
   .filter-section {
     margin-bottom: 24px;
+    background: var(--background-color);
+    @include theme-transition;
 
     .filter-form {
       display: flex;
@@ -37,6 +44,39 @@
       mat-form-field {
         flex: 1;
         min-width: 200px;
+
+        ::ng-deep {
+          // Input text
+          .mat-mdc-input-element {
+            color: var(--text-color) !important;
+          }
+
+          // Label
+          .mat-mdc-floating-label {
+            color: var(--text-color) !important;
+            opacity: 0.7;
+          }
+
+          // Placeholder
+          .mat-mdc-input-element::placeholder {
+            color: var(--text-color) !important;
+            opacity: 0.5;
+          }
+
+          // Outline
+          .mdc-notched-outline__leading,
+          .mdc-notched-outline__notch,
+          .mdc-notched-outline__trailing {
+            border-color: var(--text-color) !important;
+            opacity: 0.2;
+          }
+
+          // Date picker toggle
+          .mat-datepicker-toggle {
+            color: var(--text-color) !important;
+            opacity: 0.7;
+          }
+        }
       }
     }
   }
@@ -47,24 +87,34 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(255, 255, 255, 0.7);
+    background: rgba(var(--background-color), 0.7);
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 1000;
+    @include theme-transition;
   }
 
   .table-container {
-    background: white;
+    background: var(--background-color);
     border-radius: 4px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px rgba($dark-gray, 0.1);
     overflow: hidden;
+    border: 1px solid rgba($dark-gray, 0.1);
+    @include theme-transition;
 
     .po-table {
       width: 100%;
 
       .mat-cell {
         padding: 16px;
+        color: var(--text-color);
+      }
+
+      .mat-header-cell {
+        color: var(--text-color);
+        font-weight: 500;
+        @include theme-transition;
       }
 
       .action-buttons {
@@ -76,7 +126,9 @@
     .empty-state {
       padding: 48px;
       text-align: center;
-      color: #666;
+      color: var(--text-color);
+      opacity: 0.7;
+      @include theme-transition;
 
       mat-icon {
         font-size: 48px;
@@ -84,21 +136,27 @@
         height: 48px;
         margin-bottom: 16px;
         opacity: 0.5;
+        color: var(--text-color);
       }
 
       p {
         margin: 0 0 8px;
         font-size: 18px;
+        color: var(--text-color);
       }
 
       small {
-        color: #999;
+        color: var(--text-color);
+        opacity: 0.7;
       }
     }
   }
 
   mat-paginator {
-    border-top: 1px solid rgba(0, 0, 0, 0.12);
+    border-top: 1px solid rgba($dark-gray, 0.12);
+    background: var(--background-color);
+    color: var(--text-color);
+    @include theme-transition;
   }
 }
 
@@ -126,7 +184,8 @@
 .empty-state {
   padding: 32px;
   text-align: center;
-  color: #666;
+  color: var(--text-color);
+  @include theme-transition;
 
   mat-icon {
     font-size: 48px;
@@ -134,16 +193,19 @@
     height: 48px;
     margin-bottom: 16px;
     opacity: 0.5;
+    color: var(--text-color);
   }
 
   p {
     font-size: 16px;
     margin: 0;
     margin-bottom: 8px;
+    color: var(--text-color);
   }
 
   small {
-    color: #999;
+    color: var(--text-color);
+    opacity: 0.7;
   }
 } 
 
@@ -170,11 +232,12 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(255, 255, 255, 0.7);
+  background: rgba(var(--background-color), 0.7);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1000;
+  @include theme-transition;
 }
 
 .table-container {
@@ -184,46 +247,218 @@
 
   .po-table {
     width: 100%;
+    background: var(--background-color);
+    @include theme-transition;
     
-    th.mat-header-cell {
-      font-weight: bold;
-      color: rgba(0, 0, 0, 0.87);
-      padding: 0 8px;
-      
-      &:first-child {
-        padding-left: 24px;
+    ::ng-deep {
+      .mat-header-row {
+        background-color: var(--background-color);
+        @include theme-transition;
       }
-      
-      &:last-child {
-        padding-right: 24px;
-      }
-    }
 
-    td.mat-cell {
-      padding: 0 8px;
-      
-      &:first-child {
-        padding-left: 24px;
+      .mat-header-cell {
+        color: var(--text-color) !important;
+        font-weight: 500;
+        @include theme-transition;
       }
-      
-      &:last-child {
-        padding-right: 24px;
-      }
-    }
 
-    .mat-row:hover {
-      background-color: rgba(0, 0, 0, 0.04);
+      .mat-row {
+        background-color: var(--background-color);
+        @include theme-transition;
+      }
+
+      .mat-cell {
+        color: var(--text-color) !important;
+        @include theme-transition;
+
+        > * {
+          color: var(--text-color) !important;
+        }
+      }
+
+      td.mat-cell {
+        color: var(--text-color) !important;
+
+        > * {
+          color: var(--text-color) !important;
+        }
+      }
+
+      th.mat-header-cell {
+        color: var(--text-color) !important;
+      }
+
+      // Target specific cell content
+      .mat-column-poNumber,
+      .mat-column-contractId,
+      .mat-column-amount,
+      .mat-column-createdDate {
+        color: var(--text-color) !important;
+        
+        > * {
+          color: var(--text-color) !important;
+        }
+      }
     }
   }
 
   mat-chip {
     min-height: 24px;
     font-size: 12px;
-    color: white;
+    color: var(--text-color);
   }
 }
 
 .mat-column-actions {
-  width: 150px;  // Increased width to accommodate three buttons
+  width: 150px;
   text-align: center;
+}
+
+// Dark theme support
+:host-context(.dark-theme) {
+  .po-list-container {
+    background: lighten($navy, 5%);
+
+    .header h1 {
+      color: rgba($white, 0.9);
+    }
+  }
+
+  .filter-section {
+    background: lighten($navy, 5%);
+    border-color: rgba($white, 0.1);
+
+    .filter-form {
+      mat-form-field {
+        ::ng-deep {
+          // Input text
+          .mat-mdc-input-element {
+            color: rgba($white, 0.9) !important;
+          }
+
+          // Label
+          .mat-mdc-floating-label {
+            color: rgba($white, 0.7) !important;
+          }
+
+          // Placeholder
+          .mat-mdc-input-element::placeholder {
+            color: rgba($white, 0.5) !important;
+          }
+
+          // Outline
+          .mdc-notched-outline__leading,
+          .mdc-notched-outline__notch,
+          .mdc-notched-outline__trailing {
+            border-color: rgba($white, 0.2) !important;
+          }
+
+          // Date picker toggle
+          .mat-datepicker-toggle {
+            color: rgba($white, 0.7) !important;
+          }
+
+          // Date picker inputs
+          input.mat-mdc-input-element {
+            color: rgba($white, 0.9) !important;
+            
+            &::placeholder {
+              color: rgba($white, 0.5) !important;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .table-container {
+    background: lighten($navy, 5%);
+    border-color: rgba($white, 0.1);
+    box-shadow: 0 2px 4px rgba(black, 0.2);
+
+    .po-table {
+      background: lighten($navy, 5%);
+
+      ::ng-deep {
+        // Target MDC table cells
+        .mat-mdc-table {
+          .mat-mdc-header-cell {
+            color: rgba($white, 0.9) !important;
+          }
+          
+          .mat-mdc-cell {
+            color: rgba($white, 0.9) !important;
+          }
+        }
+
+        // Target the actual text nodes
+        td.mat-mdc-cell {
+          color: rgba($white, 0.9) !important;
+          
+          // Target text content directly
+          &:not(:empty) {
+            color: rgba($white, 0.9) !important;
+          }
+        }
+
+        // Target specific columns
+        td[class*="mat-column-"] {
+          color: rgba($white, 0.9) !important;
+        }
+
+        // Target header cells
+        th.mat-mdc-header-cell {
+          color: rgba($white, 0.9) !important;
+        }
+
+        // Force color on text content
+        .mat-mdc-cell, .mat-mdc-header-cell {
+          &, & * {
+            color: rgba($white, 0.9) !important;
+          }
+        }
+      }
+    }
+  }
+
+  .empty-state {
+    color: rgba($white, 0.7);
+
+    mat-icon {
+      color: rgba($white, 0.7);
+    }
+
+    p {
+      color: rgba($white, 0.9);
+    }
+
+    small {
+      color: rgba($white, 0.7);
+    }
+  }
+
+  mat-paginator {
+    background: lighten($navy, 5%);
+    color: rgba($white, 0.9);
+    border-color: rgba($white, 0.1);
+  }
+
+  .loading-overlay {
+    background: rgba(lighten($navy, 5%), 0.7);
+  }
+
+  .table-container {
+    .po-table {
+      ::ng-deep {
+        // Target cells with newer Angular Material classes
+        .mdc-data-table__header-cell {
+          color: var(--text-color) !important;
+        }
+
+        .mdc-data-table__cell {
+          color: var(--text-color) !important;
+        }
+      }
+    }
+  }
 }

@@ -7,95 +7,343 @@
 @import '../../../../../assets/styles/mixins';
 
 .recent-activity {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  padding: 1rem;
+  background: var(--background-color);
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba($dark-gray, 0.1);
+  padding: 24px;
+  margin-top: 24px;
+  @include theme-transition;
+  border: 1px solid rgba($dark-gray, 0.1);
 }
 
 .activities-table-container {
-  width: 100%;
-  overflow-x: auto;
-  background: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  margin-top: 16px;
+  background: var(--background-color);
+  @include theme-transition;
 }
 
 .activities-table {
   width: 100%;
   border-collapse: separate;
   border-spacing: 0;
+  background: var(--background-color);
+  @include theme-transition;
 
-  .mat-header-cell {
-    background-color: #f8f9fa;
-    color: #495057;
-    font-weight: 600;
-    font-size: 0.875rem;
-    padding: 1rem;
-    white-space: nowrap;
-  }
+  ::ng-deep {
+    th.mat-header-cell {
+      color: var(--text-color) !important;
+      @include theme-transition;
+    }
 
-  .mat-cell {
-    padding: 1rem;
-    color: #212529;
-    font-size: 0.875rem;
-    border-top: 1px solid #e9ecef;
-  }
-
-  .mat-row {
-    &:hover {
-      background-color: #f8f9fa;
+    .mat-column-icon,
+    .mat-column-description,
+    .mat-column-timestamp {
+      .mat-header-cell {
+        color: var(--text-color) !important;
+        @include theme-transition;
+      }
     }
   }
+}
 
-  // Icon column styling
-  .mat-column-icon {
-    width: 80px;
-    text-align: center;
+.icon-column {
+  width: 72px;
+  padding: 0 16px;
+}
 
-    .mat-icon {
-      vertical-align: middle;
-    }
-  }
+.timestamp-column {
+  width: 180px;
+  text-align: right;
+  padding-right: 24px;
+  color: var(--text-color);
+  @include theme-transition;
+}
 
-  // Description column styling
-  .mat-column-description {
-    min-width: 300px;
-  }
+.description-cell {
+  padding: 16px 24px;
+  color: var(--text-color);
+}
 
-  // Timestamp column styling
-  .mat-column-timestamp {
-    width: 200px;
-    white-space: nowrap;
-  }
+.status-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba($dark-gray, 0.1);
+  @include theme-transition;
+}
+
+.status-icon.contract {
+  background: rgba(#1976d2, 0.1);
+  color: #1976d2;
+}
+
+.status-icon.purchase_order {
+  background: rgba(#f57c00, 0.1);
+  color: #f57c00;
+}
+
+.status-icon.system {
+  background: rgba($dark-gray, 0.1);
+  color: $dark-gray;
+}
+
+.status-icon.warning {
+  background: rgba(#f57c00, 0.1);
+  color: #f57c00;
+}
+
+.status-icon.success {
+  background: rgba(#2e7d32, 0.1);
+  color: #2e7d32;
+}
+
+.status-icon.error {
+  background: rgba(#d32f2f, 0.1);
+  color: #d32f2f;
+}
+
+.status-icon.info {
+  background: rgba(#1976d2, 0.1);
+  color: #1976d2;
+}
+
+.activity-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.activity-description {
+  font-size: 14px;
+  color: var(--text-color);
+  @include theme-transition;
+}
+
+.activity-metadata {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.entity-id {
+  font-size: 12px;
+  color: var(--text-color);
+  font-family: monospace;
+  background: rgba($dark-gray, 0.1);
+  padding: 2px 6px;
+  border-radius: 4px;
+  @include theme-transition;
+}
+
+.status-chip {
+  font-size: 12px;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-weight: 500;
+  @include theme-transition;
+}
+
+.status-chip.warning {
+  background: rgba(#f57c00, 0.1);
+  color: #f57c00;
+}
+
+.status-chip.success {
+  background: rgba(#2e7d32, 0.1);
+  color: #2e7d32;
+}
+
+.status-chip.error {
+  background: rgba(#d32f2f, 0.1);
+  color: #d32f2f;
+}
+
+.status-chip.info {
+  background: rgba(#1976d2, 0.1);
+  color: #1976d2;
+}
+
+.timestamp {
+  font-size: 12px;
+  color: var(--text-color);
+  white-space: nowrap;
+  opacity: 0.7;
+  @include theme-transition;
 }
 
 .no-activities {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  padding: 2rem;
-  background: white;
-  border-radius: 8px;
-  gap: 0.5rem;
-
-  .mat-icon {
-    color: #6c757d;
-  }
-
-  p {
-    margin: 0;
-    color: #6c757d;
-  }
+  padding: 48px 0;
+  color: var(--text-color);
+  opacity: 0.7;
+  @include theme-transition;
 }
 
-.loading-container, .error-container {
+.no-activities mat-icon {
+  font-size: 48px;
+  width: 48px;
+  height: 48px;
+  margin-bottom: 16px;
+}
+
+.error-container {
+  background: rgba(#d32f2f, 0.1);
+  color: #d32f2f;
+  padding: 16px;
+  border-radius: 4px;
+  margin: 16px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.error-message {
+  margin: 0;
+}
+
+.loading-container {
   display: flex;
   justify-content: center;
-  align-items: center;
-  padding: 2rem;
-  background: white;
-  border-radius: 8px;
+  padding: 48px 0;
+}
+
+tr.mat-row:hover {
+  background: rgba($dark-gray, 0.04);
+  @include theme-transition;
+}
+
+.mat-header-cell {
+  font-weight: 500;
+  color: var(--text-color);
+  opacity: 0.87;
+  @include theme-transition;
+}
+
+.header-cell {
+  color: var(--text-color) !important;
+  @include theme-transition;
+}
+
+// Dark theme support
+:host-context(.dark-theme) {
+  .recent-activity {
+    background: lighten($navy, 5%);
+    border-color: rgba($white, 0.1);
+    box-shadow: 0 2px 4px rgba(black, 0.2);
+  }
+
+  .activities-table-container,
+  .activities-table {
+    background: lighten($navy, 5%);
+  }
+
+  ::ng-deep {
+    th.mat-header-cell {
+      color: rgba($white, 0.9) !important;
+    }
+
+    .mat-column-icon,
+    .mat-column-description,
+    .mat-column-timestamp {
+      .mat-header-cell {
+        color: rgba($white, 0.9) !important;
+      }
+    }
+  }
+
+  .mat-header-cell,
+  .mat-cell,
+  .description-cell,
+  .activity-description,
+  .timestamp-column,
+  .timestamp {
+    color: rgba($white, 0.9);
+  }
+
+  .entity-id {
+    background: rgba($white, 0.1);
+    color: rgba($white, 0.9);
+  }
+
+  .status-icon {
+    background: rgba($white, 0.1);
+
+    &.contract {
+      background: rgba(#1976d2, 0.2);
+      color: lighten(#1976d2, 20%);
+    }
+
+    &.purchase_order {
+      background: rgba(#f57c00, 0.2);
+      color: lighten(#f57c00, 20%);
+    }
+
+    &.system {
+      background: rgba($white, 0.2);
+      color: rgba($white, 0.7);
+    }
+
+    &.warning {
+      background: rgba(#f57c00, 0.2);
+      color: lighten(#f57c00, 20%);
+    }
+
+    &.success {
+      background: rgba(#2e7d32, 0.2);
+      color: lighten(#2e7d32, 20%);
+    }
+
+    &.error {
+      background: rgba(#d32f2f, 0.2);
+      color: lighten(#d32f2f, 20%);
+    }
+
+    &.info {
+      background: rgba(#1976d2, 0.2);
+      color: lighten(#1976d2, 20%);
+    }
+  }
+
+  .status-chip {
+    &.warning {
+      background: rgba(#f57c00, 0.2);
+      color: lighten(#f57c00, 20%);
+    }
+
+    &.success {
+      background: rgba(#2e7d32, 0.2);
+      color: lighten(#2e7d32, 20%);
+    }
+
+    &.error {
+      background: rgba(#d32f2f, 0.2);
+      color: lighten(#d32f2f, 20%);
+    }
+
+    &.info {
+      background: rgba(#1976d2, 0.2);
+      color: lighten(#1976d2, 20%);
+    }
+  }
+
+  .no-activities {
+    color: rgba($white, 0.7);
+    
+    mat-icon {
+      color: rgba($white, 0.7);
+    }
+  }
+
+  tr.mat-row:hover {
+    background: rgba($white, 0.05);
+  }
+
+  .header-cell {
+    color: rgba($white, 0.9) !important;
+  }
 }

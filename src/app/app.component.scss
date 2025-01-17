@@ -13,7 +13,7 @@
 // Main application wrapper with theme support
 // -----------------------------------------------------------------------------
 
-.app-container {
+.app-root {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -23,172 +23,122 @@
 }
 
 // -----------------------------------------------------------------------------
-// Header Component
-// Fixed position header with theme-aware styling
+// Main Container
 // -----------------------------------------------------------------------------
 
-.app-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: $header-height;
-  z-index: $z-index-dropdown;
-  background-color: var(--background-color);
-  border-bottom: 1px solid var(--border-color);
-  box-shadow: 0 2px 4px var(--shadow-color);
-  @include theme-transition;
-  
-  @include mobile {
-    height: calc($header-height * 0.875); // Slightly smaller on mobile
-  }
-}
-
-// -----------------------------------------------------------------------------
-// Main Content Area
-// Flexible content container with sidebar integration
-// -----------------------------------------------------------------------------
-
-.app-content {
+.main-container {
   display: flex;
   flex: 1;
   margin-top: $header-height;
-  padding: $spacing-base;
+  min-height: calc(100vh - #{$header-height});
+  @include theme-transition;
+}
+
+// -----------------------------------------------------------------------------
+// Content Container
+// -----------------------------------------------------------------------------
+
+.content-container {
+  flex: 1;
+  width: 100%;
+  min-height: 100%;
+  background-color: var(--background-color);
   @include theme-transition;
 
-  @include mobile {
-    margin-top: calc($header-height * 0.875);
-    padding: $spacing-base / 2;
-    flex-direction: column;
-  }
-
-  @include tablet {
-    padding: $spacing-medium;
-  }
-
-  @include desktop {
-    padding: $spacing-large;
+  &.no-nav {
+    margin-left: 0;
+    background-color: var(--background-color);
   }
 }
 
 // -----------------------------------------------------------------------------
-// Sidebar Component
-// Collapsible sidebar with responsive behavior
+// Content Wrapper
 // -----------------------------------------------------------------------------
 
-.app-sidebar {
-  width: $sidebar-width;
-  background-color: var(--background-color);
-  border-right: 1px solid var(--border-color);
-  overflow-y: auto;
-  @include theme-transition;
-  @include scrollbar;
+.content-wrapper {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 24px;
+  height: 100%;
+  box-sizing: border-box;
 
   @include mobile {
-    position: fixed;
-    left: 0;
-    top: calc($header-height * 0.875);
-    bottom: 0;
-    transform: translateX(-100%);
-    z-index: $z-index-dropdown - 1;
-    transition: transform $theme-transition-duration $theme-transition-timing;
+    padding: 16px;
+  }
+}
 
-    &.sidebar-open {
-      transform: translateX(0);
+// Auth pages special treatment
+.content-container.no-nav .content-wrapper {
+  max-width: 100%;
+  padding: 0;
+  height: calc(100vh - #{$header-height});
+}
+
+// -----------------------------------------------------------------------------
+// Accessibility Features
+// -----------------------------------------------------------------------------
+
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--background-color);
+  color: var(--text-color);
+  padding: 8px;
+  z-index: $z-index-overlay;
+  transition: top 0.3s;
+  @include theme-transition;
+
+  &:focus {
+    top: 0;
+  }
+}
+
+.sr-only {
+  @include screen-reader-only;
+}
+
+// -----------------------------------------------------------------------------
+// Dark Theme Support
+// -----------------------------------------------------------------------------
+
+:host-context(.dark-theme) {
+  .app-root {
+    background-color: lighten($navy, 5%);
+  }
+
+  .content-container {
+    background-color: lighten($navy, 5%);
+
+    &.no-nav {
+      background-color: lighten($navy, 5%);
     }
   }
 
-  @include tablet {
-    width: 200px;
+  .skip-link {
+    background-color: lighten($navy, 8%);
+    color: rgba($white, 0.9);
   }
 }
 
 // -----------------------------------------------------------------------------
-// Main Content
-// Primary content area with responsive padding
+// High Contrast Mode Support
 // -----------------------------------------------------------------------------
 
-.app-main {
-  flex: 1;
-  padding: $spacing-base;
-  overflow-y: auto;
-  background-color: var(--background-color);
-  @include theme-transition;
-  @include scrollbar;
-
-  @include mobile {
-    padding: calc($spacing-base / 2);
-  }
-
-  @include tablet {
-    padding: $spacing-medium;
-  }
-
-  @include desktop {
-    padding: $spacing-large;
+@media (forced-colors: active) {
+  .app-root {
+    forced-color-adjust: none;
   }
 }
 
 // -----------------------------------------------------------------------------
-// Loading State
-// Full-screen loading overlay
-// -----------------------------------------------------------------------------
-
-.app-loading {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: var(--overlay-background);
-  z-index: $z-index-overlay;
-  @include flex-center;
-  @include theme-transition;
-}
-
-// -----------------------------------------------------------------------------
-// Print Styles
-// Optimized layout for printed pages
-// -----------------------------------------------------------------------------
-
-@include print {
-  .app-header,
-  .app-sidebar {
-    display: none;
-  }
-
-  .app-content {
-    margin: 0;
-    padding: 0;
-  }
-
-  .app-main {
-    padding: 0;
-  }
-}
-
-// -----------------------------------------------------------------------------
-// Accessibility Enhancements
-// High contrast and reduced motion support
+// Reduced Motion Support
 // -----------------------------------------------------------------------------
 
 @media (prefers-reduced-motion: reduce) {
-  .app-sidebar,
-  .app-container,
-  .app-header,
-  .app-main {
+  .app-root,
+  .content-container,
+  .skip-link {
     transition: none;
-  }
-}
-
-// High contrast mode adjustments
-@media (prefers-contrast: high) {
-  .app-header {
-    border-bottom: 2px solid var(--text-color);
-    box-shadow: none;
-  }
-
-  .app-sidebar {
-    border-right: 2px solid var(--text-color);
   }
 }
