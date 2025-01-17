@@ -12,6 +12,7 @@ import { RouterModule, Routes } from '@angular/router';
 // Internal imports
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { AuthGuard } from '@core/auth/auth.guard';
+import { DashboardService } from './services/dashboard.service';
 
 /**
  * Dashboard routes configuration with role-based access control
@@ -28,20 +29,20 @@ const routes: Routes = [
       breadcrumb: 'Dashboard',
       analytics: {
         page: 'dashboard',
-        category: 'navigation'
+        category: 'navigation',
       },
       performance: {
         trackMetrics: true,
-        criticalPath: true
-      }
+        criticalPath: true,
+      },
     },
     resolve: {
       // Add resolvers if needed for data prefetching
     },
     children: [
       // Child routes can be added here if needed
-    ]
-  }
+    ],
+  },
 ];
 
 /**
@@ -49,13 +50,12 @@ const routes: Routes = [
  * performance monitoring, and error handling.
  */
 @NgModule({
-  imports: [
-    RouterModule.forChild(routes)
-  ],
+  imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
   providers: [
     // Add route-specific providers if needed
-  ]
+    DashboardService,
+  ],
 })
 export class DashboardRoutingModule {
   constructor() {}

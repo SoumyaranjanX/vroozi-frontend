@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { catchError, map, retry, shareReplay } from 'rxjs/operators';
+import { catchError, map, retry, shareReplay, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { IActivity } from '@shared/models/activity.model';
 
@@ -16,17 +16,21 @@ export class ActivityService {
     constructor(private readonly http: HttpClient) {}
 
     invalidateActivitiesCache(): void {
+        console.log('Invalidating activities cache');
         this.activitiesCache$ = undefined;
     }
 
     getActivities(): Observable<IActivity[]> {
+        console.log('Getting activities, cache exists:', !!this.activitiesCache$);
         if (!this.activitiesCache$) {
             this.activitiesCache$ = this.http.get<IActivity[]>(this.apiUrl).pipe(
+                tap(response => console.log('API Response:', response)),
                 retry(this.MAX_RETRIES),
                 map(activities => activities.map(activity => this.transformActivity(activity))),
                 map(activities => activities.sort((a, b) => 
                     new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
                 )),
+                tap(transformed => console.log('Transformed activities:', transformed)),
                 shareReplay(1),
                 catchError(this.handleError)
             );
@@ -35,7 +39,7 @@ export class ActivityService {
     }
 
     private transformActivity(activity: any): IActivity {
-        return {
+        const transformed = {
             id: activity.id || activity._id,
             type: activity.type,
             action: activity.action,
@@ -43,11 +47,14 @@ export class ActivityService {
             timestamp: new Date(activity.timestamp),
             userId: activity.userId,
             userName: activity.userName,
-            metadata: activity.metadata || {}
+            metadata: activity.metadata || {},
+            ui: activity.ui
         };
+        return transformed;
     }
 
     private handleError(error: HttpErrorResponse): Observable<never> {
+        console.error('API Error:', error);
         let errorMessage = 'An error occurred';
 
         if (error.error instanceof ErrorEvent) {

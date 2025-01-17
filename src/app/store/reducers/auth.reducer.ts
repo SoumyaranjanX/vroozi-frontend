@@ -28,7 +28,7 @@ export const reducer = createReducer(
     user,
     accessToken,
     refreshToken,
-    tokenExpiry: tokenExpiry.toString(),
+    tokenExpiry: tokenExpiry?.toString() || null,
     loading: false,
     error: null,
     loginAttempts: 0

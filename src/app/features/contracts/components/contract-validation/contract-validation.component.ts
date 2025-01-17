@@ -10,6 +10,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatIconModule } from '@angular/material/icon';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { environment } from 'src/environments/environment';
 
 import { 
     IContract, 
@@ -55,7 +57,7 @@ export class ContractValidationComponent implements OnInit, OnDestroy {
     confidenceLevel: number = 0;
 
     // Document viewer properties
-    documentUrl: string | null = null;
+    documentUrl: SafeResourceUrl | null = null;
     contractId: string | null = null;
     zoomLevel = 1;
     minZoom = 0.5;
@@ -88,7 +90,8 @@ export class ContractValidationComponent implements OnInit, OnDestroy {
         private readonly snackBar: MatSnackBar,
         private readonly router: Router,
         private readonly route: ActivatedRoute,
-        private readonly cdr: ChangeDetectorRef
+        private readonly cdr: ChangeDetectorRef,
+        private readonly sanitizer: DomSanitizer
     ) {
         this.validationForm = this.initForm();
     }
@@ -109,7 +112,13 @@ export class ContractValidationComponent implements OnInit, OnDestroy {
                     tap((contract: IContract) => {
                         console.log('Contract data received:', contract); // Debug log
                         this.contract = contract;
-                        this.documentUrl = contract.file_path;
+                        if (contract.file_path) {
+                            const fullUrl = `${environment.s3BucketUrl}/${contract.file_path}`;
+                            this.documentUrl = this.sanitizer.bypassSecurityTrustResourceUrl(fullUrl);
+                            console.log('Document URL:', fullUrl); // Debug log
+                        } else {
+                            this.documentUrl = null;
+                        }
                         this.confidenceLevel = contract.validation_notes?.confidence_level ? Number(contract.validation_notes.confidence_level) : 0;
                         
                         // Initialize form with the contract data

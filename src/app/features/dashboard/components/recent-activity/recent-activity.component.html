@@ -18,9 +18,9 @@
   </div>
 
   <!-- Activities Table -->
-  <div class="activities-table-container" *ngIf="(loading$ | async) === false && !(error$ | async)">
+  <div class="activities-table-container" *ngIf="hasLoaded && (loading$ | async) === false && !(error$ | async)">
     <ng-container *ngIf="activities$ | async as activities">
-      <table mat-table [dataSource]="activities" class="activities-table" *ngIf="activities.length > 0">
+      <table mat-table [dataSource]="dataSource" class="activities-table" *ngIf="activities.length > 0">
         <!-- Icon Column -->
         <ng-container matColumnDef="icon">
           <th mat-header-cell *matHeaderCellDef class="icon-column"> Type </th>
@@ -55,14 +55,14 @@
           </td>
         </ng-container>
 
-        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns; trackBy: trackById"></tr>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
       </table>
 
       <!-- No activities message -->
       <div *ngIf="activities.length === 0" class="no-activities">
         <mat-icon>info</mat-icon>
-        <p>{{ 'DASHBOARD.RECENT_ACTIVITY.NO_ACTIVITIES' | translate }}</p>
+        <p>No recent activities to display</p>
       </div>
     </ng-container>
   </div>

@@ -15,10 +15,6 @@
                 </button>
                 <h1>Contract Details</h1>
             </div>
-            <div class="confidence-indicator" [ngClass]="getConfidenceClass()">
-                <mat-icon>{{ getConfidenceIcon() }}</mat-icon>
-                <span>OCR Confidence: {{ confidenceLevel | number:'1.0-2' }}%</span>
-            </div>
         </div>
 
         <div class="validation-container">
@@ -26,18 +22,6 @@
             <div class="document-section">
                 <div class="document-toolbar">
                     <h2>Document Preview</h2>
-                    <div class="zoom-controls">
-                        <button mat-icon-button (click)="zoomOut()" [disabled]="zoomLevel <= minZoom">
-                            <mat-icon>zoom_out</mat-icon>
-                        </button>
-                        <span class="zoom-level">{{ (zoomLevel * 100) | number:'1.0-0' }}%</span>
-                        <button mat-icon-button (click)="zoomIn()" [disabled]="zoomLevel >= maxZoom">
-                            <mat-icon>zoom_in</mat-icon>
-                        </button>
-                        <button mat-icon-button (click)="resetZoom()">
-                            <mat-icon>zoom_out_map</mat-icon>
-                        </button>
-                    </div>
                 </div>
                 <div class="document-viewer" [style.transform]="'scale(' + zoomLevel + ')'">
                     <ng-container *ngIf="documentUrl">

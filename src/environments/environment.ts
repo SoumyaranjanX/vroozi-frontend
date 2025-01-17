@@ -5,7 +5,7 @@ export const environment: Environment = {
   version: '2.0.0',
   apiUrl: 'https://vroozi-backend-pz5d.onrender.com/api/v1',
   googleVisionApiUrl: 'https://vision.googleapis.com/v1',
-  s3BucketUrl: 'http://localhost:9000',
+  s3BucketUrl: 'https://pub-dc2feb6aa8314296ab626daad5932a49.r2.dev',
   cdnUrl: 'https://cdn.vroozi.com',
 
   apiRateLimit: {
@@ -63,7 +63,7 @@ export const environment: Environment = {
   },
 
   // Company Information
-  companyName: 'VROOZI',
+  companyName: 'Contract Processing',
   companyLogo: 'assets/images/company-logo.png',
   companyAddress: '123 Business Street, Los Angeles, CA 90001',
   companyPhone: '(555) 123-4567',

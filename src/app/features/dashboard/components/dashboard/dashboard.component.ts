@@ -9,7 +9,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { Store } from '@ngrx/store';
 import { Observable, Subject, BehaviorSubject } from 'rxjs';
-import { takeUntil, filter } from 'rxjs/operators';
+import { finalize, switchMap, takeUntil, filter } from 'rxjs/operators';
 
 import { IAppState } from '@store/state/app.state';
 import { IActivity } from '@shared/models/activity.model';
@@ -17,13 +17,8 @@ import { selectRecentActivities, selectActivitiesLoading } from '@store/selector
 import * as ActivityActions from '@store/actions/activity.actions';
 import { RecentActivityComponent } from '../recent-activity/recent-activity.component';
 import { StatsCardComponent } from '../stats-card/stats-card.component';
-
-interface DashboardMetrics {
-  activeContracts: number;
-  processingQueue: number;
-  pendingReview: number;
-  posGenerated: number;
-}
+import { DashboardMetrics, DashboardService } from '../../services/dashboard.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-dashboard',
@@ -39,46 +34,46 @@ interface DashboardMetrics {
     MatGridListModule,
     MatProgressSpinnerModule,
     RecentActivityComponent,
-    StatsCardComponent
-  ]
+    StatsCardComponent,
+  ],
 })
 export class DashboardComponent implements OnInit, OnDestroy {
+  metrics$: Observable<DashboardMetrics>;
   activities$: Observable<IActivity[]>;
   loading = false;
   error: string | null = null;
   private destroy$ = new Subject<void>();
-  
-  // Dashboard metrics
-  metrics: DashboardMetrics = {
-    activeContracts: 0,
-    processingQueue: 0,
-    pendingReview: 0,
-    posGenerated: 0
-  };
 
   // Grid columns based on screen size
   gridCols$ = new BehaviorSubject<number>(4);
 
   constructor(
     private store: Store<IAppState>,
+    private dashboardService: DashboardService,
+    private snackBar: MatSnackBar,
     private router: Router
   ) {
+    // Initialize data streams
+    this.metrics$ = this.dashboardService.metrics$;
     this.activities$ = this.store.select(selectRecentActivities);
   }
 
   ngOnInit(): void {
     // Initial load
+    this.initializeDashboard();
     this.loadActivities();
     this.setupGridColumns();
 
     // Subscribe to router events to refresh data when returning to dashboard
-    this.router.events.pipe(
-      filter(event => event instanceof NavigationEnd),
-      filter(event => (event as NavigationEnd).url === '/dashboard'),
-      takeUntil(this.destroy$)
-    ).subscribe(() => {
-      this.loadActivities();
-    });
+    this.router.events
+      .pipe(
+        filter(event => event instanceof NavigationEnd),
+        filter(event => (event as NavigationEnd).url === '/dashboard'),
+        takeUntil(this.destroy$)
+      )
+      .subscribe(() => {
+        this.loadActivities();
+      });
 
     // Set up auto-refresh every 30 seconds
     const REFRESH_INTERVAL = 30000; // 30 seconds
@@ -97,6 +92,31 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
+  /**
+   * Initialize dashboard data and set up auto-refresh
+   */
+  private initializeDashboard(): void {
+    // Initial data load
+    this.loadDashboardData();
+  }
+
+  /**
+   * Load dashboard data
+   */
+  private loadDashboardData(): void {
+    this.loading = true;
+    this.error = null;
+
+    this.dashboardService
+      .fetchDashboardData()
+      .pipe(
+        takeUntil(this.destroy$),
+        finalize(() => {
+          this.loading = false;
+        })
+      )
+      .subscribe();
+  }
   private loadActivities(): void {
     this.store.dispatch(ActivityActions.loadActivities());
   }
@@ -126,5 +146,27 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.destroy$.subscribe(() => {
       window.removeEventListener('resize', updateGridCols);
     });
+  }
+
+  /**
+   * Returns tooltip text for each metric card
+   */
+  getMetricTooltip(metricKey: string, metrics: DashboardMetrics): string {
+    switch (metricKey) {
+      case 'activeContracts':
+        return `Active contracts: ${
+          metrics.activeContracts.count
+        }\nAverage age: ${metrics.activeContracts.averageAge.toFixed(1)} days`;
+      case 'processingQueue':
+        return `Processing queue: ${
+          metrics.processingQueue.count
+        }\nAverage time: ${metrics.processingQueue.averageProcessingTime.toFixed(1)} mins`;
+      case 'pendingReview':
+        return `Pending review: ${metrics.pendingReview.count}\nUrgent reviews: ${metrics.pendingReview.urgentReviews}`;
+      case 'posGenerated':
+        return `POs generated: ${metrics.posGenerated.count}\nTotal POs: ${metrics.posGenerated.totalPos}`;
+      default:
+        return '';
+    }
   }
 }

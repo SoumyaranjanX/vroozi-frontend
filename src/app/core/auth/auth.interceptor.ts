@@ -1,185 +1,134 @@
-/**
- * @fileoverview Enhanced HTTP interceptor implementing secure authentication token management,
- * automatic token refresh, and request validation for the Contract Processing System.
- * @version 1.0.0
- * @license MIT
- */
-
-import { Injectable } from '@angular/core'; // @angular/core ^15.0.0
-import { 
-  HttpInterceptor, 
-  HttpRequest, 
-  HttpHandler, 
-  HttpEvent, 
-  HttpErrorResponse,
-  HttpHeaders
-} from '@angular/common/http'; // @angular/common/http ^15.0.0
-import { 
-  Observable, 
-  throwError, 
-  BehaviorSubject, 
-  timer 
-} from 'rxjs'; // rxjs ^7.8.0
-import { 
-  catchError, 
-  switchMap, 
-  filter, 
-  take, 
-  finalize, 
-  timeout,
-  retry,
-  mergeMap
-} from 'rxjs/operators'; // rxjs/operators ^7.8.0
-
-import { AuthService } from './auth.service';
+import { Injectable } from '@angular/core';
+import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HttpErrorResponse } from '@angular/common/http';
+import { Observable, throwError, BehaviorSubject } from 'rxjs';
+import { catchError, filter, take, switchMap, finalize } from 'rxjs/operators';
+import { AuthService } from '../auth/auth.service';
+import { LoadingService } from '../services/loading.service';
+import { environment } from '../../../environments/environment';
+import { jwtDecode } from 'jwt-decode';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
   private isRefreshing = false;
-  private refreshTokenSubject: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(null);
-  private readonly REQUEST_TIMEOUT_MS = 30000; // 30 second timeout
-  private readonly MAX_RETRY_ATTEMPTS = 3;
+  private refreshTokenSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null);
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private loadingService: LoadingService) {}
 
-  /**
-   * Intercepts HTTP requests to add authentication, handle token refresh, and implement security measures
-   * @param request The outgoing HTTP request
-   * @param next The HTTP handler for the request chain
-   * @returns Observable<HttpEvent<any>> The modified request with security enhancements
-   */
-  intercept(
-    request: HttpRequest<any>, 
-    next: HttpHandler
-  ): Observable<HttpEvent<any>> {
-    // Skip auth header for public endpoints
-    if (this.isPublicEndpoint(request.url)) {
-      return next.handle(request);
+  intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    // Skip loading indicator for refresh token requests
+    if (!this.isAuthRequest(request.url)) {
+      this.loadingService.show();
     }
 
-    // Add auth header
-    const token = this.authService.getToken();
-    if (token) {
-      // Check if this is a FormData request
-      if (request.body instanceof FormData) {
-        // For FormData, only add Authorization header
-        request = request.clone({
-          setHeaders: {
-            Authorization: `Bearer ${token}`
-          }
-        });
-      } else {
-        // For other requests, add all headers
-        request = request.clone({
-          setHeaders: {
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json',
-            Accept: 'application/json'
-          }
-        });
-      }
+    // Don't intercept auth requests
+    if (this.isAuthRequest(request.url)) {
+      return next.handle(request.clone({ withCredentials: true })).pipe(finalize(() => this.loadingService.hide()));
     }
+
+    // Clone the request and add base URL for non-external requests
+    request = this.addBaseUrl(request);
+
+    // Add authorization header if needed
+    if (!this.isAuthRequest(request.url)) {
+      request = this.addAuthHeader(request);
+    }
+
+    // Add credentials for cookie handling
+    request = request.clone({ withCredentials: true });
 
     return next.handle(request).pipe(
-      timeout(this.REQUEST_TIMEOUT_MS),
       catchError(error => {
         if (error instanceof HttpErrorResponse && error.status === 401) {
           return this.handle401Error(request, next);
         }
         return throwError(() => error);
+      }),
+      finalize(() => {
+        if (!this.isAuthRequest(request.url)) {
+          this.loadingService.hide();
+        }
       })
     );
   }
 
-  /**
-   * Handles 401 Unauthorized errors with token refresh logic
-   * @param request The failed HTTP request
-   * @param next The HTTP handler
-   * @returns Observable<HttpEvent<any>> The retried request with new token
-   * @private
-   */
-  private handle401Error(
-    request: HttpRequest<any>, 
-    next: HttpHandler
-  ): Observable<HttpEvent<any>> {
+  private handle401Error(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     if (!this.isRefreshing) {
       this.isRefreshing = true;
       this.refreshTokenSubject.next(null);
 
-      const token = this.authService.getToken();
-      if (token) {
-        return this.authService.refreshToken(token).pipe(
-          switchMap((response) => {
-            this.isRefreshing = false;
-            this.refreshTokenSubject.next(response.accessToken);
-            
-            // Clone request with new token
-            const clonedRequest = request.clone({
-              setHeaders: {
-                Authorization: `Bearer ${response.accessToken}`,
-                ...(!(request.body instanceof FormData) && {
-                  'Content-Type': 'application/json'
-                }),
-                Accept: 'application/json'
-              }
-            });
-            
-            return next.handle(clonedRequest);
-          }),
-          catchError((error) => {
-            this.isRefreshing = false;
-            this.authService.logout();
-            return throwError(() => error);
-          }),
-          finalize(() => {
-            this.isRefreshing = false;
-          })
-        );
-      }
+      return this.authService.refreshToken().pipe(
+        switchMap(token => {
+          this.isRefreshing = false;
+          this.refreshTokenSubject.next(token);
+          return next.handle(this.addAuthHeader(request));
+        }),
+        catchError(error => {
+          this.isRefreshing = false;
+          this.authService.handleSessionExpired();
+          return throwError(() => error);
+        })
+      );
     }
 
     return this.refreshTokenSubject.pipe(
       filter(token => token !== null),
       take(1),
-      switchMap(token => {
-        // Clone request with new token
-        const clonedRequest = request.clone({
-          setHeaders: {
-            Authorization: `Bearer ${token}`,
-            ...(!(request.body instanceof FormData) && {
-              'Content-Type': 'application/json'
-            }),
-            Accept: 'application/json'
-          }
-        });
-        return next.handle(clonedRequest);
-      })
+      switchMap(() => next.handle(this.addAuthHeader(request)))
     );
   }
 
-  /**
-   * Checks if the request URL is an authentication endpoint
-   * @param url The request URL
-   * @returns boolean True if the URL is an auth endpoint
-   * @private
-   */
-  private isPublicEndpoint(url: string): boolean {
-    const publicEndpoints = [
-      '/auth/login',
-      '/auth/register',
-      '/auth/forgot-password',
-      '/auth/reset-password',
-      '/auth/verify-email'
-    ];
-    return publicEndpoints.some(endpoint => url.includes(endpoint));
+  private addAuthHeader(request: HttpRequest<any>): HttpRequest<any> {
+    const token = this.authService.getToken();
+    if (token) {
+      const decodedToken: any = jwtDecode(token);
+      if (this.isTokenValid(decodedToken)) {
+        return request.clone({
+          setHeaders: { Authorization: `Bearer ${token}` },
+        });
+      } else {
+        // Token is expired or invalid, trigger refresh
+        this.authService.handleTokenExpiration();
+      }
+    }
+    return request;
   }
 
-  /**
-   * Generates a unique request ID for tracing
-   * @returns string The generated request ID
-   * @private
-   */
-  private generateRequestId(): string {
-    return `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+  private isTokenValid(decodedToken: any): boolean {
+    if (!decodedToken || !decodedToken.exp) {
+      return false;
+    }
+
+    const currentTime = Math.floor(Date.now() / 1000);
+    const tokenBuffer = 30; // 30 seconds buffer before expiration
+    return decodedToken.exp > currentTime + tokenBuffer;
+  }
+
+  private addBaseUrl(request: HttpRequest<any>): HttpRequest<any> {
+    if (!this.isExternalRequest(request.url)) {
+      return request.clone({
+        url: `${environment.apiUrl}${request.url}`,
+      });
+    }
+    return request;
+  }
+
+  private isAuthRequest(url: string): boolean {
+    const authPaths = ['/auth/login', '/auth/refresh', '/auth/register', '/auth/logout'];
+    return authPaths.some(path => url.includes(path));
+  }
+
+  private isExternalRequest(url: string): boolean {
+    return url.startsWith('http://') || url.startsWith('https://');
+  }
+
+  private setSecurityHeaders(request: HttpRequest<any>): HttpRequest<any> {
+    return request.clone({
+      setHeaders: {
+        ...request.headers,
+        'X-Content-Type-Options': 'nosniff',
+        'X-Frame-Options': 'DENY',
+        'X-XSS-Protection': '1; mode=block',
+      },
+    });
   }
 }

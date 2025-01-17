@@ -19,18 +19,26 @@ export const activityReducer = createReducer(
   })),
   
   // Load activities success
-  on(ActivityActions.loadActivitiesSuccess, (state, { activities }) => ({
-    ...state,
-    activities,
-    loading: false,
-    error: null
-  })),
+  on(ActivityActions.loadActivitiesSuccess, (state, { activities }) => {
+    console.log('Reducer: loadActivitiesSuccess', activities); // Debug log
+    return {
+      ...state,
+      activities: activities || [],
+      loading: false,
+      error: null
+    };
+  }),
   
   // Load activities failure
   on(ActivityActions.loadActivitiesFailure, (state, { error }) => ({
     ...state,
     loading: false,
     error
+  })),
+
+  // Clear activities (new action)
+  on(ActivityActions.clearActivities, () => ({
+    ...initialState
   }))
 );
 

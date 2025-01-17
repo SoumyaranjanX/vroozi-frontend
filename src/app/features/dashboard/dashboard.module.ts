@@ -20,12 +20,14 @@ import { MatDividerModule } from '@angular/material/divider';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { StatsCardComponent } from './components/stats-card/stats-card.component';
 import { ContractService } from '../contracts/services/contract.service';
+import { DashboardService } from './services/dashboard.service';
 import { PurchaseOrderService } from '../purchase-orders/services/purchase-order.service';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 /**
  * Feature module that bundles all dashboard-related components and dependencies.
  * Implements high-performance dashboard with real-time metrics and activity monitoring.
- * 
+ *
  * Key features:
  * - Real-time contract processing statistics
  * - Activity monitoring with visual indicators
@@ -46,12 +48,10 @@ import { PurchaseOrderService } from '../purchase-orders/services/purchase-order
     MatDividerModule,
 
     // Standalone components
-    StatsCardComponent
+    StatsCardComponent,
+    DashboardComponent,
   ],
-  providers: [
-    ContractService,
-    PurchaseOrderService
-  ]
+  providers: [ContractService, PurchaseOrderService, DashboardService],
 })
 export class DashboardModule {
   constructor() {
@@ -66,12 +66,12 @@ export class DashboardModule {
   private setupPerformanceMonitoring(): void {
     if (typeof window !== 'undefined') {
       // Monitor component render times
-      const observer = new PerformanceObserver((list) => {
-        list.getEntries().forEach((entry) => {
-          if (entry.duration > 100) { // 100ms threshold
+      const observer = new PerformanceObserver(list => {
+        list.getEntries().forEach(entry => {
+          if (entry.duration > 100) {
+            // 100ms threshold
             console.warn(
-              `Slow render detected in dashboard component: ${entry.name} ` +
-              `(${Math.round(entry.duration)}ms)`
+              `Slow render detected in dashboard component: ${entry.name} ` + `(${Math.round(entry.duration)}ms)`
             );
           }
         });

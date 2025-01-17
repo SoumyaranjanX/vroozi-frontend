@@ -8,25 +8,32 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject, catchError } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { finalize, map, tap } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 import { IUser, IUserResponse, IRegistrationResponse } from '../../shared/models/user.model';
 import { Router } from '@angular/router';
+import { LoadingService } from '../services/loading.service';
+import { NotificationService } from '../services/notification.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
   private apiUrl = environment.apiUrl;
   private currentUserSubject = new BehaviorSubject<IUser | null>(null);
-  
+  private refreshTokenInProgress = false;
+  private refreshTokenSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+
   // Observable streams
   public currentUser$ = this.currentUserSubject.asObservable();
-  public isAuthenticated$ = this.currentUser$.pipe(
-    map(user => !!user && !!this.getToken())
-  );
+  public isAuthenticated$ = this.currentUser$.pipe(map(user => !!user && !!this.getToken()));
 
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private loadingService: LoadingService,
+    private notificationService: NotificationService
+  ) {
     // Try to restore user from localStorage
     const savedUser = localStorage.getItem('currentUser');
     if (savedUser) {
@@ -39,7 +46,7 @@ export class AuthService {
     }
   }
 
-  register(data: { 
+  register(data: {
     first_name: string;
     last_name: string;
     email: string;
@@ -50,21 +57,23 @@ export class AuthService {
 
   login(email: string, password: string): Observable<IUserResponse> {
     console.log('AuthService: Making login API call to:', `${this.apiUrl}/auth/login`);
-    return this.http.post<IUserResponse>(`${this.apiUrl}/auth/login`, { email, password }).pipe(
-      tap(response => {
-        console.log('AuthService: Login API response:', response);
-        if (response && response.user) {
-          this.storeAuthData(response);
-          this.currentUserSubject.next(response.user);
-        }
-      }),
-      catchError(error => {
-        console.error('AuthService: Login API error:', error);
-        this.clearAuthData();
-        this.currentUserSubject.next(null);
-        throw error;
-      })
-    );
+    return this.http
+      .post<IUserResponse>(`${this.apiUrl}/auth/login`, { email, password }, { withCredentials: true })
+      .pipe(
+        tap(response => {
+          console.log('AuthService: Login API response:', response);
+          if (response && response.user) {
+            this.storeAuthData(response);
+            this.currentUserSubject.next(response.user);
+          }
+        }),
+        catchError(error => {
+          console.error('AuthService: Login API error:', error);
+          this.clearAuthData();
+          this.currentUserSubject.next(null);
+          throw error;
+        })
+      );
   }
 
   logout(): Observable<void> {
@@ -75,6 +84,7 @@ export class AuthService {
     if (!accessToken) {
       this.clearAuthData();
       this.currentUserSubject.next(null);
+      this.loadingService.hide();
       this.router.navigate(['/auth/login']);
       return new Observable(subscriber => {
         subscriber.next();
@@ -90,6 +100,7 @@ export class AuthService {
         // Only clear auth data after successful logout
         this.clearAuthData();
         this.currentUserSubject.next(null);
+        this.loadingService.hide();
         this.router.navigate(['/auth/login']);
       }),
       catchError(error => {
@@ -98,19 +109,77 @@ export class AuthService {
         if (error.status === 401) {
           this.clearAuthData();
           this.currentUserSubject.next(null);
+          this.loadingService.hide();
           this.router.navigate(['/auth/login']);
         }
         throw error;
+      }),
+      finalize(() => {
+        this.loadingService.hide();
       })
     );
   }
 
-  refreshToken(token: string): Observable<IUserResponse> {
-    return this.http.post<IUserResponse>(`${this.apiUrl}/auth/refresh`, { token }).pipe(
-      tap(response => {
-        this.storeAuthData(response);
-      })
-    );
+  // refreshToken(token: string): Observable<IUserResponse> {
+  //   return this.http.post<IUserResponse>(`${this.apiUrl}/auth/refresh`, { token }).pipe(
+  //     tap(response => {
+  //       this.storeAuthData(response);
+  //     })
+  //   );
+  // }
+  // Attempt to refresh the token
+  public refreshToken(): Observable<IUserResponse> {
+    if (this.refreshTokenInProgress) {
+      return this.refreshTokenSubject.asObservable();
+    }
+
+    this.refreshTokenInProgress = true;
+    this.refreshTokenSubject.next(null);
+
+    return this.http
+      .post<IUserResponse>(
+        `${this.apiUrl}/auth/refresh`,
+        {},
+        { withCredentials: true } // Enable cookies
+      )
+      .pipe(
+        tap(response => {
+          this.storeAuthData(response);
+          this.refreshTokenSubject.next(response);
+        }),
+        catchError(() => {
+          this.handleSessionExpired();
+          this.refreshTokenSubject.next(null);
+          return this.refreshTokenSubject.asObservable();
+        }),
+        finalize(() => {
+          this.refreshTokenInProgress = false;
+        })
+      );
+  }
+
+  public handleTokenExpiration(): void {
+    this.refreshToken().subscribe({
+      next: response => {
+        if (!response) {
+          this.handleSessionExpired();
+        }
+      },
+      error: () => {
+        this.handleSessionExpired();
+      },
+    });
+  }
+
+  public handleSessionExpired(): void {
+    this.clearAuthData();
+    this.currentUserSubject.next(null);
+    this.loadingService.hide();
+    this.notificationService.showWarning('Your session has expired. Please log in again.');
+
+    this.router.navigate(['/auth/login'], {
+      queryParams: { expired: 'true' },
+    });
   }
 
   // Helper methods

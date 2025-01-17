@@ -60,8 +60,10 @@ export class ContractListComponent implements OnInit, OnDestroy {
     this.dataSource = new MatTableDataSource<IContract>([]);
     this.contracts$ = this.contractService.getContracts().pipe(
       map(contracts => {
-        // Sort contracts by ID (ascending)
-        const sortedContracts = [...contracts].sort((a, b) => Number(a.id) - Number(b.id));
+        // Sort contracts by creation date (descending)
+        const sortedContracts = [...contracts].sort((a, b) => 
+          new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+        );
         this.dataSource.data = sortedContracts;
         return sortedContracts;
       })
@@ -90,11 +92,11 @@ export class ContractListComponent implements OnInit, OnDestroy {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
     
-    // Set initial sort
+    // Set initial sort to created_at descending
     if (this.sort) {
       this.sort.sort({
-        id: 'id',
-        start: 'asc',
+        id: 'created_at',
+        start: 'desc',
         disableClear: false
       });
     }

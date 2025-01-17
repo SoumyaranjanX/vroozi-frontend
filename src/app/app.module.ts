@@ -9,7 +9,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ServiceWorkerModule } from '@angular/service-worker';
 
 // NgRx Store - v15.0.0
@@ -40,6 +40,7 @@ import { ActivityEffects } from './store/effects/activity.effects';
 
 // Environment Configuration
 import { environment } from '../environments/environment';
+import { AuthInterceptor } from './core/auth/auth.interceptor';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -52,25 +53,23 @@ export function HttpLoaderFactory(http: HttpClient) {
  * Implements comprehensive module organization, state management, and core service integration.
  */
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     // Angular Core
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    
+
     // Translation
     TranslateModule.forRoot({
       defaultLanguage: 'en',
       loader: {
         provide: TranslateLoader,
         useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
-      }
+        deps: [HttpClient],
+      },
     }),
-    
+
     // Feature Modules
     AppRoutingModule,
     CoreModule,
@@ -83,28 +82,31 @@ export function HttpLoaderFactory(http: HttpClient) {
     // NgRx Store Configuration
     StoreModule.forRoot({
       purchaseOrders: poReducer,
-      activity: activityReducer
+      activity: activityReducer,
     }),
 
     // NgRx Effects Configuration
-    EffectsModule.forRoot([
-      PurchaseOrderEffects,
-      ActivityEffects
-    ]),
+    EffectsModule.forRoot([PurchaseOrderEffects, ActivityEffects]),
 
     // Development Tools Configuration
     StoreDevtoolsModule.instrument({
       maxAge: 25,
-      logOnly: environment.production
+      logOnly: environment.production,
     }),
 
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
-      registrationStrategy: 'registerImmediately'
-    })
+      registrationStrategy: 'registerImmediately',
+    }),
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
+  ],
+  bootstrap: [AppComponent],
 })
 export class AppModule {
   /**

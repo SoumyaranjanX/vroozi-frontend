@@ -2,7 +2,7 @@
 <div class="po-list-container" role="main" aria-label="Purchase Orders List">
   <div class="header">
     <h1>Purchase Orders</h1>
-    <button mat-raised-button color="primary" [routerLink]="['/purchase-orders/new']">
+    <button mat-raised-button color="primary" [routerLink]="['/contracts']">
       <mat-icon>add</mat-icon>
       New Purchase Order
     </button>
@@ -16,7 +16,7 @@
           <input matInput formControlName="contract_id" placeholder="Enter Contract ID">
         </mat-form-field>
 
-        <mat-form-field appearance="outline">
+        <!-- <mat-form-field appearance="outline">
           <mat-label>Status</mat-label>
           <mat-select formControlName="status">
             <mat-option value="">All</mat-option>
@@ -24,10 +24,10 @@
             <mat-option value="PENDING">Pending</mat-option>
             <mat-option value="CANCELLED">Cancelled</mat-option>
           </mat-select>
-        </mat-form-field>
+        </mat-form-field> -->
 
         <mat-form-field appearance="outline">
-          <mat-label>Date Range</mat-label>
+          <mat-label>Date</mat-label>
           <mat-date-range-input [rangePicker]="picker">
             <input matStartDate placeholder="Start date" formControlName="start_date">
             <input matEndDate placeholder="End date" formControlName="end_date">

@@ -247,15 +247,17 @@ export class POGenerationComponent implements OnInit, OnDestroy {
       ? JSON.parse(this.contract.extracted_data)
       : this.contract.extracted_data;
     
-    // Find vendor from parties
+    // Find vendor/provider from parties
     const vendor = this.parties.find(party => 
       party.role.toLowerCase().includes('supplier') || 
-      party.role.toLowerCase().includes('vendor')
+      party.role.toLowerCase().includes('vendor') ||
+      party.role.toLowerCase().includes('provider')
     );
 
-    // Find buyer from parties
+    // Find buyer/client from parties
     const buyer = this.parties.find(party => 
-      party.role.toLowerCase().includes('buyer')
+      party.role.toLowerCase().includes('buyer') ||
+      party.role.toLowerCase().includes('client')
     );
 
     // Get total amount from contract
@@ -345,8 +347,8 @@ export class POGenerationComponent implements OnInit, OnDestroy {
 
   getPartyColor(role: string): 'primary' | 'accent' | 'warn' {
     const lowerRole = role.toLowerCase();
-    if (lowerRole.includes('buyer')) return 'primary';
-    if (lowerRole.includes('supplier') || lowerRole.includes('vendor')) return 'accent';
+    if (lowerRole.includes('buyer') || lowerRole.includes('client')) return 'primary';
+    if (lowerRole.includes('supplier') || lowerRole.includes('vendor') || lowerRole.includes('provider')) return 'accent';
     return 'warn';
   }
 

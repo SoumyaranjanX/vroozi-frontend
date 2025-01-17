@@ -6,90 +6,86 @@
     <!-- Quick Actions -->
     <div class="header-actions">
       <!-- Upload Contract button -->
-      <button mat-raised-button 
-              color="primary"
-              routerLink="/contracts/upload"
-              aria-label="Upload new contract">
+      <button mat-raised-button color="primary" routerLink="/contracts/upload" aria-label="Upload new contract">
         <mat-icon>upload_file</mat-icon>
         Upload Contract
-      </button>
-
-      <!-- Create PO button -->
-      <button mat-raised-button 
-              color="accent"
-              routerLink="/purchase-orders/generate"
-              aria-label="Create new purchase order">
-        <mat-icon>note_add</mat-icon>
-        Create PO
       </button>
     </div>
   </div>
 
+  <ng-container *ngIf="metrics$ | async as metrics">
+    <mat-grid-list
+      class="metrics-grid"
+      [cols]="gridCols$ | async"
+      rowHeight="180px"
+      gutterSize="24px"
+      role="region"
+      aria-label="Dashboard Metrics"
+    >
+      <!-- Active Contracts metric card -->
+      <mat-grid-tile>
+        <app-stats-card
+          title="Active Contracts"
+          [count]="metrics.activeContracts.count"
+          icon="description"
+          color="#ebb502"
+          [loading]="loading"
+          [error]="error"
+          aria-label="Active contracts statistics"
+        >
+        </app-stats-card>
+      </mat-grid-tile>
+
+      <!-- Processing Queue metric card -->
+      <mat-grid-tile>
+        <app-stats-card
+          title="Processing Queue"
+          [count]="metrics.processingQueue.count"
+          icon="pending"
+          color="#037fff"
+          [loading]="loading"
+          [error]="error"
+          aria-label="Processing queue statistics"
+        >
+        </app-stats-card>
+      </mat-grid-tile>
+
+      <!-- Pending Review metric card -->
+      <mat-grid-tile>
+        <app-stats-card
+          title="Pending Review"
+          [count]="metrics.pendingReview.count"
+          icon="rate_review"
+          color="#dc3545"
+          [loading]="loading"
+          [error]="error"
+          aria-label="Pending review statistics"
+        >
+        </app-stats-card>
+      </mat-grid-tile>
+
+      <!-- POs Generated metric card -->
+      <mat-grid-tile>
+        <app-stats-card
+          title="POs Generated"
+          [count]="metrics.posGenerated.count"
+          icon="assignment_turned_in"
+          color="#28a745"
+          [loading]="loading"
+          [error]="error"
+          aria-label="Purchase orders generated statistics"
+        >
+          <div class="metric-details">
+            <small>Total POs: {{ metrics.posGenerated.totalPos }}</small>
+          </div>
+        </app-stats-card>
+      </mat-grid-tile>
+    </mat-grid-list>
+    <!-- Last updated timestamp -->
+    <div class="last-updated" aria-live="polite">Last updated: {{ metrics.lastUpdated | date : 'medium' }}</div>
+  </ng-container>
   <!-- Metrics grid section -->
-  <mat-grid-list class="metrics-grid" 
-                 [cols]="gridCols$ | async" 
-                 rowHeight="180px" 
-                 gutterSize="24px"
-                 role="region"
-                 aria-label="Dashboard Metrics">
-    
-    <!-- Active Contracts metric card -->
-    <mat-grid-tile>
-      <app-stats-card
-        title="Active Contracts"
-        [count]="metrics.activeContracts"
-        icon="description"
-        color="#ebb502"
-        [loading]="loading"
-        [error]="error"
-        aria-label="Active contracts statistics">
-      </app-stats-card>
-    </mat-grid-tile>
-
-    <!-- Processing Queue metric card -->
-    <mat-grid-tile>
-      <app-stats-card
-        title="Processing Queue"
-        [count]="metrics.processingQueue"
-        icon="pending"
-        color="#037fff"
-        [loading]="loading"
-        [error]="error"
-        aria-label="Processing queue statistics">
-      </app-stats-card>
-    </mat-grid-tile>
-
-    <!-- Pending Review metric card -->
-    <mat-grid-tile>
-      <app-stats-card
-        title="Pending Review"
-        [count]="metrics.pendingReview"
-        icon="rate_review"
-        color="#dc3545"
-        [loading]="loading"
-        [error]="error"
-        aria-label="Pending review statistics">
-      </app-stats-card>
-    </mat-grid-tile>
-
-    <!-- POs Generated metric card -->
-    <mat-grid-tile>
-      <app-stats-card
-        title="POs Generated"
-        [count]="metrics.posGenerated"
-        icon="assignment_turned_in"
-        color="#28a745"
-        [loading]="loading"
-        [error]="error"
-        aria-label="Purchase orders generated statistics">
-      </app-stats-card>
-    </mat-grid-tile>
-  </mat-grid-list>
-
-  <!-- Recent Activity section -->
-  <section class="activity-section" 
-           role="complementary" 
-           aria-label="Recent Activity">
+  <section class="activity-section" role="complementary" aria-label="Recent Activity">
     <div class="section-header">
       <h2>Recent Activity</h2>
     </div>
@@ -104,10 +100,7 @@
 </div>
 
 <!-- Error message -->
-<div class="error-message" 
-     *ngIf="error" 
-     role="alert" 
-     aria-live="assertive">
+<div class="error-message" *ngIf="error" role="alert" aria-live="assertive">
   <mat-icon color="warn">error</mat-icon>
   <span>Failed to load dashboard data. Please try again later.</span>
 </div>
@@ -131,7 +124,7 @@
     background: white;
     border-radius: 4px;
     padding: 24px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
 
   .quick-actions {
@@ -146,7 +139,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(255,255,255,0.8);
+    background: rgba(255, 255, 255, 0.8);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -172,8 +165,21 @@
     padding: 0;
     margin: -1px;
     overflow: hidden;
-    clip: rect(0,0,0,0);
+    clip: rect(0, 0, 0, 0);
     border: 0;
+  }
+
+  .metric-details {
+    font-size: 0.875rem;
+    color: rgba(0, 0, 0, 0.6);
+    margin-top: 8px;
+  }
+
+  .last-updated {
+    text-align: right;
+    color: rgba(0, 0, 0, 0.6);
+    font-size: 0.75rem;
+    margin-top: 8px;
   }
 
   /* Responsive breakpoints */
@@ -181,7 +187,7 @@
     .dashboard-container {
       padding: 16px;
     }
-    
+
     .quick-actions {
       flex-direction: column;
     }

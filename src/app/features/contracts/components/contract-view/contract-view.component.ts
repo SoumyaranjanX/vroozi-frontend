@@ -9,6 +9,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatIconModule } from '@angular/material/icon';
 import { Router, ActivatedRoute } from '@angular/router';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { environment } from 'src/environments/environment';
 
 import { 
     IContract, 
@@ -71,7 +73,7 @@ export class ContractViewComponent implements OnInit, OnDestroy {
     confidenceLevel: number = 0;
 
     // Document viewer properties
-    documentUrl: string | null = null;
+    documentUrl: SafeResourceUrl | null = null;
     contractId: string | null = null;
     zoomLevel = 1;
     minZoom = 0.5;
@@ -97,7 +99,8 @@ export class ContractViewComponent implements OnInit, OnDestroy {
         private readonly snackBar: MatSnackBar,
         private readonly router: Router,
         private readonly route: ActivatedRoute,
-        private readonly cdr: ChangeDetectorRef
+        private readonly cdr: ChangeDetectorRef,
+        private readonly sanitizer: DomSanitizer
     ) {
         this.viewForm = this.initForm();
     }
@@ -116,7 +119,12 @@ export class ContractViewComponent implements OnInit, OnDestroy {
                 return this.contractService.getContract(id).pipe(
                     tap((contract: IContract) => {
                         this.contract = contract;
-                        this.documentUrl = contract.file_path;
+                        if (contract.file_path) {
+                            const fullUrl = `${environment.s3BucketUrl}/${contract.file_path}`;
+                            this.documentUrl = this.sanitizer.bypassSecurityTrustResourceUrl(fullUrl);
+                        } else {
+                            this.documentUrl = null;
+                        }
                         this.confidenceLevel = contract.validation_notes?.confidence_level ? Number(contract.validation_notes.confidence_level) : 0;
                         
                         // Initialize form with the contract data
